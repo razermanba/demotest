@@ -1,0 +1,846 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2945978F9A959E36F7ADFA24 /* Pods_Brainfit_Chat_v2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8534F1F4AAEC9B27B2FDED5 /* Pods_Brainfit_Chat_v2.framework */; };
+		FA08E251226D6FE5002EABFB /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E250226D6FE5002EABFB /* ProfileTableViewController.swift */; };
+		FA08E259226D72A7002EABFB /* ChangePassword.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA08E254226D72A7002EABFB /* ChangePassword.xib */; };
+		FA08E25C226D72A7002EABFB /* alertToken.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA08E257226D72A7002EABFB /* alertToken.xib */; };
+		FA08E25E226D72C8002EABFB /* ChangePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E25D226D72C8002EABFB /* ChangePassword.swift */; };
+		FA08E262226D7CF1002EABFB /* ListMemberChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E261226D7CF1002EABFB /* ListMemberChatTableViewController.swift */; };
+		FA08E264226D7D82002EABFB /* ListMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E263226D7D82002EABFB /* ListMemberTableViewCell.swift */; };
+		FA08E269226D81EC002EABFB /* Room_centers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E265226D81EB002EABFB /* Room_centers.swift */; };
+		FA08E26A226D81EC002EABFB /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E266226D81EB002EABFB /* Tokens.swift */; };
+		FA08E26B226D81EC002EABFB /* listUserChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E267226D81EC002EABFB /* listUserChat.swift */; };
+		FA08E26C226D81EC002EABFB /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E268226D81EC002EABFB /* Users.swift */; };
+		FA08E26E226DA4D6002EABFB /* ListTokenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E26D226DA4D6002EABFB /* ListTokenTableViewCell.swift */; };
+		FA08E272226DA4FE002EABFB /* ListTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E271226DA4FE002EABFB /* ListTokenViewController.swift */; };
+		FA08E276226DAE2E002EABFB /* alertToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E275226DAE2E002EABFB /* alertToken.swift */; };
+		FA2652282268696800A7131E /* LogOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2652272268696800A7131E /* LogOutViewController.swift */; };
+		FA26522B22686D1E00A7131E /* ChatRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26522A22686D1E00A7131E /* ChatRoomTableViewCell.swift */; };
+		FA26522D22686DA300A7131E /* RoomChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26522C22686DA300A7131E /* RoomChatTableViewController.swift */; };
+		FA265230226870C000A7131E /* RoomChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26522E226870C000A7131E /* RoomChat.swift */; };
+		FA265231226870C000A7131E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26522F226870C000A7131E /* Message.swift */; };
+		FA265233226880D200A7131E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA265232226880D200A7131E /* ChatViewController.swift */; };
+		FA2652352268840300A7131E /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2652342268840300A7131E /* SocketIOManager.swift */; };
+		FA28ADFE22697B5A002DC95B /* listChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28ADFC22697B59002DC95B /* listChat.swift */; };
+		FA28ADFF22697B5A002DC95B /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28ADFD22697B59002DC95B /* Id.swift */; };
+		FA5EA2122269756D001BF077 /* MockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5EA2112269756D001BF077 /* MockMessage.swift */; };
+		FA68EE5A2269ABC4007BF7DD /* BasicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68EE592269ABC4007BF7DD /* BasicExampleViewController.swift */; };
+		FAC731BB22670AA700C59F10 /* URLServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC731BA22670AA700C59F10 /* URLServer.swift */; };
+		FAC731BD22670C6300C59F10 /* APIServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC731BC22670C6300C59F10 /* APIServer.swift */; };
+		FAEB0288226858A9002F54EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0287226858A9002F54EA /* LoginViewController.swift */; };
+		FAEB028A22685E5B002F54EA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB028922685E5B002F54EA /* UserProfile.swift */; };
+		FAFF3F412266CBCA00225C94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFF3F402266CBCA00225C94 /* AppDelegate.swift */; };
+		FAFF3F432266CBCA00225C94 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFF3F422266CBCA00225C94 /* ViewController.swift */; };
+		FAFF3F462266CBCA00225C94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAFF3F442266CBCA00225C94 /* Main.storyboard */; };
+		FAFF3F482266CBCC00225C94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAFF3F472266CBCC00225C94 /* Assets.xcassets */; };
+		FAFF3F4B2266CBCC00225C94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAFF3F492266CBCC00225C94 /* LaunchScreen.storyboard */; };
+		FAFF3F562266CBCC00225C94 /* Brainfit_Chat_v2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFF3F552266CBCC00225C94 /* Brainfit_Chat_v2Tests.swift */; };
+		FAFF3F612266CBCC00225C94 /* Brainfit_Chat_v2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFF3F602266CBCC00225C94 /* Brainfit_Chat_v2UITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FAFF3F522266CBCC00225C94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FAFF3F352266CBCA00225C94 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FAFF3F3C2266CBCA00225C94;
+			remoteInfo = "Brainfit-Chat-v2";
+		};
+		FAFF3F5D2266CBCC00225C94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FAFF3F352266CBCA00225C94 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FAFF3F3C2266CBCA00225C94;
+			remoteInfo = "Brainfit-Chat-v2";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		065945B2BB9F52FC4928F55B /* Pods-Brainfit-Chat-v2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Brainfit-Chat-v2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Brainfit-Chat-v2/Pods-Brainfit-Chat-v2.release.xcconfig"; sourceTree = "<group>"; };
+		1734ECDC8B3EEA38D55D9D35 /* Pods-Brainfit-Chat-v2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Brainfit-Chat-v2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Brainfit-Chat-v2/Pods-Brainfit-Chat-v2.debug.xcconfig"; sourceTree = "<group>"; };
+		A8534F1F4AAEC9B27B2FDED5 /* Pods_Brainfit_Chat_v2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Brainfit_Chat_v2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC353550BB2C58C16D6B4882 /* Pods_Brainfit_Chat_v2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Brainfit_Chat_v2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E09152DB722FFEB4030CF8E5 /* Pods_Brainfit_Chat_v2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Brainfit_Chat_v2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA08E250226D6FE5002EABFB /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		FA08E254226D72A7002EABFB /* ChangePassword.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePassword.xib; sourceTree = "<group>"; };
+		FA08E257226D72A7002EABFB /* alertToken.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = alertToken.xib; sourceTree = "<group>"; };
+		FA08E25D226D72C8002EABFB /* ChangePassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePassword.swift; sourceTree = "<group>"; };
+		FA08E261226D7CF1002EABFB /* ListMemberChatTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMemberChatTableViewController.swift; sourceTree = "<group>"; };
+		FA08E263226D7D82002EABFB /* ListMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMemberTableViewCell.swift; sourceTree = "<group>"; };
+		FA08E265226D81EB002EABFB /* Room_centers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room_centers.swift; sourceTree = "<group>"; };
+		FA08E266226D81EB002EABFB /* Tokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
+		FA08E267226D81EC002EABFB /* listUserChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listUserChat.swift; sourceTree = "<group>"; };
+		FA08E268226D81EC002EABFB /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		FA08E26D226DA4D6002EABFB /* ListTokenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTokenTableViewCell.swift; sourceTree = "<group>"; };
+		FA08E271226DA4FE002EABFB /* ListTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTokenViewController.swift; sourceTree = "<group>"; };
+		FA08E275226DAE2E002EABFB /* alertToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertToken.swift; sourceTree = "<group>"; };
+		FA2652272268696800A7131E /* LogOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutViewController.swift; sourceTree = "<group>"; };
+		FA26522A22686D1E00A7131E /* ChatRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewCell.swift; sourceTree = "<group>"; };
+		FA26522C22686DA300A7131E /* RoomChatTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomChatTableViewController.swift; sourceTree = "<group>"; };
+		FA26522E226870C000A7131E /* RoomChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomChat.swift; sourceTree = "<group>"; };
+		FA26522F226870C000A7131E /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		FA265232226880D200A7131E /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		FA2652342268840300A7131E /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
+		FA28ADFC22697B59002DC95B /* listChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listChat.swift; sourceTree = "<group>"; };
+		FA28ADFD22697B59002DC95B /* Id.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
+		FA5EA2112269756D001BF077 /* MockMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockMessage.swift; sourceTree = "<group>"; };
+		FA68EE592269ABC4007BF7DD /* BasicExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicExampleViewController.swift; sourceTree = "<group>"; };
+		FAC731BA22670AA700C59F10 /* URLServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLServer.swift; sourceTree = "<group>"; };
+		FAC731BC22670C6300C59F10 /* APIServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServer.swift; sourceTree = "<group>"; };
+		FAEB0287226858A9002F54EA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FAEB028922685E5B002F54EA /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		FAFF3F3D2266CBCA00225C94 /* Brainfit-Chat-v2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Brainfit-Chat-v2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAFF3F402266CBCA00225C94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FAFF3F422266CBCA00225C94 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FAFF3F452266CBCA00225C94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FAFF3F472266CBCC00225C94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FAFF3F4A2266CBCC00225C94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FAFF3F4C2266CBCC00225C94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAFF3F512266CBCC00225C94 /* Brainfit-Chat-v2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Brainfit-Chat-v2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAFF3F552266CBCC00225C94 /* Brainfit_Chat_v2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brainfit_Chat_v2Tests.swift; sourceTree = "<group>"; };
+		FAFF3F572266CBCC00225C94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAFF3F5C2266CBCC00225C94 /* Brainfit-Chat-v2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Brainfit-Chat-v2UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAFF3F602266CBCC00225C94 /* Brainfit_Chat_v2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brainfit_Chat_v2UITests.swift; sourceTree = "<group>"; };
+		FAFF3F622266CBCC00225C94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FAFF3F3A2266CBCA00225C94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2945978F9A959E36F7ADFA24 /* Pods_Brainfit_Chat_v2.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAFF3F4E2266CBCC00225C94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAFF3F592266CBCC00225C94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		55FBF0F4A4F850C960D63401 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1734ECDC8B3EEA38D55D9D35 /* Pods-Brainfit-Chat-v2.debug.xcconfig */,
+				065945B2BB9F52FC4928F55B /* Pods-Brainfit-Chat-v2.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B7D79051C108925FDC99944D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A8534F1F4AAEC9B27B2FDED5 /* Pods_Brainfit_Chat_v2.framework */,
+				CC353550BB2C58C16D6B4882 /* Pods_Brainfit_Chat_v2Tests.framework */,
+				E09152DB722FFEB4030CF8E5 /* Pods_Brainfit_Chat_v2UITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA08E252226D72A7002EABFB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA08E254226D72A7002EABFB /* ChangePassword.xib */,
+				FA08E257226D72A7002EABFB /* alertToken.xib */,
+				FA08E25D226D72C8002EABFB /* ChangePassword.swift */,
+				FA08E275226DAE2E002EABFB /* alertToken.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA26522922686CDC00A7131E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FA26522A22686D1E00A7131E /* ChatRoomTableViewCell.swift */,
+				FA08E263226D7D82002EABFB /* ListMemberTableViewCell.swift */,
+				FA08E26D226DA4D6002EABFB /* ListTokenTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		FAC731B7226709AB00C59F10 /* Sever */ = {
+			isa = PBXGroup;
+			children = (
+				FAC731BA22670AA700C59F10 /* URLServer.swift */,
+				FAC731BC22670C6300C59F10 /* APIServer.swift */,
+				FA2652342268840300A7131E /* SocketIOManager.swift */,
+			);
+			path = Sever;
+			sourceTree = "<group>";
+		};
+		FAC731B8226709AB00C59F10 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FAEB0287226858A9002F54EA /* LoginViewController.swift */,
+				FA2652272268696800A7131E /* LogOutViewController.swift */,
+				FA26522C22686DA300A7131E /* RoomChatTableViewController.swift */,
+				FA265232226880D200A7131E /* ChatViewController.swift */,
+				FA68EE592269ABC4007BF7DD /* BasicExampleViewController.swift */,
+				FA08E250226D6FE5002EABFB /* ProfileTableViewController.swift */,
+				FA08E261226D7CF1002EABFB /* ListMemberChatTableViewController.swift */,
+				FA08E271226DA4FE002EABFB /* ListTokenViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FAC731B9226709AB00C59F10 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA28ADFD22697B59002DC95B /* Id.swift */,
+				FA28ADFC22697B59002DC95B /* listChat.swift */,
+				FA5EA2112269756D001BF077 /* MockMessage.swift */,
+				FAEB028922685E5B002F54EA /* UserProfile.swift */,
+				FA26522E226870C000A7131E /* RoomChat.swift */,
+				FA26522F226870C000A7131E /* Message.swift */,
+				FA08E267226D81EC002EABFB /* listUserChat.swift */,
+				FA08E265226D81EB002EABFB /* Room_centers.swift */,
+				FA08E266226D81EB002EABFB /* Tokens.swift */,
+				FA08E268226D81EC002EABFB /* Users.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FAFF3F342266CBCA00225C94 = {
+			isa = PBXGroup;
+			children = (
+				FAFF3F3F2266CBCA00225C94 /* Brainfit-Chat-v2 */,
+				FAFF3F542266CBCC00225C94 /* Brainfit-Chat-v2Tests */,
+				FAFF3F5F2266CBCC00225C94 /* Brainfit-Chat-v2UITests */,
+				FAFF3F3E2266CBCA00225C94 /* Products */,
+				55FBF0F4A4F850C960D63401 /* Pods */,
+				B7D79051C108925FDC99944D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FAFF3F3E2266CBCA00225C94 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FAFF3F3D2266CBCA00225C94 /* Brainfit-Chat-v2.app */,
+				FAFF3F512266CBCC00225C94 /* Brainfit-Chat-v2Tests.xctest */,
+				FAFF3F5C2266CBCC00225C94 /* Brainfit-Chat-v2UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FAFF3F3F2266CBCA00225C94 /* Brainfit-Chat-v2 */ = {
+			isa = PBXGroup;
+			children = (
+				FA08E252226D72A7002EABFB /* Views */,
+				FA26522922686CDC00A7131E /* Cell */,
+				FAC731B9226709AB00C59F10 /* Model */,
+				FAC731B7226709AB00C59F10 /* Sever */,
+				FAC731B8226709AB00C59F10 /* ViewController */,
+				FAFF3F402266CBCA00225C94 /* AppDelegate.swift */,
+				FAFF3F422266CBCA00225C94 /* ViewController.swift */,
+				FAFF3F442266CBCA00225C94 /* Main.storyboard */,
+				FAFF3F472266CBCC00225C94 /* Assets.xcassets */,
+				FAFF3F492266CBCC00225C94 /* LaunchScreen.storyboard */,
+				FAFF3F4C2266CBCC00225C94 /* Info.plist */,
+			);
+			path = "Brainfit-Chat-v2";
+			sourceTree = "<group>";
+		};
+		FAFF3F542266CBCC00225C94 /* Brainfit-Chat-v2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				FAFF3F552266CBCC00225C94 /* Brainfit_Chat_v2Tests.swift */,
+				FAFF3F572266CBCC00225C94 /* Info.plist */,
+			);
+			path = "Brainfit-Chat-v2Tests";
+			sourceTree = "<group>";
+		};
+		FAFF3F5F2266CBCC00225C94 /* Brainfit-Chat-v2UITests */ = {
+			isa = PBXGroup;
+			children = (
+				FAFF3F602266CBCC00225C94 /* Brainfit_Chat_v2UITests.swift */,
+				FAFF3F622266CBCC00225C94 /* Info.plist */,
+			);
+			path = "Brainfit-Chat-v2UITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FAFF3F3C2266CBCA00225C94 /* Brainfit-Chat-v2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAFF3F652266CBCC00225C94 /* Build configuration list for PBXNativeTarget "Brainfit-Chat-v2" */;
+			buildPhases = (
+				31C2BB3448836139FFB161E9 /* [CP] Check Pods Manifest.lock */,
+				FAFF3F392266CBCA00225C94 /* Sources */,
+				FAFF3F3A2266CBCA00225C94 /* Frameworks */,
+				FAFF3F3B2266CBCA00225C94 /* Resources */,
+				14FE7E25B066848D4972E788 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Brainfit-Chat-v2";
+			productName = "Brainfit-Chat-v2";
+			productReference = FAFF3F3D2266CBCA00225C94 /* Brainfit-Chat-v2.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FAFF3F502266CBCC00225C94 /* Brainfit-Chat-v2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAFF3F682266CBCC00225C94 /* Build configuration list for PBXNativeTarget "Brainfit-Chat-v2Tests" */;
+			buildPhases = (
+				FAFF3F4D2266CBCC00225C94 /* Sources */,
+				FAFF3F4E2266CBCC00225C94 /* Frameworks */,
+				FAFF3F4F2266CBCC00225C94 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FAFF3F532266CBCC00225C94 /* PBXTargetDependency */,
+			);
+			name = "Brainfit-Chat-v2Tests";
+			productName = "Brainfit-Chat-v2Tests";
+			productReference = FAFF3F512266CBCC00225C94 /* Brainfit-Chat-v2Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FAFF3F5B2266CBCC00225C94 /* Brainfit-Chat-v2UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAFF3F6B2266CBCC00225C94 /* Build configuration list for PBXNativeTarget "Brainfit-Chat-v2UITests" */;
+			buildPhases = (
+				FAFF3F582266CBCC00225C94 /* Sources */,
+				FAFF3F592266CBCC00225C94 /* Frameworks */,
+				FAFF3F5A2266CBCC00225C94 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FAFF3F5E2266CBCC00225C94 /* PBXTargetDependency */,
+			);
+			name = "Brainfit-Chat-v2UITests";
+			productName = "Brainfit-Chat-v2UITests";
+			productReference = FAFF3F5C2266CBCC00225C94 /* Brainfit-Chat-v2UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FAFF3F352266CBCA00225C94 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = macbook;
+				TargetAttributes = {
+					FAFF3F3C2266CBCA00225C94 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					FAFF3F502266CBCC00225C94 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = FAFF3F3C2266CBCA00225C94;
+					};
+					FAFF3F5B2266CBCC00225C94 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = FAFF3F3C2266CBCA00225C94;
+					};
+				};
+			};
+			buildConfigurationList = FAFF3F382266CBCA00225C94 /* Build configuration list for PBXProject "Brainfit-Chat-v2" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FAFF3F342266CBCA00225C94;
+			productRefGroup = FAFF3F3E2266CBCA00225C94 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FAFF3F3C2266CBCA00225C94 /* Brainfit-Chat-v2 */,
+				FAFF3F502266CBCC00225C94 /* Brainfit-Chat-v2Tests */,
+				FAFF3F5B2266CBCC00225C94 /* Brainfit-Chat-v2UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FAFF3F3B2266CBCA00225C94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA08E259226D72A7002EABFB /* ChangePassword.xib in Resources */,
+				FAFF3F4B2266CBCC00225C94 /* LaunchScreen.storyboard in Resources */,
+				FA08E25C226D72A7002EABFB /* alertToken.xib in Resources */,
+				FAFF3F482266CBCC00225C94 /* Assets.xcassets in Resources */,
+				FAFF3F462266CBCA00225C94 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAFF3F4F2266CBCC00225C94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAFF3F5A2266CBCC00225C94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		14FE7E25B066848D4972E788 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Brainfit-Chat-v2/Pods-Brainfit-Chat-v2-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${PODS_ROOT}/GoogleAds-IMA-iOS-SDK/GoogleInteractiveMediaAds.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/MessageInputBar/MessageInputBar.framework",
+				"${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
+				"${BUILT_PRODUCTS_DIR}/StarscreamSocketIO/StarscreamSocketIO.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftySound/SwiftySound.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleInteractiveMediaAds.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageInputBar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StarscreamSocketIO.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftySound.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Brainfit-Chat-v2/Pods-Brainfit-Chat-v2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		31C2BB3448836139FFB161E9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Brainfit-Chat-v2-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FAFF3F392266CBCA00225C94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA08E251226D6FE5002EABFB /* ProfileTableViewController.swift in Sources */,
+				FA28ADFF22697B5A002DC95B /* Id.swift in Sources */,
+				FA28ADFE22697B5A002DC95B /* listChat.swift in Sources */,
+				FAFF3F432266CBCA00225C94 /* ViewController.swift in Sources */,
+				FA2652282268696800A7131E /* LogOutViewController.swift in Sources */,
+				FAC731BB22670AA700C59F10 /* URLServer.swift in Sources */,
+				FA265230226870C000A7131E /* RoomChat.swift in Sources */,
+				FAEB028A22685E5B002F54EA /* UserProfile.swift in Sources */,
+				FA08E26B226D81EC002EABFB /* listUserChat.swift in Sources */,
+				FA08E264226D7D82002EABFB /* ListMemberTableViewCell.swift in Sources */,
+				FA08E25E226D72C8002EABFB /* ChangePassword.swift in Sources */,
+				FAFF3F412266CBCA00225C94 /* AppDelegate.swift in Sources */,
+				FA08E26C226D81EC002EABFB /* Users.swift in Sources */,
+				FA2652352268840300A7131E /* SocketIOManager.swift in Sources */,
+				FA5EA2122269756D001BF077 /* MockMessage.swift in Sources */,
+				FA08E272226DA4FE002EABFB /* ListTokenViewController.swift in Sources */,
+				FA08E26E226DA4D6002EABFB /* ListTokenTableViewCell.swift in Sources */,
+				FA08E269226D81EC002EABFB /* Room_centers.swift in Sources */,
+				FA265231226870C000A7131E /* Message.swift in Sources */,
+				FAEB0288226858A9002F54EA /* LoginViewController.swift in Sources */,
+				FA26522B22686D1E00A7131E /* ChatRoomTableViewCell.swift in Sources */,
+				FA08E26A226D81EC002EABFB /* Tokens.swift in Sources */,
+				FAC731BD22670C6300C59F10 /* APIServer.swift in Sources */,
+				FA08E262226D7CF1002EABFB /* ListMemberChatTableViewController.swift in Sources */,
+				FA08E276226DAE2E002EABFB /* alertToken.swift in Sources */,
+				FA265233226880D200A7131E /* ChatViewController.swift in Sources */,
+				FA68EE5A2269ABC4007BF7DD /* BasicExampleViewController.swift in Sources */,
+				FA26522D22686DA300A7131E /* RoomChatTableViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAFF3F4D2266CBCC00225C94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAFF3F562266CBCC00225C94 /* Brainfit_Chat_v2Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAFF3F582266CBCC00225C94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAFF3F612266CBCC00225C94 /* Brainfit_Chat_v2UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FAFF3F532266CBCC00225C94 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FAFF3F3C2266CBCA00225C94 /* Brainfit-Chat-v2 */;
+			targetProxy = FAFF3F522266CBCC00225C94 /* PBXContainerItemProxy */;
+		};
+		FAFF3F5E2266CBCC00225C94 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FAFF3F3C2266CBCA00225C94 /* Brainfit-Chat-v2 */;
+			targetProxy = FAFF3F5D2266CBCC00225C94 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FAFF3F442266CBCA00225C94 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAFF3F452266CBCA00225C94 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FAFF3F492266CBCC00225C94 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAFF3F4A2266CBCC00225C94 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FAFF3F632266CBCC00225C94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FAFF3F642266CBCC00225C94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FAFF3F662266CBCC00225C94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1734ECDC8B3EEA38D55D9D35 /* Pods-Brainfit-Chat-v2.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P9265767DK;
+				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "pure.myanimetime.Brainfit-Chat-v2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FAFF3F672266CBCC00225C94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 065945B2BB9F52FC4928F55B /* Pods-Brainfit-Chat-v2.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P9265767DK;
+				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "pure.myanimetime.Brainfit-Chat-v2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FAFF3F692266CBCC00225C94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Brainfit-Chat-v2Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "pure.myanimetime.Brainfit-Chat-v2Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Brainfit-Chat-v2.app/Brainfit-Chat-v2";
+			};
+			name = Debug;
+		};
+		FAFF3F6A2266CBCC00225C94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Brainfit-Chat-v2Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "pure.myanimetime.Brainfit-Chat-v2Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Brainfit-Chat-v2.app/Brainfit-Chat-v2";
+			};
+			name = Release;
+		};
+		FAFF3F6C2266CBCC00225C94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Brainfit-Chat-v2UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "pure.myanimetime.Brainfit-Chat-v2UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Brainfit-Chat-v2";
+			};
+			name = Debug;
+		};
+		FAFF3F6D2266CBCC00225C94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Brainfit-Chat-v2UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "pure.myanimetime.Brainfit-Chat-v2UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Brainfit-Chat-v2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FAFF3F382266CBCA00225C94 /* Build configuration list for PBXProject "Brainfit-Chat-v2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAFF3F632266CBCC00225C94 /* Debug */,
+				FAFF3F642266CBCC00225C94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAFF3F652266CBCC00225C94 /* Build configuration list for PBXNativeTarget "Brainfit-Chat-v2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAFF3F662266CBCC00225C94 /* Debug */,
+				FAFF3F672266CBCC00225C94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAFF3F682266CBCC00225C94 /* Build configuration list for PBXNativeTarget "Brainfit-Chat-v2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAFF3F692266CBCC00225C94 /* Debug */,
+				FAFF3F6A2266CBCC00225C94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAFF3F6B2266CBCC00225C94 /* Build configuration list for PBXNativeTarget "Brainfit-Chat-v2UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAFF3F6C2266CBCC00225C94 /* Debug */,
+				FAFF3F6D2266CBCC00225C94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FAFF3F352266CBCA00225C94 /* Project object */;
+}

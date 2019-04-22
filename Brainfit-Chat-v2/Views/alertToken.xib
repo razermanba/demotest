@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Mark Simonson - Proxima Nova Regular_0.otf">
+            <string>ProximaNova-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="alertToken" customModule="Brainfit_Chat_v2" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Suc-RX-TIi">
+                    <rect key="frame" x="25" y="54" width="325" height="617"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jyg-eY-sNY">
+                            <rect key="frame" x="10" y="164.5" width="305" height="288.5"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GlF-hQ-zi1">
+                            <rect key="frame" x="138" y="461" width="49" height="23.5"/>
+                            <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Jyg-eY-sNY" firstAttribute="height" secondItem="Suc-RX-TIi" secondAttribute="height" multiplier="1:2" constant="-20" id="Gf2-Rg-jQq"/>
+                        <constraint firstItem="GlF-hQ-zi1" firstAttribute="centerX" secondItem="Suc-RX-TIi" secondAttribute="centerX" id="XvC-lo-J7V"/>
+                        <constraint firstItem="GlF-hQ-zi1" firstAttribute="top" secondItem="Jyg-eY-sNY" secondAttribute="bottom" constant="8" id="a5s-Zs-YZf"/>
+                        <constraint firstItem="Jyg-eY-sNY" firstAttribute="centerY" secondItem="Suc-RX-TIi" secondAttribute="centerY" id="dOq-ey-Df3"/>
+                        <constraint firstItem="Jyg-eY-sNY" firstAttribute="width" secondItem="Suc-RX-TIi" secondAttribute="width" constant="-20" id="eP9-18-fqS"/>
+                        <constraint firstItem="Jyg-eY-sNY" firstAttribute="centerX" secondItem="Suc-RX-TIi" secondAttribute="centerX" id="v49-38-lxQ"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qjb-lw-i8n">
+                    <rect key="frame" x="329" y="72" width="30" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="h2g-HI-yvZ"/>
+                        <constraint firstAttribute="width" constant="30" id="pV6-Wa-Wdm"/>
+                    </constraints>
+                    <state key="normal" image="icons8-Cancel-30-2 (1)"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Suc-RX-TIi" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="1:1" constant="-50" id="A5e-dD-nqL"/>
+                <constraint firstItem="Qjb-lw-i8n" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="72" id="AqW-NY-AcT"/>
+                <constraint firstAttribute="trailing" secondItem="Qjb-lw-i8n" secondAttribute="trailing" constant="16" id="C4o-N4-boa"/>
+                <constraint firstItem="Suc-RX-TIi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ClD-wy-p4I"/>
+                <constraint firstItem="Suc-RX-TIi" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" constant="-50" id="PWq-OV-FTY"/>
+                <constraint firstItem="Suc-RX-TIi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="29" id="Vm4-bq-2gT"/>
+            </constraints>
+            <connections>
+                <outlet property="btnClose" destination="Qjb-lw-i8n" id="LuR-ao-Src"/>
+                <outlet property="imageToken" destination="Jyg-eY-sNY" id="DaS-Ky-lzG"/>
+                <outlet property="lblName" destination="GlF-hQ-zi1" id="MP0-lm-WZD"/>
+            </connections>
+            <point key="canvasLocation" x="25.5" y="52.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icons8-Cancel-30-2 (1)" width="30" height="30"/>
+    </resources>
+</document>
