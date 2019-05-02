@@ -37,23 +37,30 @@ class SocketIOManager{
     let NotificationMessage_DidGotSocketEvent = "NotificationMessage_DidGotSocketEvent"
 
     func socketConnect (){
-        socket.connect()
-
-        socket.onAny({(_ event: SocketAnyEvent) -> Void in
-            print(event.event)
-            if event.event == "room connected" {
-                print("room connected")
-            }else if event.event == "message"{
-                print("event message")
-            }
+//        socket.connect()
+//
+//        socket.onAny({(_ event: SocketAnyEvent) -> Void in
+//            print(event.event)
+//            if event.event == "room connected" {
+//                print("room connected")
+//            }else if event.event == "message"{
+//                print("event message")
+//            }
+//
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: self.NotificationMessage_DidGotSocketEvent), object: event)
+//        })
+        
+        socket.onAny({ ( event: SocketAnyEvent) -> Void in
+                        print(event.event)
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: self.NotificationMessage_DidGotSocketEvent), object: event)
         })
+        
+        socket.connect()
 
     }
 
     func socketSendMessage(text : String , message : String , link : String , timeStamp : String) {
-        socket.emit("send message", with: [["type":"text","content":message,"link":link,"client_id":timeStamp]])
+        socket.emit("send message", with: [["type":"text","content":message,"link":"","client_id":timeStamp]])
 //        socket.emit("send message", "text",message,"",timeStamp)
     }
 }

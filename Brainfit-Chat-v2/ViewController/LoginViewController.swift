@@ -12,16 +12,26 @@ import ObjectMapper
 import Alamofire
 import AlamofireObjectMapper
 
-class LoginviewController : UIViewController{
+class LoginviewController : UIViewController, UITextFieldDelegate{
     
     @IBOutlet weak var txtUsername: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtVersion: UILabel!
+    @IBOutlet weak var btnkeep: UIButton!
+    
+    var flagKeep : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         txtUsername.text = UserDefaults.standard.string(forKey: "username")
         txtPassword.text = UserDefaults.standard.string(forKey: "password")
+        
+        let appVersion = String(format: "Version %@",(Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String)!)
+        txtVersion.text = appVersion
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
         
     }
     
@@ -32,11 +42,28 @@ class LoginviewController : UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
+    
+    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+
+    
     @IBAction func actionKeep(_ sender: Any) {
-        
+        if flagKeep == false{
+            flagKeep = true;
+            btnkeep.setImage(UIImage(named: "border_ticked_signin"), for: UIControl.State.normal)
+        }else {
+            flagKeep = false;
+            btnkeep.setImage(UIImage(named: "border_tick_signin"), for: UIControl.State.normal)
+        }
     }
     
     @IBAction func actionForgorPassword(_ sender: Any) {
+        let alert = UIAlertController(title: "Warning", message: "Please contact your trainer", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
         
     }
     
@@ -45,6 +72,10 @@ class LoginviewController : UIViewController{
         
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
 }
 
 
@@ -95,9 +126,33 @@ extension LoginviewController{
                 self.present(alert, animated: true, completion: nil)
             }
         })
-        
     }
     
-    
+    func needsUpdate() -> Bool {
+        let infoDictionary = Bundle.main.infoDictionary
+        let appID = infoDictionary!["CFBundleIdentifier"] as! String
+        let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(appID)")
+        guard let data = try? Data(contentsOf: url!) else {
+            print("There is an error!")
+            return false;
+        }
+        let lookup = (try? JSONSerialization.jsonObject(with: data , options: [])) as? [String: Any]
+        if let resultCount = lookup!["resultCount"] as? Int, resultCount == 1 {
+            if let results = lookup!["results"] as? [[String:Any]] {
+                if let appStoreVersion = results[0]["version"] as? String{
+                    let currentVersion = infoDictionary!["CFBundleShortVersionString"] as? String
+                    if !(appStoreVersion == currentVersion) {
+                        print("Need to update [\(appStoreVersion) != \(String(describing: currentVersion))]")
+                        return true
+                    }else {
+                        let alert = UIAlertController(title: "Announcement", message: "Please update new version \(currentVersion)", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+        return false
+    }
 }
 

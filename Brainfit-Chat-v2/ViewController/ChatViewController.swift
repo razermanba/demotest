@@ -18,6 +18,7 @@ import SocketIO
 class ChatViewController: MessagesViewController  {
     var arrayListChat = Mapper<listChat>().mapArray(JSONArray: [])
     var messageList: [MockMessage] = []
+    let pageNumber : Int = 0
     let refreshControl = UIRefreshControl()
     let userSender = Sender(id:String(format: "%@", UserDefaults.standard.value(forKey: "id")! as! CVarArg), displayName: String(format: "%@", UserDefaults.standard.value(forKey: "name")! as! CVarArg))
     
@@ -63,7 +64,7 @@ class ChatViewController: MessagesViewController  {
 
 extension ChatViewController {
     func loadHistoryChat(){
-        APIService.sharedInstance.getHistoryChat([:], roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , pagenumber: String(0), completionHandle: {(result, error) in
+        APIService.sharedInstance.getHistoryChat([:], roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , pagenumber: String(pageNumber), completionHandle: {(result, error) in
             self.arrayListChat = Mapper<listChat>().mapArray(JSONArray: result as! [[String : Any]])
            
             for chat in self.arrayListChat {
@@ -77,7 +78,18 @@ extension ChatViewController {
     }
     
     @objc func loadMoreMessages()  {
-        
+        APIService.sharedInstance.getHistoryChat([:], roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , pagenumber: String(pageNumber + 1), completionHandle: {(result, error) in
+            self.arrayListChat = Mapper<listChat>().mapArray(JSONArray: result as! [[String : Any]])
+            
+            for chat in self.arrayListChat {
+                let message = MockMessage(text: chat.content! , sender: Sender(id: String(chat.user_id) , displayName: chat.name!), messageId: "0000456", date: Date())
+                self.messageList.append(message)
+            }
+            
+            self.messagesCollectionView.reloadData()
+            self.messagesCollectionView.scrollToBottom()
+            self.refreshControl.endRefreshing()
+        })
     }
     
     
