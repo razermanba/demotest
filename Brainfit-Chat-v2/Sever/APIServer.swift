@@ -137,4 +137,47 @@ class APIService {
     func getListMember(_ params : [String : AnyObject], roomId : String , completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
         getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API_Room + "/" + roomId , params: params, headers: [:], completionHandle: completionHandle)
     }
+    
+//    func uploadAvatar(_ params : [String : AnyObject] , completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
+//        getURL(METHOD.kPUT, url: API.BASE_URL_API_Chat + "/avatar" , params: params, headers: [:], completionHandle: completionHandle)
+//    }
+    
+    func uploadImage(_ keyUpload : String ,_ photo: UIImage, completionHandle:@escaping (_ result:[String:AnyObject]?,_ error:AnyObject?) -> Void) {
+        
+        guard let imageData = photo.jpegData(compressionQuality: 1) else { return }
+        
+        let manager = AFHTTPSessionManager()
+        
+        let file = [
+            "uri": "",
+            "name": "avatar",
+            "type": "image/jpg",
+            "fileName" : "avatar.jpg"
+            ] as [String : Any]
+        
+        
+        manager.requestSerializer.setValue(String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg), forHTTPHeaderField: "Authorization")
+        
+        let request: NSMutableURLRequest = manager.requestSerializer.multipartFormRequest(withMethod: "PUT", urlString: API.base_url + API.BASE_URL_API_User + "/avatar" , parameters: file, constructingBodyWith: {(formData: AFMultipartFormData!) -> Void in
+            
+            formData.appendPart(withFileData: imageData, name: keyUpload , fileName: "photo.jpg", mimeType: "image/jpeg")
+            
+        }, error: nil)
+        
+        manager.dataTask(with: request as URLRequest) { (response, responseObject, error) -> Void in
+            if((error == nil)) {
+                print(responseObject!)
+                completionHandle(responseObject as? [String : AnyObject],nil)
+            }
+            else {
+               
+                completionHandle(nil,error as AnyObject )
+            }
+            
+            }.resume()
+    }
+
 }
+
+
+

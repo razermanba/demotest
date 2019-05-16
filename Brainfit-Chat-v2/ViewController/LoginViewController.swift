@@ -23,6 +23,9 @@ class LoginviewController : UIViewController, UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        needsUpdate()
+        
         txtUsername.text = UserDefaults.standard.string(forKey: "username")
         txtPassword.text = UserDefaults.standard.string(forKey: "password")
         
@@ -48,7 +51,7 @@ class LoginviewController : UIViewController, UITextFieldDelegate{
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-
+    
     
     @IBAction func actionKeep(_ sender: Any) {
         if flagKeep == false{
@@ -106,7 +109,7 @@ extension LoginviewController{
                         
                         
                         if (user?.room)! > 0 {
-                              self.performSegue(withIdentifier: "roomChat", sender: self)
+                            self.performSegue(withIdentifier: "roomChat", sender: self)
                             
                         } else {
                             let alert = UIAlertController(title: "Warning", message: "You don't have any rooms", preferredStyle: UIAlertController.Style.alert)
@@ -128,13 +131,13 @@ extension LoginviewController{
         })
     }
     
-    func needsUpdate() -> Bool {
+    func needsUpdate() {
         let infoDictionary = Bundle.main.infoDictionary
         let appID = infoDictionary!["CFBundleIdentifier"] as! String
         let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(appID)")
         guard let data = try? Data(contentsOf: url!) else {
             print("There is an error!")
-            return false;
+            return 
         }
         let lookup = (try? JSONSerialization.jsonObject(with: data , options: [])) as? [String: Any]
         if let resultCount = lookup!["resultCount"] as? Int, resultCount == 1 {
@@ -143,16 +146,18 @@ extension LoginviewController{
                     let currentVersion = infoDictionary!["CFBundleShortVersionString"] as? String
                     if !(appStoreVersion == currentVersion) {
                         print("Need to update [\(appStoreVersion) != \(String(describing: currentVersion))]")
-                        return true
                     }else {
-                        let alert = UIAlertController(title: "Announcement", message: "Please update new version \(currentVersion)", preferredStyle: UIAlertController.Style.alert)
+                        let alert = UIAlertController(title: "Announcement", message: "Please update new version \(String(describing: currentVersion))", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default){ action -> Void in
+                            guard let url = URL(string: "itms://itunes.apple.com/us/app/personal-brain-coach/id1244995154?ls=1&mt=8") else { return }
+                            UIApplication.shared.open(url)
+                        })
                         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
             }
         }
-        return false
     }
 }
 

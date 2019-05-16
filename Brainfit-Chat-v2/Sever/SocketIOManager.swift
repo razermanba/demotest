@@ -22,45 +22,33 @@ class SocketIOManager{
     }
     
     fileprivate init() {
-    
+        
     }
     
     
-    let socket = SocketIOClient(socketURL: URL(string: API.SOCKET_URL)!, config: [.connectParams(["room":  UserDefaults.standard.value(forKey: "room")! as! CVarArg ,
-                                                                                                  "token": UserDefaults.standard.value(forKey: "token")! as! CVarArg,
-                                                                                                  "role":  UserDefaults.standard.value(forKey: "role")! as! CVarArg ,
-                                                                                                  "id":   UserDefaults.standard.value(forKey: "id")! as! CVarArg,
-                                                                                                  "name": UserDefaults.standard.value(forKey: "name")! as! CVarArg ,
-                                                                                                  "username": UserDefaults.standard.value(forKey: "username")! as! CVarArg ,
-                                                                                                  "avatar":   UserDefaults.standard.value(forKey: "avatar")! as! CVarArg ])])
-   
+    let manager = SocketManager(socketURL:URL(string: API.SOCKET_URL)!, config: [.connectParams(["room":  UserDefaults.standard.value(forKey: "room")! as! CVarArg ,
+                                                                                                 "token": UserDefaults.standard.value(forKey: "token")! as! CVarArg,
+                                                                                                 "role":  UserDefaults.standard.value(forKey: "role")! as! CVarArg ,
+                                                                                                 "id":   UserDefaults.standard.value(forKey: "id")! as! CVarArg,
+                                                                                                 "name": UserDefaults.standard.value(forKey: "name")! as! CVarArg ,
+                                                                                                 "username": UserDefaults.standard.value(forKey: "username")! as! CVarArg ,
+                                                                                                 "avatar":   UserDefaults.standard.value(forKey: "avatar")! as! CVarArg ])])
+    
     let NotificationMessage_DidGotSocketEvent = "NotificationMessage_DidGotSocketEvent"
-
+    
+    var socket : SocketIOClient!
     func socketConnect (){
-//        socket.connect()
-//
-//        socket.onAny({(_ event: SocketAnyEvent) -> Void in
-//            print(event.event)
-//            if event.event == "room connected" {
-//                print("room connected")
-//            }else if event.event == "message"{
-//                print("event message")
-//            }
-//
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: self.NotificationMessage_DidGotSocketEvent), object: event)
-//        })
-        
+        socket = manager.defaultSocket
+     
         socket.onAny({ ( event: SocketAnyEvent) -> Void in
-                        print(event.event)
-            
+            print(event.event)
+             NotificationCenter.default.post(name: NSNotification.Name(rawValue: self.NotificationMessage_DidGotSocketEvent), object: event)
         })
         
         socket.connect()
-
     }
-
+     
     func socketSendMessage(text : String , message : String , link : String , timeStamp : String) {
         socket.emit("send message", with: [["type":"text","content":message,"link":"","client_id":timeStamp]])
-//        socket.emit("send message", "text",message,"",timeStamp)
     }
 }

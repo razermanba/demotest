@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F27F8A164BD0B8600DDB01CA9B0B6CCD"
-               BlueprintName = "StarscreamSocketIO"
+               BlueprintIdentifier = "42B91B3C5605A2B27401EBD5BF3BDAB0"
+               BlueprintName = "YouTubePlayer"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "StarscreamSocketIO.framework">
+               BuildableName = "YouTubePlayer.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

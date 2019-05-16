@@ -22,7 +22,8 @@ target 'Brainfit-Chat-v2' do
     pod 'AlamofireObjectMapper', '~> 5.0'
     pod 'ObjectMapper', '~> 3.3'
     pod 'GoogleAds-IMA-iOS-SDK', '~> 3.7'
-    pod 'Socket.IO-Client-Swift', '~> 12.0.0'
-
+    pod 'Socket.IO-Client-Swift', '~> 15.0.0'
+    pod 'YouTubePlayer'
+    pod 'VIMVideoPlayer'
     
 end

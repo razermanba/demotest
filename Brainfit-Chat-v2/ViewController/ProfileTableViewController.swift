@@ -8,15 +8,18 @@
 
 import UIKit
 
-class ProfileTableViewController: UITableViewController {
+class ProfileTableViewController: UITableViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate {
     
     @IBOutlet weak var imageAvatar: UIImageView!
     @IBOutlet weak var lblUsername: UILabel!
     @IBOutlet weak var lblName: UILabel!
     var changePWView = ChangePassword()
+    var imagePicker = UIImagePickerController()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         let image : UIImage = UIImage(named: "logo_groupchat.png")!
         let imageView = UIImageView()
@@ -26,7 +29,10 @@ class ProfileTableViewController: UITableViewController {
         imageView.image = image
         navigationItem.titleView = imageView
         
-        
+        imageAvatar.layer.cornerRadius = imageAvatar.frame.width / 2
+        imageAvatar.clipsToBounds = true
+
+
         let url = URL(string:  UserDefaults.standard.value(forKey: "avatar") as! String)
         imageAvatar.af_setImage(withURL:url! )
         
@@ -60,7 +66,21 @@ class ProfileTableViewController: UITableViewController {
             window.addSubview(changePWView)
         }
     }
+    
+    @IBAction func changeAvatar(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+            
+            imagePicker.delegate = self
+            imagePicker.sourceType = .savedPhotosAlbum
+            imagePicker.allowsEditing = false
+            
+            present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    
 }
+
 
 extension ProfileTableViewController{
     // MARK: - animate view
@@ -104,6 +124,13 @@ extension ProfileTableViewController{
         
     }
     
-    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        imageAvatar.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        self.dismiss(animated: true, completion: { () -> Void in
+            APIService.sharedInstance.uploadImage("", (info[UIImagePickerController.InfoKey.originalImage] as? UIImage)! , completionHandle: {(result, error) in
+                print(result as Any)
+            })
+        })
+    }
 }
 

@@ -123,7 +123,7 @@
 			<key>orderHint</key>
 			<integer>17</integer>
 		</dict>
-		<key>StarscreamSocketIO.xcscheme</key>
+		<key>Starscream.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -150,6 +150,20 @@
 			<false/>
 			<key>orderHint</key>
 			<integer>21</integer>
+		</dict>
+		<key>VIMVideoPlayer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>22</integer>
+		</dict>
+		<key>YouTubePlayer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>23</integer>
 		</dict>
 		<key>nanopb.xcscheme</key>
 		<dict>

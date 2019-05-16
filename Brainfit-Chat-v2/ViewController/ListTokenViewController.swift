@@ -24,6 +24,16 @@ class ListTokenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let image : UIImage = UIImage(named: "logo_groupchat.png")!
+        let imageView = UIImageView()
+        imageView.frame.size.width = 40
+        imageView.frame.size.height = 40
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = image
+        navigationItem.titleView = imageView
+
+        
         lblTotalCount.text = String(format: "%d", arrayToken.count)
         
     }

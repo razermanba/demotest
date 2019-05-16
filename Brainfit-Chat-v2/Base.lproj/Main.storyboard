@@ -284,9 +284,8 @@
                     <navigationItem key="navigationItem" id="cx8-dQ-Qwp">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="3hb-la-Xzp">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Ug-7o-1Ed">
-                                <rect key="frame" x="280" y="9.6666666666666643" width="79" height="25"/>
+                                <rect key="frame" x="343" y="9.6666666666666643" width="16" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <inset key="imageEdgeInsets" minX="40" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" image="group"/>
                                 <connections>
                                     <segue destination="4Om-Ex-qLT" kind="show" id="bT0-b4-RCV"/>
@@ -545,6 +544,9 @@
                                                         <constraint firstAttribute="width" constant="30" id="h5j-i6-XOB"/>
                                                     </constraints>
                                                     <state key="normal" image="icons8-Edit-48"/>
+                                                    <connections>
+                                                        <action selector="changeAvatar:" destination="SAf-TY-RZM" eventType="touchUpInside" id="wuq-en-ItO"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

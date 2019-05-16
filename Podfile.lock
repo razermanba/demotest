@@ -70,12 +70,14 @@ PODS:
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
-  - Socket.IO-Client-Swift (12.0.0):
-    - StarscreamSocketIO (~> 8.0.7)
-  - StarscreamSocketIO (8.0.7)
+  - Socket.IO-Client-Swift (15.0.0):
+    - Starscream (~> 3.1)
+  - Starscream (3.1.0)
   - SwiftyJSON (4.1.0)
   - SwiftySound (1.0.0)
   - SwiftyStoreKit (0.11.3)
+  - VIMVideoPlayer (6.0.1)
+  - YouTubePlayer (0.4.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
@@ -90,10 +92,12 @@ DEPENDENCIES:
   - MessageKit
   - ObjectMapper (~> 3.3)
   - SDWebImage (~> 4.0)
-  - Socket.IO-Client-Swift (~> 12.0.0)
+  - Socket.IO-Client-Swift (~> 15.0.0)
   - SwiftyJSON
   - SwiftySound
   - SwiftyStoreKit (~> 0.11.0)
+  - VIMVideoPlayer
+  - YouTubePlayer
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -116,10 +120,12 @@ SPEC REPOS:
     - Protobuf
     - SDWebImage
     - Socket.IO-Client-Swift
-    - StarscreamSocketIO
+    - Starscream
     - SwiftyJSON
     - SwiftySound
     - SwiftyStoreKit
+    - VIMVideoPlayer
+    - YouTubePlayer
 
 EXTERNAL SOURCES:
   MessageInputBar:
@@ -151,12 +157,14 @@ SPEC CHECKSUMS:
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
-  Socket.IO-Client-Swift: 5b0154b42b3892bfb4c44fa138cbeb8afec4f6ef
-  StarscreamSocketIO: 00b54e4208481ca5cef089545353aaf126bae16d
+  Socket.IO-Client-Swift: c039a808195d22a7192962841b8c035cb61ea49e
+  Starscream: 08172b481e145289c4930cb567230fb55897cfa4
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   SwiftySound: b9c3370956fd4ed65ed79d45563070077a50a2cd
   SwiftyStoreKit: 783df8530cd444b3cce886196b11ff6cdc55bc11
+  VIMVideoPlayer: f4ed0a9986294ec3684a2e6bdc738e30051ef4ef
+  YouTubePlayer: 028451f6772f372d4759866db99824c676ac1473
 
-PODFILE CHECKSUM: 70166ae052a6a3f3467301de1132c6c28d8451e8
+PODFILE CHECKSUM: 60124aaa74ee79aabb3bf34f99b17de32a89a374
 
 COCOAPODS: 1.5.2
