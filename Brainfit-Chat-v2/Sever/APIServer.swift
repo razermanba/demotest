@@ -138,9 +138,10 @@ class APIService {
         getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API_Room + "/" + roomId , params: params, headers: [:], completionHandle: completionHandle)
     }
     
-//    func uploadAvatar(_ params : [String : AnyObject] , completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
-//        getURL(METHOD.kPUT, url: API.BASE_URL_API_Chat + "/avatar" , params: params, headers: [:], completionHandle: completionHandle)
-//    }
+    func submitDeviceToken(_ params : [String : AnyObject], completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
+        getURL(METHOD.kPOST, url: API.base_url + API.BASE_URL_API_User + "/device_token", params: params, headers: [:], completionHandle: completionHandle)
+    }
+
     
     func uploadImage(_ keyUpload : String ,_ photo: UIImage, completionHandle:@escaping (_ result:[String:AnyObject]?,_ error:AnyObject?) -> Void) {
         

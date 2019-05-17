@@ -18,16 +18,17 @@ import YouTubePlayer
 import VIMVideoPlayer
 import GoogleInteractiveMediaAds
 
-class ChatViewController: MessagesViewController ,VIMVideoPlayerViewDelegate  {
+class ChatViewController: MessagesViewController  {
     var arrayListChat = Mapper<listChat>().mapArray(JSONArray: [])
     var messageList: [MockMessage] = []
     let pageNumber : Int = 0
     let refreshControl = UIRefreshControl()
     let userSender = Sender(id:String(format: "%@", UserDefaults.standard.value(forKey: "id")! as! CVarArg), displayName: String(format: "%@", UserDefaults.standard.value(forKey: "name")! as! CVarArg))
-    let img : UIImageView? = nil
+    let img = UIImageView()
     var contentPlayer: AVPlayer?
     var playerLayer: AVPlayerLayer?
-    
+    let imageToken = UIImageView()
+    var clickVideo : Int = 0
     
     let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -58,8 +59,6 @@ class ChatViewController: MessagesViewController ,VIMVideoPlayerViewDelegate  {
         
         loadHistoryChat()
         
-   
-        
     }
     
     
@@ -83,6 +82,9 @@ class ChatViewController: MessagesViewController ,VIMVideoPlayerViewDelegate  {
         messageInputBar.sendButton.tintColor = UIColor.gray
     }
     
+    
+    
+    
 }
 
 extension ChatViewController {
@@ -91,11 +93,7 @@ extension ChatViewController {
             self.arrayListChat = Mapper<listChat>().mapArray(JSONArray: result as! [[String : Any]])
             
             for chat in self.arrayListChat {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                let date = dateFormatter.date(from:chat.created_at!)!
                 self.typeChat(type: chat.type! , content: chat.content!, user_id: String(chat.user_id), name: chat.name!, link: chat.link! , create_at: chat.created_at!)
-                
             }
             
             self.messagesCollectionView.reloadData()
@@ -134,51 +132,51 @@ extension ChatViewController {
     }
     
     func typeChat(type : String, content : String , user_id : String , name : String , link : String , create_at : String ){
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let date = dateFormatter.date(from:create_at)!
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        dateFormatter.timeZone = NSTimeZone.local
+//
+//        let date = dateFormatter.date(from:create_at)!
         
         var message : MockMessage
         
         switch type {
         case "text":
-            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: date , link: link , type: type)
+            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: Date() , link: link , type: type)
             self.messageList.append(message)
             
             break
         case "youtube":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(thumbnail:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
             self.messageList.append(message)
             
             break
         case "vimeo":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(thumbnail:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
             self.messageList.append(message)
             
             break
         case "video":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(thumbnail:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
             self.messageList.append(message)
             
             break
         case "document":
+            let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date(),link: link , type:type)
+            self.messageList.append(message)
             break
         case "token":
-            
-            //            let url = URL(string:link)
+            let url = URL(string:link)
             let placeholderImage = UIImage(named: "bg (1)")!
-            
-            //            img!.af_setImage( withURL: url!,placeholderImage: placeholderImage)
-            
-            let message = MockMessage(image: placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date(),link: link , type:type)
+            img.af_setImage( withURL: url! ,placeholderImage: placeholderImage)
+            let message = MockMessage(attributedText: tokenImage(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date(),link: link , type:type)
             self.messageList.append(message)
-            
             break
             
         default:
@@ -187,7 +185,61 @@ extension ChatViewController {
         
         self.messagesCollectionView.reloadDataAndKeepOffset()
         self.refreshControl.endRefreshing()
+    }
+    
+    
+    
+    func tokenImage(_ text: String?, andLink link: String?) -> NSMutableAttributedString? {
         
+        let string = NSMutableAttributedString()
+        
+        imageToken.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
+        imageToken.sd_setImage(with: URL(string: link ?? ""), placeholderImage: UIImage(named: "badge-1"))
+        
+        let attachment = NSTextAttachment()
+        
+        attachment.image = imageToken.image
+        attachment.bounds = CGRect(x: 0, y: 0, width: 60, height: 60)
+        
+        let font: UIFont? = UIFont(name: "Arial", size: 16)!
+        let colour = UIColor.black
+        
+        let attributes: [NSString : AnyObject] = [NSString(string: NSAttributedString.Key.font.rawValue): font!, NSString(string: NSAttributedString.Key.foregroundColor.rawValue): colour]
+        
+        let attrStr = NSAttributedString(string: "  " + "\(text ?? "")", attributes: attributes as? [NSAttributedString.Key : Any])
+        
+        let attrStringWithImage = NSAttributedString(attachment: attachment)
+        
+        string.append(attrStringWithImage)
+        string.append(attrStr)
+        
+        return string
+    }
+    
+    func docmentText(_ text: String?, andLink link: String?) -> NSMutableAttributedString? {
+        
+        let string = NSMutableAttributedString()
+        
+        imageToken.sd_setImage(with: URL(string: link ?? ""), placeholderImage: UIImage(named: "icons8-Download From Cloud-30"))
+        
+        let attachment = NSTextAttachment()
+        
+        attachment.image = imageToken.image
+        attachment.bounds = CGRect(x: 0, y: 0, width: 30, height: 30)
+        
+        let font: UIFont? = UIFont(name: "Arial", size: 16)!
+        let colour = UIColor.black
+        
+        let attributes: [NSString : AnyObject] = [NSString(string: NSAttributedString.Key.font.rawValue): font!, NSString(string: NSAttributedString.Key.foregroundColor.rawValue): colour]
+        
+        let attrStr = NSAttributedString(string: "  "+"\(text ?? "")", attributes: attributes as? [NSAttributedString.Key : Any])
+        
+        let attrStringWithImage = NSAttributedString(attachment: attachment)
+        
+        string.append(attrStringWithImage)
+        string.append(attrStr)
+        
+        return string
     }
 }
 
@@ -205,9 +257,9 @@ extension ChatViewController : MessagesDataSource {
     }
     
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        if indexPath.section % 3 == 0 {
-            return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10), NSAttributedString.Key.foregroundColor: UIColor.darkGray])
-        }
+//        if indexPath.section % 3 == 0 {
+//            return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10), NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+//        }
         return nil
     }
     
@@ -221,7 +273,10 @@ extension ChatViewController : MessagesDataSource {
     ////        let dateString = Formatter.string(for:message.sentDate)
     ////        return NSAttributedString(string: dateString, attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption2)])
     //    }
+    
 }
+
+
 
 // MARK: - MessageCellDelegate
 extension ChatViewController: MessageCellDelegate {
@@ -230,6 +285,8 @@ extension ChatViewController: MessageCellDelegate {
         print("Avatar tapped")
     }
     
+   
+    
     func didTapMessage(in cell: MessageCollectionViewCell) {
         
         if let indexPath = messagesCollectionView.indexPath(for: cell) {
@@ -237,7 +294,7 @@ extension ChatViewController: MessageCellDelegate {
             
             switch message.Type {
             case "youtube":
-                let videoPlayer = YouTubePlayerView(frame: CGRect(x: cell.frame.minX, y: cell.frame.minY, width: cell.frame.width , height: cell.frame.height))
+                let videoPlayer = YouTubePlayerView(frame: CGRect(x: cell.frame.minX, y: cell.frame.minY, width: 240 , height: 200))
                 videoPlayer.playerVars = [
                     "playsinline": "1",
                     "modestbranding": "1",
@@ -256,17 +313,26 @@ extension ChatViewController: MessageCellDelegate {
                 break
             case "video":
                 let player = AVPlayer(url: URL(string:"https://video.brainfitstudio.com/vod/_definst_/mp4:development/1000/file.mp4/playlist.m3u8")!)
-                let playerViewController = AVPlayerViewController()
-                playerViewController.player = player
-                playerViewController.view.frame = CGRect(x: cell.frame.minX, y: cell.frame.minY, width: cell.frame.width , height: cell.frame.height)
-                playerViewController.showsPlaybackControls = true
-
-                self.present(playerViewController, animated: true) {
-             
+                if clickVideo == 0 {
+                    let playerLayer = AVPlayerLayer(player: player)
+                    playerLayer.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: 240 , height: 200)
+                    player.play()
+                    clickVideo = 1;
+                    messagesCollectionView.layer.addSublayer(playerLayer)
+                }else {
+                    let window = UIApplication.shared.keyWindow!
+                    let playerViewController = AVPlayerViewController()
+                    playerViewController.player = player
+                    playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: cell.frame.width , height: cell.frame.height + 20)
+                    playerViewController.showsPlaybackControls = true
+                    playerViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                    
+                    self.present(playerViewController, animated: true) {
+                        playerViewController.player!.play()
+                    }
+                    window.addSubview(playerViewController.view)
+                    clickVideo = 0;
                 }
-                playerViewController.player!.play()
-                
-                messagesCollectionView.addSubview(playerViewController.view)
                 break
             case "document":
                 let docLink = NSURL(string: message.Link)

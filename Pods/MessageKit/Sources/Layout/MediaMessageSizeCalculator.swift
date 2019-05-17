@@ -34,7 +34,8 @@ open class MediaMessageSizeCalculator: MessageSizeCalculator {
                 let height = maxWidth * item.size.height / item.size.width
                 return CGSize(width: maxWidth, height: height)
             }
-            return item.size
+            return CGSize(width: maxWidth, height: 200)
+//                item.size
         }
         switch message.kind {
         case .photo(let item):

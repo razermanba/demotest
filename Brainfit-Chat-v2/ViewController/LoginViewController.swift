@@ -93,6 +93,14 @@ extension LoginviewController{
                 let user = Mapper<UserProfile>().map(JSONObject: result)
                 UserDefaults.standard.set(user?.token, forKey: "token")
                 
+                let paramToken = ["device_id": UIDevice.current.identifierForVendor!.uuidString,
+                                  "device_token":UserDefaults.standard.string(forKey: "device_token"),
+                                  "device_type": "ios"] as [String : AnyObject]
+             
+                APIService.sharedInstance.submitDeviceToken(paramToken, completionHandle: { (result, error) in
+                    
+                })
+                
                 APIService.sharedInstance.getProfile([:], completionHandle:  { (result, error) in
                     if error == nil{
                         let user = Mapper<UserProfile>().map(JSONObject: result)
@@ -105,9 +113,7 @@ extension LoginviewController{
                         UserDefaults.standard.set(user?.name, forKey: "name")
                         UserDefaults.standard.set(user?.username, forKey: "username")
                         UserDefaults.standard.set(user?.avatar, forKey: "avatar")
-                        
-                        
-                        
+        
                         if (user?.room)! > 0 {
                             self.performSegue(withIdentifier: "roomChat", sender: self)
                             

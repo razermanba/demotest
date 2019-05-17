@@ -26,9 +26,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-(1)" translatesAutoresizingMaskIntoConstraints="NO" id="lLX-bF-nkZ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="813"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-(1)" translatesAutoresizingMaskIntoConstraints="NO" id="lLX-bF-nkZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Email or Username" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hIx-kd-3AK">
                                 <rect key="frame" x="32" y="346.66666666666669" width="305" height="41"/>
@@ -91,7 +90,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nnh-y8-I83">
-                                <rect key="frame" x="31" y="499.66666666666674" width="306" height="40"/>
+                                <rect key="frame" x="31" y="489.66666666666669" width="306" height="40.000000000000057"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="agC-a2-do8">
                                         <variation key="heightClass=regular-widthClass=compact" constant="40"/>
@@ -126,10 +125,10 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nBn-qU-OM6">
-                                <rect key="frame" x="31" y="626" width="305" height="50"/>
+                                <rect key="frame" x="31" y="623" width="305" height="44"/>
                                 <color key="backgroundColor" red="0.043780468400000001" green="0.7471340299" blue="0.91039723159999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="M7s-dR-sFM"/>
+                                    <constraint firstAttribute="height" constant="44" id="M7s-dR-sFM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="14"/>
                                 <state key="normal" title="LOG IN">
@@ -145,10 +144,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="lLX-bF-nkZ" secondAttribute="bottom" id="4hq-QG-dPI"/>
+                            <constraint firstItem="lLX-bF-nkZ" firstAttribute="trailing" secondItem="qeM-rt-KwG" secondAttribute="trailing" id="7m2-4p-cID"/>
                             <constraint firstItem="kbq-Fc-YWs" firstAttribute="leading" secondItem="qeM-rt-KwG" secondAttribute="leading" constant="70" id="As1-hV-KJH"/>
+                            <constraint firstItem="lLX-bF-nkZ" firstAttribute="top" secondItem="8Vn-QA-gKL" secondAttribute="top" id="GQj-Od-Qan"/>
                             <constraint firstItem="qeM-rt-KwG" firstAttribute="trailing" secondItem="B6I-R0-Sla" secondAttribute="trailing" constant="39" id="GvK-pE-jNe"/>
                             <constraint firstItem="9hp-Gk-UMX" firstAttribute="bottom" secondItem="0IM-kx-LVJ" secondAttribute="bottom" constant="-2" id="IOy-mq-DSM"/>
-                            <constraint firstItem="nBn-qU-OM6" firstAttribute="top" secondItem="nnh-y8-I83" secondAttribute="bottom" constant="86.333333333333258" id="IXn-0a-PuN"/>
+                            <constraint firstItem="nBn-qU-OM6" firstAttribute="top" secondItem="nnh-y8-I83" secondAttribute="bottom" constant="93.333335876464844" id="IXn-0a-PuN"/>
                             <constraint firstItem="0IM-kx-LVJ" firstAttribute="top" secondItem="B6I-R0-Sla" secondAttribute="bottom" constant="9" id="KC9-mc-ZZc">
                                 <variation key="heightClass=regular-widthClass=compact" constant="9.0000000000000568"/>
                             </constraint>
@@ -162,12 +164,13 @@
                             <constraint firstItem="nnh-y8-I83" firstAttribute="trailing" secondItem="hIx-kd-3AK" secondAttribute="trailing" id="ZhF-lI-Waw"/>
                             <constraint firstItem="nBn-qU-OM6" firstAttribute="leading" secondItem="qeM-rt-KwG" secondAttribute="leading" constant="31" id="af7-eb-g7Q"/>
                             <constraint firstItem="geg-5B-rNg" firstAttribute="centerX" secondItem="8Vn-QA-gKL" secondAttribute="centerX" constant="-2" id="gUH-ud-Ra2"/>
-                            <constraint firstItem="nnh-y8-I83" firstAttribute="top" secondItem="9hp-Gk-UMX" secondAttribute="bottom" constant="24" id="ge3-6g-d1f"/>
+                            <constraint firstItem="nnh-y8-I83" firstAttribute="top" secondItem="9hp-Gk-UMX" secondAttribute="bottom" constant="14" id="ge3-6g-d1f"/>
                             <constraint firstItem="B6I-R0-Sla" firstAttribute="top" secondItem="hIx-kd-3AK" secondAttribute="bottom" constant="3" id="hr1-Jm-5QQ"/>
                             <constraint firstItem="B6I-R0-Sla" firstAttribute="leading" secondItem="qeM-rt-KwG" secondAttribute="leading" constant="32" id="irF-ye-FmW"/>
                             <constraint firstItem="qeM-rt-KwG" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9hp-Gk-UMX" secondAttribute="trailing" symbolic="YES" id="lLw-GJ-S9a"/>
                             <constraint firstItem="0IM-kx-LVJ" firstAttribute="leading" secondItem="qeM-rt-KwG" secondAttribute="leading" constant="31" id="mRr-se-Eqn"/>
                             <constraint firstItem="qeM-rt-KwG" firstAttribute="trailing" secondItem="kbq-Fc-YWs" secondAttribute="trailing" constant="77" id="nOL-E3-lab"/>
+                            <constraint firstItem="lLX-bF-nkZ" firstAttribute="leading" secondItem="qeM-rt-KwG" secondAttribute="leading" id="o5Q-kc-EoI"/>
                             <constraint firstItem="qeM-rt-KwG" firstAttribute="trailing" secondItem="hIx-kd-3AK" secondAttribute="trailing" constant="38" id="rwb-Px-JQe"/>
                             <constraint firstItem="qeM-rt-KwG" firstAttribute="trailing" secondItem="nBn-qU-OM6" secondAttribute="trailing" constant="39" id="trV-Vf-z0C"/>
                             <constraint firstItem="kbq-Fc-YWs" firstAttribute="bottom" secondItem="qeM-rt-KwG" secondAttribute="bottom" constant="-11" id="zfE-x5-Kfy"/>
@@ -284,7 +287,7 @@
                     <navigationItem key="navigationItem" id="cx8-dQ-Qwp">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="3hb-la-Xzp">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Ug-7o-1Ed">
-                                <rect key="frame" x="343" y="9.6666666666666643" width="16" height="25"/>
+                                <rect key="frame" x="334" y="9.6666666666666643" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="group"/>
                                 <connections>

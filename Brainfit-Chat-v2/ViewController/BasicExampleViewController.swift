@@ -28,14 +28,17 @@ import MessageKit
 import MessageInputBar
 
 final class BasicExampleViewController: ChatViewController {
-  
+    
     override func configureMessageCollectionView() {
         super.configureMessageCollectionView()
         
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        
+        UserDefaults.standard.set(true, forKey: "Photo Messages")
+        UserDefaults.standard.set(true, forKey: "Video Messages")
     }
-
+    
 }
 
 // MARK: - MessagesDisplayDelegate
@@ -69,7 +72,8 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        let url = URL(string: UserDefaults.standard.value(forKey: "avatar")! as! String)!
+        let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
+        let url = URL(string: String(format: "%@?v=%@",UserDefaults.standard.value(forKey: "avatar")! as! String, timestamp))!
         avatarView.sd_setAnimationImages(with: [url])
     }
     
