@@ -30,6 +30,15 @@
 		FA2652352268840300A7131E /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2652342268840300A7131E /* SocketIOManager.swift */; };
 		FA28ADFE22697B5A002DC95B /* listChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28ADFC22697B59002DC95B /* listChat.swift */; };
 		FA28ADFF22697B5A002DC95B /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28ADFD22697B59002DC95B /* Id.swift */; };
+		FA50503B2292559000FE9848 /* ReportCMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA50503A2292559000FE9848 /* ReportCMViewController.swift */; };
+		FA50503D229255A800FE9848 /* StandardScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA50503C229255A800FE9848 /* StandardScoreViewController.swift */; };
+		FA505046229256FD00FE9848 /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA50503F229256FD00FE9848 /* Levels.swift */; };
+		FA505047229256FD00FE9848 /* Tuk.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA505040229256FD00FE9848 /* Tuk.swift */; };
+		FA505048229256FD00FE9848 /* Contents.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA505041229256FD00FE9848 /* Contents.swift */; };
+		FA505049229256FD00FE9848 /* Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA505042229256FD00FE9848 /* Points.swift */; };
+		FA50504A229256FD00FE9848 /* Strategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA505043229256FD00FE9848 /* Strategy.swift */; };
+		FA50504B229256FD00FE9848 /* En.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA505044229256FD00FE9848 /* En.swift */; };
+		FA50504C229256FD00FE9848 /* StandardScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA505045229256FD00FE9848 /* StandardScore.swift */; };
 		FA5EA2122269756D001BF077 /* MockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5EA2112269756D001BF077 /* MockMessage.swift */; };
 		FA68EE5A2269ABC4007BF7DD /* BasicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68EE592269ABC4007BF7DD /* BasicExampleViewController.swift */; };
 		FAC731BB22670AA700C59F10 /* URLServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC731BA22670AA700C59F10 /* URLServer.swift */; };
@@ -90,6 +99,15 @@
 		FA2652342268840300A7131E /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		FA28ADFC22697B59002DC95B /* listChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listChat.swift; sourceTree = "<group>"; };
 		FA28ADFD22697B59002DC95B /* Id.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
+		FA50503A2292559000FE9848 /* ReportCMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCMViewController.swift; sourceTree = "<group>"; };
+		FA50503C229255A800FE9848 /* StandardScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardScoreViewController.swift; sourceTree = "<group>"; };
+		FA50503F229256FD00FE9848 /* Levels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
+		FA505040229256FD00FE9848 /* Tuk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tuk.swift; sourceTree = "<group>"; };
+		FA505041229256FD00FE9848 /* Contents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contents.swift; sourceTree = "<group>"; };
+		FA505042229256FD00FE9848 /* Points.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Points.swift; sourceTree = "<group>"; };
+		FA505043229256FD00FE9848 /* Strategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strategy.swift; sourceTree = "<group>"; };
+		FA505044229256FD00FE9848 /* En.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = En.swift; sourceTree = "<group>"; };
+		FA505045229256FD00FE9848 /* StandardScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardScore.swift; sourceTree = "<group>"; };
 		FA5EA2112269756D001BF077 /* MockMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockMessage.swift; sourceTree = "<group>"; };
 		FA68EE592269ABC4007BF7DD /* BasicExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicExampleViewController.swift; sourceTree = "<group>"; };
 		FAC731BA22670AA700C59F10 /* URLServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLServer.swift; sourceTree = "<group>"; };
@@ -178,6 +196,20 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		FA50503E229256FD00FE9848 /* StandardScore */ = {
+			isa = PBXGroup;
+			children = (
+				FA50503F229256FD00FE9848 /* Levels.swift */,
+				FA505040229256FD00FE9848 /* Tuk.swift */,
+				FA505041229256FD00FE9848 /* Contents.swift */,
+				FA505042229256FD00FE9848 /* Points.swift */,
+				FA505043229256FD00FE9848 /* Strategy.swift */,
+				FA505044229256FD00FE9848 /* En.swift */,
+				FA505045229256FD00FE9848 /* StandardScore.swift */,
+			);
+			path = StandardScore;
+			sourceTree = "<group>";
+		};
 		FAC731B7226709AB00C59F10 /* Sever */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +231,8 @@
 				FA08E250226D6FE5002EABFB /* ProfileTableViewController.swift */,
 				FA08E261226D7CF1002EABFB /* ListMemberChatTableViewController.swift */,
 				FA08E271226DA4FE002EABFB /* ListTokenViewController.swift */,
+				FA50503A2292559000FE9848 /* ReportCMViewController.swift */,
+				FA50503C229255A800FE9848 /* StandardScoreViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -206,6 +240,7 @@
 		FAC731B9226709AB00C59F10 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FA50503E229256FD00FE9848 /* StandardScore */,
 				FA28ADFD22697B59002DC95B /* Id.swift */,
 				FA28ADFC22697B59002DC95B /* listChat.swift */,
 				FA5EA2112269756D001BF077 /* MockMessage.swift */,
@@ -497,6 +532,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA08E251226D6FE5002EABFB /* ProfileTableViewController.swift in Sources */,
+				FA50503B2292559000FE9848 /* ReportCMViewController.swift in Sources */,
+				FA50504B229256FD00FE9848 /* En.swift in Sources */,
 				FA28ADFF22697B5A002DC95B /* Id.swift in Sources */,
 				FA28ADFE22697B5A002DC95B /* listChat.swift in Sources */,
 				FAFF3F432266CBCA00225C94 /* ViewController.swift in Sources */,
@@ -505,11 +542,15 @@
 				FA265230226870C000A7131E /* RoomChat.swift in Sources */,
 				FAEB028A22685E5B002F54EA /* UserProfile.swift in Sources */,
 				FA08E26B226D81EC002EABFB /* listUserChat.swift in Sources */,
+				FA50504A229256FD00FE9848 /* Strategy.swift in Sources */,
+				FA505046229256FD00FE9848 /* Levels.swift in Sources */,
 				FA08E264226D7D82002EABFB /* ListMemberTableViewCell.swift in Sources */,
 				FA08E25E226D72C8002EABFB /* ChangePassword.swift in Sources */,
 				FAFF3F412266CBCA00225C94 /* AppDelegate.swift in Sources */,
 				FA08E26C226D81EC002EABFB /* Users.swift in Sources */,
 				FA2652352268840300A7131E /* SocketIOManager.swift in Sources */,
+				FA505049229256FD00FE9848 /* Points.swift in Sources */,
+				FA505048229256FD00FE9848 /* Contents.swift in Sources */,
 				FA5EA2122269756D001BF077 /* MockMessage.swift in Sources */,
 				FA08E272226DA4FE002EABFB /* ListTokenViewController.swift in Sources */,
 				FA08E26E226DA4D6002EABFB /* ListTokenTableViewCell.swift in Sources */,
@@ -518,9 +559,12 @@
 				FAEB0288226858A9002F54EA /* LoginViewController.swift in Sources */,
 				FA26522B22686D1E00A7131E /* ChatRoomTableViewCell.swift in Sources */,
 				FA08E26A226D81EC002EABFB /* Tokens.swift in Sources */,
+				FA505047229256FD00FE9848 /* Tuk.swift in Sources */,
+				FA50504C229256FD00FE9848 /* StandardScore.swift in Sources */,
 				FAC731BD22670C6300C59F10 /* APIServer.swift in Sources */,
 				FA08E262226D7CF1002EABFB /* ListMemberChatTableViewController.swift in Sources */,
 				FA08E276226DAE2E002EABFB /* alertToken.swift in Sources */,
+				FA50503D229255A800FE9848 /* StandardScoreViewController.swift in Sources */,
 				FA265233226880D200A7131E /* ChatViewController.swift in Sources */,
 				FA68EE5A2269ABC4007BF7DD /* BasicExampleViewController.swift in Sources */,
 				FA26522D22686DA300A7131E /* RoomChatTableViewController.swift in Sources */,

@@ -141,6 +141,10 @@ class APIService {
     func submitDeviceToken(_ params : [String : AnyObject], completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
         getURL(METHOD.kPOST, url: API.base_url + API.BASE_URL_API_User + "/device_token", params: params, headers: [:], completionHandle: completionHandle)
     }
+    
+    func getStandardScore(_ params : [String : AnyObject], user_id : String , completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
+        getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API + "/students/" + user_id + "/cogmap-report", params: params, headers: [:], completionHandle: completionHandle)
+    }
 
     
     func uploadImage(_ keyUpload : String ,_ photo: UIImage, completionHandle:@escaping (_ result:[String:AnyObject]?,_ error:AnyObject?) -> Void) {
