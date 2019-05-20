@@ -13,7 +13,7 @@ class ReportCMViewController: UIViewController {
 //    var viewHeader = ViewHeader()
     
     @IBOutlet weak var viewAddSub: UIView!
-    var StandardScore : StandardScoreViewController!
+    var StandardScore : StandardScoreTableViewController!
 //    var PollVC : PollUserViewController!
     
     var oldVC : UIViewController!
@@ -23,6 +23,13 @@ class ReportCMViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let image : UIImage = UIImage(named: "logo_groupchat.png")!
+        let imageView = UIImageView()
+        imageView.frame.size.width = 40
+        imageView.frame.size.height = 40
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = image
+        navigationItem.titleView = imageView
         // Do any additional setup after loading the view.
         
         standardScoreVC()
@@ -73,9 +80,9 @@ extension ReportCMViewController{
         activeVC.didMove(toParent: self)
     }
     
-    func StandardScoreController() -> StandardScoreViewController {
+    func StandardScoreController() -> StandardScoreTableViewController {
         let storyboard = UIStoryboard(name:"Main", bundle: nil)
-        StandardScore = storyboard.instantiateViewController(withIdentifier: "StandardScoreStoryboardID") as? StandardScoreViewController
+        StandardScore = storyboard.instantiateViewController(withIdentifier: "StandardScoreStoryboardID") as? StandardScoreTableViewController
         addChild(StandardScore);
         StandardScore.didMove(toParent: self)
         

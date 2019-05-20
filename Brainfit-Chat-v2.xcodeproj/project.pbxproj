@@ -31,7 +31,6 @@
 		FA28ADFE22697B5A002DC95B /* listChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28ADFC22697B59002DC95B /* listChat.swift */; };
 		FA28ADFF22697B5A002DC95B /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28ADFD22697B59002DC95B /* Id.swift */; };
 		FA50503B2292559000FE9848 /* ReportCMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA50503A2292559000FE9848 /* ReportCMViewController.swift */; };
-		FA50503D229255A800FE9848 /* StandardScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA50503C229255A800FE9848 /* StandardScoreViewController.swift */; };
 		FA505046229256FD00FE9848 /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA50503F229256FD00FE9848 /* Levels.swift */; };
 		FA505047229256FD00FE9848 /* Tuk.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA505040229256FD00FE9848 /* Tuk.swift */; };
 		FA505048229256FD00FE9848 /* Contents.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA505041229256FD00FE9848 /* Contents.swift */; };
@@ -39,6 +38,7 @@
 		FA50504A229256FD00FE9848 /* Strategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA505043229256FD00FE9848 /* Strategy.swift */; };
 		FA50504B229256FD00FE9848 /* En.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA505044229256FD00FE9848 /* En.swift */; };
 		FA50504C229256FD00FE9848 /* StandardScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA505045229256FD00FE9848 /* StandardScore.swift */; };
+		FA5050502292696B00FE9848 /* StandardScoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA50504F2292696B00FE9848 /* StandardScoreTableViewController.swift */; };
 		FA5EA2122269756D001BF077 /* MockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5EA2112269756D001BF077 /* MockMessage.swift */; };
 		FA68EE5A2269ABC4007BF7DD /* BasicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68EE592269ABC4007BF7DD /* BasicExampleViewController.swift */; };
 		FAC731BB22670AA700C59F10 /* URLServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC731BA22670AA700C59F10 /* URLServer.swift */; };
@@ -100,7 +100,6 @@
 		FA28ADFC22697B59002DC95B /* listChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listChat.swift; sourceTree = "<group>"; };
 		FA28ADFD22697B59002DC95B /* Id.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
 		FA50503A2292559000FE9848 /* ReportCMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCMViewController.swift; sourceTree = "<group>"; };
-		FA50503C229255A800FE9848 /* StandardScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardScoreViewController.swift; sourceTree = "<group>"; };
 		FA50503F229256FD00FE9848 /* Levels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
 		FA505040229256FD00FE9848 /* Tuk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tuk.swift; sourceTree = "<group>"; };
 		FA505041229256FD00FE9848 /* Contents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contents.swift; sourceTree = "<group>"; };
@@ -108,6 +107,7 @@
 		FA505043229256FD00FE9848 /* Strategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strategy.swift; sourceTree = "<group>"; };
 		FA505044229256FD00FE9848 /* En.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = En.swift; sourceTree = "<group>"; };
 		FA505045229256FD00FE9848 /* StandardScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardScore.swift; sourceTree = "<group>"; };
+		FA50504F2292696B00FE9848 /* StandardScoreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardScoreTableViewController.swift; sourceTree = "<group>"; };
 		FA5EA2112269756D001BF077 /* MockMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockMessage.swift; sourceTree = "<group>"; };
 		FA68EE592269ABC4007BF7DD /* BasicExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicExampleViewController.swift; sourceTree = "<group>"; };
 		FAC731BA22670AA700C59F10 /* URLServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLServer.swift; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 				FA08E261226D7CF1002EABFB /* ListMemberChatTableViewController.swift */,
 				FA08E271226DA4FE002EABFB /* ListTokenViewController.swift */,
 				FA50503A2292559000FE9848 /* ReportCMViewController.swift */,
-				FA50503C229255A800FE9848 /* StandardScoreViewController.swift */,
+				FA50504F2292696B00FE9848 /* StandardScoreTableViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -461,6 +461,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${PODS_ROOT}/GoogleAds-IMA-iOS-SDK/GoogleInteractiveMediaAds.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -484,6 +485,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleInteractiveMediaAds.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -562,9 +564,9 @@
 				FA505047229256FD00FE9848 /* Tuk.swift in Sources */,
 				FA50504C229256FD00FE9848 /* StandardScore.swift in Sources */,
 				FAC731BD22670C6300C59F10 /* APIServer.swift in Sources */,
+				FA5050502292696B00FE9848 /* StandardScoreTableViewController.swift in Sources */,
 				FA08E262226D7CF1002EABFB /* ListMemberChatTableViewController.swift in Sources */,
 				FA08E276226DAE2E002EABFB /* alertToken.swift in Sources */,
-				FA50503D229255A800FE9848 /* StandardScoreViewController.swift in Sources */,
 				FA265233226880D200A7131E /* ChatViewController.swift in Sources */,
 				FA68EE5A2269ABC4007BF7DD /* BasicExampleViewController.swift in Sources */,
 				FA26522D22686DA300A7131E /* RoomChatTableViewController.swift in Sources */,

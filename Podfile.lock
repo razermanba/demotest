@@ -20,6 +20,9 @@ PODS:
   - AlamofireObjectMapper (5.2.0):
     - Alamofire (~> 4.7)
     - ObjectMapper (~> 3.4)
+  - Charts (3.1.1):
+    - Charts/Core (= 3.1.1)
+  - Charts/Core (3.1.1)
   - Firebase/Auth (5.0.1):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.0.0)
@@ -84,6 +87,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.0)
   - AlamofireImage
   - AlamofireObjectMapper (~> 5.0)
+  - Charts (~> 3.1.1)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Messaging
@@ -105,6 +109,7 @@ SPEC REPOS:
     - Alamofire
     - AlamofireImage
     - AlamofireObjectMapper
+    - Charts
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -142,6 +147,7 @@ SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
   AlamofireObjectMapper: 92b6ce2423a9d159e686f6a1d514a009bf903ddc
+  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
   Firebase: d6861c2059d8c32d1e6dd8932e22ada346d90a3a
   FirebaseAnalytics: 19812b49fa5f283dd6b23edf8a14b5d477029ab8
   FirebaseAuth: acbeef02fe7c3a26624e309849f3fe30c84115af
@@ -165,6 +171,6 @@ SPEC CHECKSUMS:
   VIMVideoPlayer: f4ed0a9986294ec3684a2e6bdc738e30051ef4ef
   YouTubePlayer: 028451f6772f372d4759866db99824c676ac1473
 
-PODFILE CHECKSUM: 60124aaa74ee79aabb3bf34f99b17de32a89a374
+PODFILE CHECKSUM: a3630091173ea2c16d3e284db387727fecb56ea1
 
 COCOAPODS: 1.5.2
