@@ -32,9 +32,9 @@ class ProfileTableViewController: UITableViewController,UINavigationControllerDe
         imageAvatar.layer.cornerRadius = imageAvatar.frame.width / 2
         imageAvatar.clipsToBounds = true
 
-
-        let url = URL(string:  UserDefaults.standard.value(forKey: "avatar") as! String)
-        imageAvatar.af_setImage(withURL:url! )
+        let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
+        let url = URL(string: String(format: "%@?v=%@",UserDefaults.standard.value(forKey: "avatar")! as! String, timestamp))!
+        imageAvatar.af_setImage(withURL:url )
         
         lblUsername.text = (UserDefaults.standard.value(forKey: "name") as! String)
         lblName.text =  (UserDefaults.standard.value(forKey: "username") as! String)
@@ -129,6 +129,9 @@ extension ProfileTableViewController{
         self.dismiss(animated: true, completion: { () -> Void in
             APIService.sharedInstance.uploadImage("", (info[UIImagePickerController.InfoKey.originalImage] as? UIImage)! , completionHandle: {(result, error) in
                 print(result as Any)
+                let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
+                let url = URL(string: String(format: "%@?v=%@",UserDefaults.standard.value(forKey: "avatar")! as! String, timestamp))!
+                self.imageAvatar.af_setImage(withURL:url )
             })
         })
     }

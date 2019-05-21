@@ -14,11 +14,15 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Levels : Mappable {
-	var parent : Int?
-	var level : String?
-	var converted_score : Int?
-	var strategy : Strategy?
+struct Datasets : Mappable {
+	var label : String?
+	var data : [Int]?
+	var backgroundColor : String?
+	var borderColor : String?
+	var fill : Bool?
+	var pointRadius : [Int]?
+	var pointHoverRadius : Int?
+	var lineTension : Int?
 
 	init?(map: Map) {
 
@@ -26,10 +30,14 @@ struct Levels : Mappable {
 
 	mutating func mapping(map: Map) {
 
-		parent <- map["parent"]
-		level <- map["level"]
-		converted_score <- map["converted_score"]
-		strategy <- map["strategy"]
+		label <- map["label"]
+		data <- map["data"]
+		backgroundColor <- map["backgroundColor"]
+		borderColor <- map["borderColor"]
+		fill <- map["fill"]
+		pointRadius <- map["pointRadius"]
+		pointHoverRadius <- map["pointHoverRadius"]
+		lineTension <- map["lineTension"]
 	}
 
 }

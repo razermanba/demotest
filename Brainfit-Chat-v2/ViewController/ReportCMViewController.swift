@@ -14,6 +14,8 @@ class ReportCMViewController: UIViewController {
     
     @IBOutlet weak var viewAddSub: UIView!
     var StandardScore : StandardScoreTableViewController!
+    var porgress : ProgressScoreTableViewController!
+    
 //    var PollVC : PollUserViewController!
     
     var oldVC : UIViewController!
@@ -32,7 +34,8 @@ class ReportCMViewController: UIViewController {
         navigationItem.titleView = imageView
         // Do any additional setup after loading the view.
         
-        standardScoreVC()
+//        standardScoreVC()
+        ProgressScoreVC()
     }
     
 
@@ -46,7 +49,7 @@ class ReportCMViewController: UIViewController {
     }
     */
     @IBAction func studentPorgress(_ sender: Any) {
-    
+        ProgressScoreVC()
     }
     
     @IBAction func standardScore(_ sender: Any) {
@@ -60,6 +63,13 @@ extension ReportCMViewController{
     func standardScoreVC() {
         self.removeChildViewController()
         oldVC = self.StandardScoreController()
+        self.activeChildViewController(oldVC)
+        animateViewHeight(oldVC.view, withAnimationType: CATransitionSubtype.fromTop.rawValue, andflagClose: true)
+    }
+    
+    func ProgressScoreVC() {
+        self.removeChildViewController()
+        oldVC = self.ProgressScoreController()
         self.activeChildViewController(oldVC)
         animateViewHeight(oldVC.view, withAnimationType: CATransitionSubtype.fromTop.rawValue, andflagClose: true)
     }
@@ -88,6 +98,18 @@ extension ReportCMViewController{
         
         return StandardScore
     }
+    
+    func ProgressScoreController() -> ProgressScoreTableViewController {
+        let storyboard = UIStoryboard(name:"Main", bundle: nil)
+        porgress = storyboard.instantiateViewController(withIdentifier: "ProgressScoreStoryboardId") as? ProgressScoreTableViewController
+        addChild(porgress);
+        porgress.didMove(toParent: self)
+        
+        return porgress
+    }
+
+    
+
     
     // MARK: - animate view
     func animateViewHeight(_ animateView: UIView, withAnimationType animType: String, andflagClose flag: Bool) {

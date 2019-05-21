@@ -73,8 +73,17 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
-        let url = URL(string: String(format: "%@?v=%@",UserDefaults.standard.value(forKey: "avatar")! as! String, timestamp))!
-        avatarView.sd_setAnimationImages(with: [url])
+      
+        if userSender.id == self.messageList[indexPath.section].sender.id{
+            let url = URL(string: String(format: "%@?v=%@",UserDefaults.standard.value(forKey: "avatar")! as! String, timestamp))!
+            let placeholderImage = UIImage(named: "avatar_student (1)")!
+            avatarView.af_setImage(withURL: url ,placeholderImage:placeholderImage )
+            
+        }else {
+            let placeholderImage = UIImage(named: "avatar_student (1)")!
+             let url = URL(string: String(format: "%@?v=%@","", timestamp))!
+            avatarView.af_setImage(withURL: url ,placeholderImage:placeholderImage )
+        }
     }
     
     // MARK: - Location Messages

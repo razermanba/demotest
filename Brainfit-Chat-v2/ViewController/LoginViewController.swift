@@ -36,6 +36,13 @@ class LoginviewController : UIViewController, UITextFieldDelegate{
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         
+        let keeplogin = UserDefaults.standard.string(forKey: "keepLogin")
+        if keeplogin == "true" && UserDefaults.standard.string(forKey: "username") != nil{
+            btnkeep.setImage(UIImage(named: "border_ticked_signin"), for: UIControl.State.normal)
+            loginUser(username: txtUsername.text!, password: txtPassword.text!)
+        }else {
+            UserDefaults.standard.set("false", forKey: "keepLogin")
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,9 +64,11 @@ class LoginviewController : UIViewController, UITextFieldDelegate{
         if flagKeep == false{
             flagKeep = true;
             btnkeep.setImage(UIImage(named: "border_ticked_signin"), for: UIControl.State.normal)
+            UserDefaults.standard.set("true", forKey: "keepLogin")
         }else {
             flagKeep = false;
             btnkeep.setImage(UIImage(named: "border_tick_signin"), for: UIControl.State.normal)
+            UserDefaults.standard.set("false", forKey: "keepLogin")
         }
     }
     
@@ -92,13 +101,13 @@ extension LoginviewController{
             if error == nil {
                 let user = Mapper<UserProfile>().map(JSONObject: result)
                 
-                print(user?.token)
+                //                print(user?.token)
                 UserDefaults.standard.set(user?.token, forKey: "token")
                 
                 let paramToken = ["device_id": UIDevice.current.identifierForVendor!.uuidString,
                                   "device_token":UserDefaults.standard.string(forKey: "device_token"),
                                   "device_type": "ios"] as [String : AnyObject]
-             
+                
                 APIService.sharedInstance.submitDeviceToken(paramToken, completionHandle: { (result, error) in
                     
                 })
@@ -115,7 +124,7 @@ extension LoginviewController{
                         UserDefaults.standard.set(user?.name, forKey: "name")
                         UserDefaults.standard.set(user?.username, forKey: "username")
                         UserDefaults.standard.set(user?.avatar, forKey: "avatar")
-        
+                        
                         if (user?.room)! > 0 {
                             self.performSegue(withIdentifier: "roomChat", sender: self)
                             
@@ -167,5 +176,6 @@ extension LoginviewController{
             }
         }
     }
+    
 }
 

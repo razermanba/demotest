@@ -67,8 +67,11 @@ class RoomChatTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        
         UserDefaults.standard.set(arrayRoom[indexPath.row].room_id!, forKey: "room")
-
+        
+        SocketIOManager.sharedInstance.socketConnect()
+        
         self.performSegue(withIdentifier: "Chat", sender: self)
         
     }

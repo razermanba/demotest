@@ -14,7 +14,7 @@ import AlamofireImage
 import SDWebImage
 
 class ListTokenViewController: UIViewController {
-
+    
     @IBOutlet weak var lblTotalCount: UILabel!
     @IBOutlet weak var TokenTable: UITableView!
     
@@ -32,23 +32,23 @@ class ListTokenViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
         navigationItem.titleView = imageView
-
+        
         
         lblTotalCount.text = String(format: "%d", arrayToken.count)
         
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension ListTokenViewController : UITableViewDataSource,UITableViewDelegate{
@@ -66,11 +66,12 @@ extension ListTokenViewController : UITableViewDataSource,UITableViewDelegate{
         DispatchQueue.main.async {
             cell.imageToken.sd_setAnimationImages(with: [url])
         }
+        
         cell.lblName.text = self.arrayToken[indexPath.row].name
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let window = UIApplication.shared.keyWindow!
         tokenview = (Bundle.main.loadNibNamed("alertToken", owner: self, options: nil)?.first as? alertToken)!
         tokenview.bounds = window.bounds
@@ -85,7 +86,6 @@ extension ListTokenViewController : UITableViewDataSource,UITableViewDelegate{
         
         self.animateViewHeight(tokenview, withAnimationType: CATransitionSubtype.fromTop.rawValue, andflagClose: true)
         window.addSubview(tokenview)
-
     }
 }
 

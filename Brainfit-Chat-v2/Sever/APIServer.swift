@@ -145,6 +145,11 @@ class APIService {
     func getStandardScore(_ params : [String : AnyObject], user_id : String , completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
         getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API + "/students/" + user_id + "/cogmap-report", params: params, headers: [:], completionHandle: completionHandle)
     }
+    
+    func getProgressScore(_ params : [String : AnyObject], user_id : String , completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
+        getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API + "/students/" + user_id + "/progress-report", params: params, headers: [:], completionHandle: completionHandle)
+    }
+
 
     
     func uploadImage(_ keyUpload : String ,_ photo: UIImage, completionHandle:@escaping (_ result:[String:AnyObject]?,_ error:AnyObject?) -> Void) {
@@ -152,20 +157,14 @@ class APIService {
         guard let imageData = photo.jpegData(compressionQuality: 1) else { return }
         
         let manager = AFHTTPSessionManager()
-        
-        let file = [
-            "uri": "",
-            "name": "avatar",
-            "type": "image/jpg",
-            "fileName" : "avatar.jpg"
-            ] as [String : Any]
-        
+            
         
         manager.requestSerializer.setValue(String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg), forHTTPHeaderField: "Authorization")
         
-        let request: NSMutableURLRequest = manager.requestSerializer.multipartFormRequest(withMethod: "PUT", urlString: API.base_url + API.BASE_URL_API_User + "/avatar" , parameters: file, constructingBodyWith: {(formData: AFMultipartFormData!) -> Void in
+    
+        let request: NSMutableURLRequest = manager.requestSerializer.multipartFormRequest(withMethod: "PUT", urlString: API.base_url + API.BASE_URL_API_User + "/avatar" , parameters: nil, constructingBodyWith: {(formData: AFMultipartFormData!) -> Void in
             
-            formData.appendPart(withFileData: imageData, name: keyUpload , fileName: "photo.jpg", mimeType: "image/jpeg")
+            formData.appendPart(withFileData: imageData, name: "avatar" , fileName: "avatar.jpg", mimeType: "image/jpeg")
             
         }, error: nil)
         

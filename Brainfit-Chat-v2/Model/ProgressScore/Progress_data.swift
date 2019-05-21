@@ -14,11 +14,17 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Levels : Mappable {
-	var parent : Int?
-	var level : String?
-	var converted_score : Int?
-	var strategy : Strategy?
+struct Progress_data : Mappable {
+	var id : String?
+	var game_id : Int?
+	var subgame_id : Int?
+	var subgame_name : String?
+	var subgame_course_id : Int?
+	var course_title : String?
+	var session_score : Int?
+	var session_percent : Double?
+	var session_created_at : String?
+	var session_id : Int?
 
 	init?(map: Map) {
 
@@ -26,10 +32,16 @@ struct Levels : Mappable {
 
 	mutating func mapping(map: Map) {
 
-		parent <- map["parent"]
-		level <- map["level"]
-		converted_score <- map["converted_score"]
-		strategy <- map["strategy"]
+		id <- map["id"]
+		game_id <- map["game_id"]
+		subgame_id <- map["subgame_id"]
+		subgame_name <- map["subgame_name"]
+		subgame_course_id <- map["subgame_course_id"]
+		course_title <- map["course_title"]
+		session_score <- map["session_score"]
+		session_percent <- map["session_percent"]
+		session_created_at <- map["session_created_at"]
+		session_id <- map["session_id"]
 	}
 
 }

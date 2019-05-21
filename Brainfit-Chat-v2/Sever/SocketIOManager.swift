@@ -26,22 +26,27 @@ class SocketIOManager{
     }
     
     
-    let manager = SocketManager(socketURL:URL(string: API.SOCKET_URL)!, config: [.connectParams(["room":  UserDefaults.standard.value(forKey: "room")! as! CVarArg ,
-                                                                                                 "token": UserDefaults.standard.value(forKey: "token")! as! CVarArg,
-                                                                                                 "role":  UserDefaults.standard.value(forKey: "role")! as! CVarArg ,
-                                                                                                 "id":   UserDefaults.standard.value(forKey: "id")! as! CVarArg,
-                                                                                                 "name": UserDefaults.standard.value(forKey: "name")! as! CVarArg ,
-                                                                                                 "username": UserDefaults.standard.value(forKey: "username")! as! CVarArg ,
-                                                                                                 "avatar":   UserDefaults.standard.value(forKey: "avatar")! as! CVarArg ])])
+    let manager = SocketManager(socketURL:URL(string: API.SOCKET_URL)!, config: nil)
+    
     
     let NotificationMessage_DidGotSocketEvent = "NotificationMessage_DidGotSocketEvent"
-    
     var socket : SocketIOClient!
     func socketConnect (){
+        
+        print(UserDefaults.standard.value(forKey: "room")! as! CVarArg)
+        
+        manager.setConfigs([.connectParams(["room":  UserDefaults.standard.value(forKey: "room")! as! CVarArg ,
+                                        "token": UserDefaults.standard.value(forKey: "token")! as! CVarArg,
+                                        "role":  UserDefaults.standard.value(forKey: "role")! as! CVarArg ,
+                                        "id":   UserDefaults.standard.value(forKey: "id")! as! CVarArg,
+                                        "name": UserDefaults.standard.value(forKey: "name")! as! CVarArg ,
+                                        "username": UserDefaults.standard.value(forKey: "username")! as! CVarArg ,
+                                        "avatar":   UserDefaults.standard.value(forKey: "avatar")! as! CVarArg ])])
+        
+        
         socket = manager.defaultSocket
      
         socket.onAny({ ( event: SocketAnyEvent) -> Void in
-            print(event.event)
              NotificationCenter.default.post(name: NSNotification.Name(rawValue: self.NotificationMessage_DidGotSocketEvent), object: event)
         })
         
@@ -50,5 +55,10 @@ class SocketIOManager{
      
     func socketSendMessage(text : String , message : String , link : String , timeStamp : String) {
         socket.emit("send message", with: [["type":"text","content":message,"link":"","client_id":timeStamp]])
+    }
+    
+    func socketDisconnect() {
+        socket.manager?.disconnect()
+        socket.disconnect()
     }
 }
