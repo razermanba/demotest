@@ -198,15 +198,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RoomChatCell" rowHeight="83" id="lQc-S2-o6O" customClass="ChatRoomTableViewCell" customModule="Brainfit_Chat_v2" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RoomChatCell" rowHeight="83" id="lQc-S2-o6O" customClass="ChatRoomTableViewCell" customModule="Brainfit_Chat_v2" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="83"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="lQc-S2-o6O" id="qsZ-jz-kyW">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="82.666666666666671"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="82.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="dadada" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMD-2R-8B4">
-                                            <rect key="frame" x="81" y="19" width="205" height="35"/>
+                                            <rect key="frame" x="81" y="19" width="239" height="35"/>
                                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -225,7 +225,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sJ-v7-mXR">
-                                            <rect key="frame" x="294" y="21" width="38" height="0.0"/>
+                                            <rect key="frame" x="328" y="21" width="38" height="0.0"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="38" id="ejB-4z-NUZ"/>
                                             </constraints>
@@ -499,7 +499,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="TqG-de-AgW" kind="relationship" relationship="viewControllers" id="Ei0-UC-B5n"/>
-                        <segue destination="pc7-CN-5sD" kind="relationship" relationship="viewControllers" id="ogj-KP-B85"/>
                         <segue destination="XZI-fa-ahy" kind="relationship" relationship="viewControllers" id="KUK-gz-BVy"/>
                         <segue destination="wWp-me-CSe" kind="relationship" relationship="viewControllers" id="jXP-8x-LiB"/>
                     </connections>

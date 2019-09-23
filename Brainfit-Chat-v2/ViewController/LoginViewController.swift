@@ -101,7 +101,7 @@ extension LoginviewController{
             if error == nil {
                 let user = Mapper<UserProfile>().map(JSONObject: result)
                 
-                //                print(user?.token)
+                print(user?.token)
                 UserDefaults.standard.set(user?.token, forKey: "token")
                 
                 let paramToken = ["device_id": UIDevice.current.identifierForVendor!.uuidString,

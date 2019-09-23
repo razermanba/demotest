@@ -26,5 +26,6 @@ target 'Brainfit-Chat-v2' do
     pod 'YouTubePlayer'
     pod 'VIMVideoPlayer'
     pod 'Charts', '~> 3.1.1'
+    pod 'JGProgressHUD'
 
 end

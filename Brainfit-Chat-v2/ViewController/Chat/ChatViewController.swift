@@ -21,7 +21,7 @@ import GoogleInteractiveMediaAds
 class ChatViewController: MessagesViewController  {
     var arrayListChat = Mapper<listChat>().mapArray(JSONArray: [])
     var messageList: [MockMessage] = []
-    var pageNumber : Int = 0
+    let pageNumber : Int = 0
     let refreshControl = UIRefreshControl()
     let userSender = Sender(id:String(format: "%@", UserDefaults.standard.value(forKey: "id")! as! CVarArg), displayName: String(format: "%@", UserDefaults.standard.value(forKey: "name")! as! CVarArg))
     let img = UIImageView()
@@ -65,7 +65,7 @@ class ChatViewController: MessagesViewController  {
         super .viewWillDisappear(true)
         
         //        self.messageList.removeAll()
-        //        SocketIOManager.sharedInstance.socketDisconnect()
+        SocketIOManager.sharedInstance.socketDisconnect()
         
         
     }
@@ -94,44 +94,29 @@ class ChatViewController: MessagesViewController  {
 extension ChatViewController {
     func loadHistoryChat(){
         APIService.sharedInstance.getHistoryChat([:], roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , pagenumber: String(pageNumber), completionHandle: {(result, error) in
-            if  error == nil {
-                self.arrayListChat = Mapper<listChat>().mapArray(JSONArray: result as! [[String : Any]])
-                
-                for chat in self.arrayListChat {
-                    self.typeChat(type: chat.type! , content: chat.content!, user_id: String(chat.user_id), name: chat.name!, link: chat.link! , create_at: chat.created_at!)
-                }
-                self.pageNumber = self.pageNumber + 1;
-                
-                self.messagesCollectionView.reloadData()
-                self.messagesCollectionView.scrollToBottom()
-            }else {
-                self.messagesCollectionView.reloadData()
-                self.messagesCollectionView.scrollToBottom()
-
+            self.arrayListChat = Mapper<listChat>().mapArray(JSONArray: result as! [[String : Any]])
+            
+            for chat in self.arrayListChat {
+                self.typeChat(type: chat.type! , content: chat.content!, user_id: String(chat.user_id), name: chat.name!, link: chat.link! , create_at: chat.created_at!)
             }
+            
+            self.messagesCollectionView.reloadData()
+            self.messagesCollectionView.scrollToBottom()
         })
     }
     
     @objc func loadMoreMessages()  {
-        APIService.sharedInstance.getHistoryChat([:], roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , pagenumber: String(pageNumber), completionHandle: {(result, error) in
-            if error == nil {
-                self.arrayListChat = Mapper<listChat>().mapArray(JSONArray: result as! [[String : Any]])
-                self.pageNumber = self.pageNumber + 1;
+        APIService.sharedInstance.getHistoryChat([:], roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , pagenumber: String(pageNumber + 1), completionHandle: {(result, error) in
+            self.arrayListChat = Mapper<listChat>().mapArray(JSONArray: result as! [[String : Any]])
+            
+            for chat in self.arrayListChat {
                 
-                print(self.pageNumber);
+                self.loadMoreMessagesChat(type: chat.type! , content: chat.content!, user_id: String(chat.user_id), name: chat.name!, link: chat.link! , create_at: chat.created_at!)
                 
-                for chat in self.arrayListChat {
-                    self.loadMoreMessagesChat(type: chat.type! , content: chat.content!, user_id: String(chat.user_id), name: chat.name!, link: chat.link! , create_at: chat.created_at!)
-                    
-                }
-                
-                self.messagesCollectionView.reloadDataAndKeepOffset()
-                self.refreshControl.endRefreshing()
-            }else {
-                self.messagesCollectionView.reloadData()
-                self.messagesCollectionView.scrollToBottom()
-
             }
+            
+            self.messagesCollectionView.reloadDataAndKeepOffset()
+            self.refreshControl.endRefreshing()
         })
     }
     

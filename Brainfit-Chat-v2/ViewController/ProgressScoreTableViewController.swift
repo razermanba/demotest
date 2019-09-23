@@ -21,7 +21,7 @@ class ProgressScoreTableViewController: UITableViewController,ChartViewDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getProgressSore()
-         chartView.delegate = self
+        chartView.delegate = self
         
     }
     
@@ -78,7 +78,7 @@ extension ProgressScoreTableViewController {
     
     func setDataCount(_ count: Int, range: UInt32) {
         let ChartData = LineChartData()
-    
+        
         for datasets in self.progressScore!.datasets!{
             
             let values = (0..<datasets.data!.count).map { (i) -> ChartDataEntry in
@@ -98,12 +98,29 @@ extension ProgressScoreTableViewController {
             set1.fillAlpha = 225/255
             set1.drawCircleHoleEnabled = false
             set1.drawFilledEnabled = true
-
             
+        
             ChartData.addDataSet(set1)
+            chartView.setNeedsDisplay()
             chartView.data = ChartData
+            
         }
         
+        
+//        for set in chartView.data!.dataSets as! [LineChartDataSet] {
+        
+//            let entries = set.values
+//
+//            for value in entries {
+//                for point in self.progressScore!.datasets![0].pointRadius! {
+//                    print(point)
+//                    //                    value.circleRadius = CGFloat(point)
+//                }
+//            }
+            
+          
+//        }
+
         
         for set in chartView.data!.dataSets as! [LineChartDataSet] {
             print(set.drawFilledEnabled)
@@ -113,14 +130,15 @@ extension ProgressScoreTableViewController {
         for set in chartView.data!.dataSets {
             set.drawValuesEnabled = !set.drawValuesEnabled
         }
-//        chartView.fitScreen()
+        
+        //        chartView.fitScreen()
         chartView.setScaleMinima(10, scaleY: 0)
-//        chartView.setNeedsDisplay()
+        //        chartView.setNeedsDisplay()
         
         let barLineChart = chartView as BarLineChartViewBase
         barLineChart.autoScaleMinMaxEnabled = !barLineChart.isAutoScaleMinMaxEnabled
         chartView.notifyDataSetChanged()
-
+        
         
     }
     
@@ -146,4 +164,5 @@ extension ProgressScoreTableViewController {
         )
     }
 
+    
 }
