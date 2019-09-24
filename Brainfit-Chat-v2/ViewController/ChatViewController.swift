@@ -16,7 +16,9 @@ import AlamofireImage
 import SocketIO
 import YouTubePlayer
 import VIMVideoPlayer
-import GoogleInteractiveMediaAds
+import AVKit
+import AVFoundation
+//import GoogleInteractiveMediaAds
 
 class ChatViewController: MessagesViewController  {
     var arrayListChat = Mapper<listChat>().mapArray(JSONArray: [])
@@ -40,6 +42,7 @@ class ChatViewController: MessagesViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.messageList.removeAll()
         
         let image : UIImage = UIImage(named: "logo_groupchat.png")!
         let imageView = UIImageView()
@@ -60,14 +63,16 @@ class ChatViewController: MessagesViewController  {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super .viewWillDisappear(true)
         
-        //        self.messageList.removeAll()
-        //        SocketIOManager.sharedInstance.socketDisconnect()
-        
-        
+        SocketIOManager.sharedInstance.socketDissconectRoom()
     }
     
     func configureMessageCollectionView() {
@@ -95,19 +100,25 @@ extension ChatViewController {
     func loadHistoryChat(){
         APIService.sharedInstance.getHistoryChat([:], roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , pagenumber: String(pageNumber), completionHandle: {(result, error) in
             if  error == nil {
+                print(result)
                 self.arrayListChat = Mapper<listChat>().mapArray(JSONArray: result as! [[String : Any]])
                 
                 for chat in self.arrayListChat {
                     self.typeChat(type: chat.type! , content: chat.content!, user_id: String(chat.user_id), name: chat.name!, link: chat.link! , create_at: chat.created_at!)
                 }
+                
                 self.pageNumber = self.pageNumber + 1;
                 
+                //                DispatchQueue.main.async {
                 self.messagesCollectionView.reloadData()
-                self.messagesCollectionView.scrollToBottom()
+                self.refreshControl.endRefreshing()
+                self.messagesCollectionView.scrollToBottom(animated: true)
+                //                }
             }else {
-                self.messagesCollectionView.reloadData()
-                self.messagesCollectionView.scrollToBottom()
-
+                DispatchQueue.main.async {
+                    self.refreshControl.endRefreshing()
+                    self.messagesCollectionView.scrollToBottom(animated: true)
+                }
             }
         })
     }
@@ -125,12 +136,17 @@ extension ChatViewController {
                     
                 }
                 
-                self.messagesCollectionView.reloadDataAndKeepOffset()
-                self.refreshControl.endRefreshing()
+                DispatchQueue.main.async {
+                    self.messagesCollectionView.reloadDataAndKeepOffset()
+                    self.refreshControl.endRefreshing()
+                }
+                
             }else {
-                self.messagesCollectionView.reloadData()
-                self.messagesCollectionView.scrollToBottom()
-
+                DispatchQueue.main.async {
+                    self.messagesCollectionView.reloadDataAndKeepOffset()
+                    self.refreshControl.endRefreshing()
+                    
+                }
             }
         })
     }
@@ -142,7 +158,7 @@ extension ChatViewController {
         switch event.event {
         case "message":
             let dicReceive: NSDictionary = event.items![0] as! NSDictionary
-            typeChat(type: dicReceive["type"] as! String, content: dicReceive["content"] as! String, user_id: String(format: "%@", dicReceive["user_id"] as! CVarArg), name: dicReceive["name"] as! String, link: dicReceive["link"]! as! String,create_at: dicReceive["created_at"] as! String)
+            typeChatSocket(type: dicReceive["type"] as! String, content: dicReceive["content"] as! String, user_id: String(format: "%@", dicReceive["user_id"] as! CVarArg), name: dicReceive["name"] as! String, link: dicReceive["link"]! as! String,create_at: dicReceive["created_at"] as! String)
             break
         default:
             break
@@ -196,8 +212,6 @@ extension ChatViewController {
             break
         }
         
-        self.messagesCollectionView.reloadDataAndKeepOffset()
-        self.refreshControl.endRefreshing()
         
     }
     
@@ -246,10 +260,77 @@ extension ChatViewController {
         default:
             break
         }
-        
-        self.messagesCollectionView.reloadDataAndKeepOffset()
-        self.refreshControl.endRefreshing()
     }
+    
+    func typeChatSocket(type : String, content : String , user_id : String , name : String , link : String , create_at : String ){
+        var message : MockMessage
+        
+        switch type {
+        case "text":
+            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: Date() , link: link , type: type)
+            self.messageList.append(message)
+            
+            break
+        case "youtube":
+            let placeholderImage = UIImage(named: "bg (1)")!
+            
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            self.messageList.append(message)
+            
+            break
+        case "vimeo":
+            let placeholderImage = UIImage(named: "bg (1)")!
+            
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            self.messageList.append(message)
+            
+            break
+        case "video":
+            let placeholderImage = UIImage(named: "bg (1)")!
+            
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            self.messageList.append(message)
+            
+            break
+        case "document":
+            let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date(),link: link , type:type)
+            self.messageList.append(message)
+            break
+        case "token":
+            let url = URL(string:link)
+            let placeholderImage = UIImage(named: "bg (1)")!
+            img.af_setImage( withURL: url! ,placeholderImage: placeholderImage)
+            let message = MockMessage(attributedText: tokenImage(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date(),link: link , type:type)
+            self.messageList.append(message)
+            break
+            
+        default:
+            break
+        }
+        
+        messagesCollectionView.performBatchUpdates({
+            messagesCollectionView.insertSections([messageList.count - 1])
+            if messageList.count >= 2 {
+                messagesCollectionView.reloadSections([messageList.count - 2])
+            }
+        }, completion: { [weak self] _ in
+            if self?.isLastSectionVisible() == true {
+                self?.messagesCollectionView.scrollToBottom(animated: true)
+            }else {
+                 self?.messagesCollectionView.scrollToBottom(animated: true)
+            }
+        })
+    }
+    
+    func isLastSectionVisible() -> Bool {
+        
+        guard !messageList.isEmpty else { return false }
+        
+        let lastIndexPath = IndexPath(item: 0, section: messageList.count - 1)
+        
+        return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
+    }
+    
     
     
     

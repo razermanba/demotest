@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "75BDF430D633F7416115FB0FCD83AC6C"
+               BlueprintIdentifier = "EFCE383D4DE93B1EAFA21212F213921B"
                BuildableName = "Pods_Brainfit_Chat_v2.framework"
                BlueprintName = "Pods-Brainfit-Chat-v2"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -29,8 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -42,17 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "75BDF430D633F7416115FB0FCD83AC6C"
-            BuildableName = "Pods_Brainfit_Chat_v2.framework"
-            BlueprintName = "Pods-Brainfit-Chat-v2"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

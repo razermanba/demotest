@@ -26,6 +26,7 @@ import UIKit
 import MapKit
 import MessageKit
 import MessageInputBar
+import SDWebImage
 
 final class BasicExampleViewController: ChatViewController {
     
@@ -73,17 +74,21 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
-//        var message = messageList[indexPath.row]
+        //        var message = messageList[indexPath.row]
         
         if userSender.id == self.messageList[indexPath.section].sender.id{
             let url = URL(string: String(format: "%@?v=%@",UserDefaults.standard.value(forKey: "avatar")! as! String, timestamp))!
             let placeholderImage = UIImage(named: "avatar_student (1)")!
-            avatarView.af_setImage(withURL: url ,placeholderImage:placeholderImage )
+            DispatchQueue.main.async {
+                avatarView.sd_setImage(with: url, placeholderImage: placeholderImage)
+            }
             
         }else {
             let placeholderImage = UIImage(named: "avatar_student (1)")!
             let url = URL(string: String(format: "%@api/v1/users/%@/avatar?v=%@",API.base_url,self.messageList[indexPath.section].sender.id, timestamp))!
-            avatarView.af_setImage(withURL: url ,placeholderImage:placeholderImage )
+            DispatchQueue.main.async {
+                avatarView.sd_setImage(with: url, placeholderImage: placeholderImage)
+            }
         }
     }
     

@@ -17,7 +17,10 @@ class RoomChatTableViewController: UITableViewController {
     
     var arrayRoom = Mapper<RoomChat>().mapArray(JSONArray: [])
     var roomID : Int = 0
-    
+    let appdelgate = UIApplication.shared.delegate as? AppDelegate
+    internal let refresh = UIRefreshControl()
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,8 +37,16 @@ class RoomChatTableViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 83
         self.tableView.rowHeight = UITableView.automaticDimension
         
+        refresh.addTarget(self, action: #selector(actionRefresh), for: UIControl.Event.valueChanged)
+        tableView.addSubview(refresh)
+        
         getListRoom(pageNumber: 0)
         
+    }
+    
+    @objc func actionRefresh() {
+        // Code to refresh table view
+        getListRoom(pageNumber: 0)
     }
     
     // MARK: - Table view data source
@@ -76,7 +87,7 @@ class RoomChatTableViewController: UITableViewController {
         
     }
     
-  
+    
     
     // MARK: - Navigation
     
@@ -84,8 +95,8 @@ class RoomChatTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Chat" {
             
-//            let navVC = segue.destination as! UINavigationController
-//            let chatView = navVC.viewControllers.first as! ChatViewController
+            //            let navVC = segue.destination as! UINavigationController
+            //            let chatView = navVC.viewControllers.first as! ChatViewController
             
         }
     }
@@ -93,12 +104,23 @@ class RoomChatTableViewController: UITableViewController {
 
 extension RoomChatTableViewController{
     func getListRoom(pageNumber : Int){
+        self.appdelgate?.showLoading()
         APIService.sharedInstance.getListRoom([:], pagenumber: String(pageNumber) , completionHandle: {(result, error) in
-            self.arrayRoom = Mapper<RoomChat>().mapArray(JSONArray: result as! [[String : Any]])
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                
-            }            
+            if error == nil {
+                self.arrayRoom = Mapper<RoomChat>().mapArray(JSONArray: result as! [[String : Any]])
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.appdelgate?.dismissLoading()
+                    self.refresh.endRefreshing()
+                }
+            }else {
+                self.refresh.endRefreshing()
+                self.appdelgate?.dismissLoading()
+                let alert = UIAlertController(title: "Error", message: (error as! String), preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+
+            }
         })
     }
 }

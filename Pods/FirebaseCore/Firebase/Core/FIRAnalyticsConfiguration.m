@@ -16,7 +16,10 @@
 
 #import "Private/FIRAnalyticsConfiguration+Internal.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 @implementation FIRAnalyticsConfiguration
+#pragma clang diagnostic pop
 
 + (FIRAnalyticsConfiguration *)sharedInstance {
   static FIRAnalyticsConfiguration *sharedInstance = nil;
@@ -47,13 +50,20 @@
 }
 
 - (void)setAnalyticsCollectionEnabled:(BOOL)analyticsCollectionEnabled {
+  [self setAnalyticsCollectionEnabled:analyticsCollectionEnabled persistSetting:YES];
+}
+
+- (void)setAnalyticsCollectionEnabled:(BOOL)analyticsCollectionEnabled
+                       persistSetting:(BOOL)shouldPersist {
   // Persist the measurementEnabledState. Use FIRAnalyticsEnabledState values instead of YES/NO.
   FIRAnalyticsEnabledState analyticsEnabledState =
       analyticsCollectionEnabled ? kFIRAnalyticsEnabledStateSetYes : kFIRAnalyticsEnabledStateSetNo;
-  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  [userDefaults setObject:@(analyticsEnabledState)
-                   forKey:kFIRAPersistedConfigMeasurementEnabledStateKey];
-  [userDefaults synchronize];
+  if (shouldPersist) {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@(analyticsEnabledState)
+                     forKey:kFIRAPersistedConfigMeasurementEnabledStateKey];
+    [userDefaults synchronize];
+  }
 
   [self postNotificationName:kFIRAnalyticsConfigurationSetEnabledNotification
                        value:@(analyticsCollectionEnabled)];

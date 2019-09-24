@@ -34,6 +34,7 @@ class APIService {
         }
         
         if (UserDefaults.standard.value(forKey: "token") != nil && String(describing: UserDefaults.standard.value(forKey: "token")).count > 0) {
+            
             let authorizationValue = String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg)
             my_headers["Authorization"] = authorizationValue
         }
@@ -125,7 +126,7 @@ class APIService {
     func getListRoom(_ params : [String : AnyObject], pagenumber: String, completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
         getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API_Chat + "/rooms?page=" +  pagenumber , params: params, headers: [:], completionHandle: completionHandle)
     }
-
+    
     func getHistoryChat(_ params : [String : AnyObject], roomId : String ,pagenumber: String, completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
         getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API_Chat + "/room/" + roomId + "/messages?page=" + pagenumber , params: params, headers: [:], completionHandle: completionHandle)
     }
@@ -133,7 +134,7 @@ class APIService {
     func changePassword(_ params : [String : AnyObject], completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
         getURL(METHOD.kPUT, url: API.base_url + API.BASE_URL_API_User + "/update-password", params: params, headers: [:], completionHandle: completionHandle)
     }
-
+    
     func getListMember(_ params : [String : AnyObject], roomId : String , completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
         getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API_Room + "/" + roomId , params: params, headers: [:], completionHandle: completionHandle)
     }
@@ -149,19 +150,19 @@ class APIService {
     func getProgressScore(_ params : [String : AnyObject], user_id : String , completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
         getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API + "/students/" + user_id + "/progress-report", params: params, headers: [:], completionHandle: completionHandle)
     }
-
-
+    
+    
     
     func uploadImage(_ keyUpload : String ,_ photo: UIImage, completionHandle:@escaping (_ result:[String:AnyObject]?,_ error:AnyObject?) -> Void) {
         
         guard let imageData = photo.jpegData(compressionQuality: 1) else { return }
         
         let manager = AFHTTPSessionManager()
-            
+        
         
         manager.requestSerializer.setValue(String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg), forHTTPHeaderField: "Authorization")
         
-    
+        
         let request: NSMutableURLRequest = manager.requestSerializer.multipartFormRequest(withMethod: "PUT", urlString: API.base_url + API.BASE_URL_API_User + "/avatar" , parameters: nil, constructingBodyWith: {(formData: AFMultipartFormData!) -> Void in
             
             formData.appendPart(withFileData: imageData, name: "avatar" , fileName: "avatar.jpg", mimeType: "image/jpeg")
@@ -174,13 +175,13 @@ class APIService {
                 completionHandle(responseObject as? [String : AnyObject],nil)
             }
             else {
-               
+                
                 completionHandle(nil,error as AnyObject )
             }
             
-            }.resume()
+        }.resume()
     }
-
+    
 }
 
 

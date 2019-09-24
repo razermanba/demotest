@@ -15,6 +15,8 @@ import SocketIO
 
 
 class LogOutViewController: UIViewController {
+     let appdelgate = UIApplication.shared.delegate as? AppDelegate
+    
     override func viewDidLoad() {
         super .viewDidLoad()
         
@@ -56,7 +58,6 @@ extension LogOutViewController{
         APIService.sharedInstance.logOutUser([:], completionHandle: { (result, error) in
             UserDefaults.standard.removeObject(forKey: "username")
             UserDefaults.standard.removeObject(forKey: "password")
-            UserDefaults.standard.removeObject(forKey: "token")
             UserDefaults.standard.removeObject(forKey: "token")
             UserDefaults.standard.removeObject(forKey: "room")
             UserDefaults.standard.removeObject(forKey: "role")

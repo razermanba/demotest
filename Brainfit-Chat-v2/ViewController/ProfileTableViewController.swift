@@ -15,6 +15,8 @@ class ProfileTableViewController: UITableViewController,UINavigationControllerDe
     @IBOutlet weak var lblName: UILabel!
     var changePWView = ChangePassword()
     var imagePicker = UIImagePickerController()
+    let appdelgate = UIApplication.shared.delegate as? AppDelegate
+    
     
     
     override func viewDidLoad() {
@@ -31,7 +33,7 @@ class ProfileTableViewController: UITableViewController,UINavigationControllerDe
         
         imageAvatar.layer.cornerRadius = imageAvatar.frame.width / 2
         imageAvatar.clipsToBounds = true
-
+        
         let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
         let url = URL(string: String(format: "%@?v=%@",UserDefaults.standard.value(forKey: "avatar")! as! String, timestamp))!
         imageAvatar.af_setImage(withURL:url )
@@ -104,34 +106,45 @@ extension ProfileTableViewController{
     @objc func actionChangePassword() {
         changePWView.txtNewPassword.resignFirstResponder()
         changePWView.txtConfirmPassword.resignFirstResponder()
-        
+        appdelgate?.showLoading()
         
         let param = ["password":changePWView.txtNewPassword.text,
                      "password_confirmation":changePWView.txtConfirmPassword.text] as [String : AnyObject]
         
         APIService.sharedInstance.changePassword(param, completionHandle: {(result, error) in
-            self.animateViewHeight(self.changePWView, withAnimationType: CATransitionSubtype.fromBottom.rawValue, andflagClose: false)
-            
-            UserDefaults.standard.removeObject(forKey: "username")
-            UserDefaults.standard.removeObject(forKey: "password")
-            UserDefaults.standard.removeObject(forKey: "token")
-            
-            var controller: UINavigationController
-            controller = self.storyboard?.instantiateViewController(withIdentifier: "NavigationStoryboard") as! UINavigationController
-            self.present(controller, animated: true, completion: nil)
-            
+            if  error == nil {
+                self.animateViewHeight(self.changePWView, withAnimationType: CATransitionSubtype.fromBottom.rawValue, andflagClose: false)
+                
+                UserDefaults.standard.removeObject(forKey: "username")
+                UserDefaults.standard.removeObject(forKey: "password")
+                UserDefaults.standard.removeObject(forKey: "token")
+                
+                var controller: UINavigationController
+                controller = self.storyboard?.instantiateViewController(withIdentifier: "NavigationStoryboard") as! UINavigationController
+                self.present(controller, animated: true, completion: nil)
+                self.appdelgate?.dismissLoading()
+            }else {
+                self.appdelgate?.dismissLoading()
+                let alert = UIAlertController(title: "Error", message: (error as! String), preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
+            }
         })
         
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         imageAvatar.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        appdelgate?.showLoading()
+        
         self.dismiss(animated: true, completion: { () -> Void in
             APIService.sharedInstance.uploadImage("", (info[UIImagePickerController.InfoKey.originalImage] as? UIImage)! , completionHandle: {(result, error) in
                 print(result as Any)
                 let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
                 let url = URL(string: String(format: "%@?v=%@",UserDefaults.standard.value(forKey: "avatar")! as! String, timestamp))!
                 self.imageAvatar.af_setImage(withURL:url )
+                self.appdelgate?.dismissLoading()
             })
         })
     }

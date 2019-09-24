@@ -11,6 +11,7 @@ import UIKit
 import ObjectMapper
 import Alamofire
 import AlamofireObjectMapper
+import Firebase
 
 class LoginviewController : UIViewController, UITextFieldDelegate{
     
@@ -18,13 +19,15 @@ class LoginviewController : UIViewController, UITextFieldDelegate{
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtVersion: UILabel!
     @IBOutlet weak var btnkeep: UIButton!
+    let appdelgate = UIApplication.shared.delegate as? AppDelegate
+    
     
     var flagKeep : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        needsUpdate()
+//        needsUpdate()
         
         txtUsername.text = UserDefaults.standard.string(forKey: "username")
         txtPassword.text = UserDefaults.standard.string(forKey: "password")
@@ -93,7 +96,7 @@ class LoginviewController : UIViewController, UITextFieldDelegate{
 
 extension LoginviewController{
     func loginUser( username : String ,password : String ) {
-        
+        appdelgate?.showLoading()
         let param = ["username": username,
                      "password": password ] as [String : AnyObject]
         
@@ -101,16 +104,23 @@ extension LoginviewController{
             if error == nil {
                 let user = Mapper<UserProfile>().map(JSONObject: result)
                 
-                print(user?.token)
                 UserDefaults.standard.set(user?.token, forKey: "token")
                 
+                if let token = Messaging.messaging().fcmToken {
+                    print("FCM token: \(token)")
+                
+
+
                 let paramToken = ["device_id": UIDevice.current.identifierForVendor!.uuidString,
-                                  "device_token":UserDefaults.standard.string(forKey: "device_token"),
+                                  "device_token":token,
                                   "device_type": "ios"] as [String : AnyObject]
                 
                 APIService.sharedInstance.submitDeviceToken(paramToken, completionHandle: { (result, error) in
-                    
+                    if error == nil {
+                        print(result)
+                    }
                 })
+                }
                 
                 APIService.sharedInstance.getProfile([:], completionHandle:  { (result, error) in
                     if error == nil{
@@ -126,21 +136,26 @@ extension LoginviewController{
                         UserDefaults.standard.set(user?.avatar, forKey: "avatar")
                         
                         if (user?.room)! > 0 {
+                            self.appdelgate?.dismissLoading()
                             self.performSegue(withIdentifier: "roomChat", sender: self)
                             
                         } else {
+                            self.appdelgate?.dismissLoading()
                             let alert = UIAlertController(title: "Warning", message: "You don't have any rooms", preferredStyle: UIAlertController.Style.alert)
                             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
                             self.present(alert, animated: true, completion: nil)
                             return
                         }
+                        
                     }else {
+                        self.appdelgate?.dismissLoading()
                         let alert = UIAlertController(title: "Error", message: (error as! String), preferredStyle: UIAlertController.Style.alert)
                         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     }
                 })
             }else {
+                self.appdelgate?.dismissLoading()
                 let alert = UIAlertController(title: "Error", message: (error as! String), preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)

@@ -7,9 +7,6 @@ target 'Brainfit-Chat-v2' do
     pod 'MessageKit'
     pod 'MessageInputBar', :git => 'https://github.com/MessageKit/MessageInputBar.git', :branch => 'master'
     pod 'AFNetworking', '~> 3.0'
-    #  pod 'FacebookCore'
-    #  pod 'FacebookLogin'
-    #  pod 'FacebookShare'
     pod 'Firebase/Auth'
     pod 'Firebase/Core'
     pod 'Firebase/Messaging'
@@ -21,11 +18,10 @@ target 'Brainfit-Chat-v2' do
     pod 'SDWebImage', '~> 4.0'
     pod 'AlamofireObjectMapper', '~> 5.0'
     pod 'ObjectMapper', '~> 3.3'
-    pod 'GoogleAds-IMA-iOS-SDK', '~> 3.7'
     pod 'Socket.IO-Client-Swift', '~> 15.0.0'
     pod 'YouTubePlayer'
     pod 'VIMVideoPlayer'
-    pod 'Charts', '~> 3.1.1'
+#    pod 'Charts', '~> 3.1.1'
     pod 'JGProgressHUD'
 
 end

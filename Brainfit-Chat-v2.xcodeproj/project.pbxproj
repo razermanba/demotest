@@ -21,6 +21,7 @@
 		FA08E26E226DA4D6002EABFB /* ListTokenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E26D226DA4D6002EABFB /* ListTokenTableViewCell.swift */; };
 		FA08E272226DA4FE002EABFB /* ListTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E271226DA4FE002EABFB /* ListTokenViewController.swift */; };
 		FA08E276226DAE2E002EABFB /* alertToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E275226DAE2E002EABFB /* alertToken.swift */; };
+		FA1E6606233A03F800DB85F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA1E6605233A03F800DB85F4 /* GoogleService-Info.plist */; };
 		FA2652282268696800A7131E /* LogOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2652272268696800A7131E /* LogOutViewController.swift */; };
 		FA26522B22686D1E00A7131E /* ChatRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26522A22686D1E00A7131E /* ChatRoomTableViewCell.swift */; };
 		FA26522D22686DA300A7131E /* RoomChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26522C22686DA300A7131E /* RoomChatTableViewController.swift */; };
@@ -95,6 +96,7 @@
 		FA08E26D226DA4D6002EABFB /* ListTokenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTokenTableViewCell.swift; sourceTree = "<group>"; };
 		FA08E271226DA4FE002EABFB /* ListTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTokenViewController.swift; sourceTree = "<group>"; };
 		FA08E275226DAE2E002EABFB /* alertToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertToken.swift; sourceTree = "<group>"; };
+		FA1E6605233A03F800DB85F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA2652272268696800A7131E /* LogOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutViewController.swift; sourceTree = "<group>"; };
 		FA26522A22686D1E00A7131E /* ChatRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewCell.swift; sourceTree = "<group>"; };
 		FA26522C22686DA300A7131E /* RoomChatTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomChatTableViewController.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				FAFF3F442266CBCA00225C94 /* Main.storyboard */,
 				FAFF3F472266CBCC00225C94 /* Assets.xcassets */,
 				FAFF3F492266CBCC00225C94 /* LaunchScreen.storyboard */,
+				FA1E6605233A03F800DB85F4 /* GoogleService-Info.plist */,
 				FAFF3F4C2266CBCC00225C94 /* Info.plist */,
 			);
 			path = "Brainfit-Chat-v2";
@@ -453,6 +456,7 @@
 				FA08E25C226D72A7002EABFB /* alertToken.xib in Resources */,
 				FAFF3F482266CBCC00225C94 /* Assets.xcassets in Resources */,
 				FAFF3F462266CBCA00225C94 /* Main.storyboard in Resources */,
+				FA1E6606233A03F800DB85F4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,10 +488,9 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${PODS_ROOT}/GoogleAds-IMA-iOS-SDK/GoogleInteractiveMediaAds.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MessageInputBar/MessageInputBar.framework",
 				"${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
@@ -508,10 +511,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleInteractiveMediaAds.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageInputBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
@@ -776,6 +778,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Brainfit-Chat-v2/Brainfit-Chat-v2.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P9265767DK;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -797,6 +800,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Brainfit-Chat-v2/Brainfit-Chat-v2.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P9265767DK;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (

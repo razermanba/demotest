@@ -59,6 +59,15 @@ class SocketIOManager{
         socket.emit("send message", with: [["type":"text","content":message,"link":"","client_id":timeStamp]])
     }
     
+    func socketDissconectRoom (){
+        if socket != nil {
+//            socket.emit("disconnect",with:[])
+            socket.manager?.disconnect()
+            socket.disconnect()
+
+        }
+    }
+    
     func socketDisconnect() {
         if socket != nil {
             socket.manager?.disconnect()
