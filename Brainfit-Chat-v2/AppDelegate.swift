@@ -23,8 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         
         FirebaseApp.configure()
         
-        Messaging.messaging().delegate = self
-        
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
@@ -34,29 +32,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
                 options: authOptions,
                 completionHandler: {_, _ in })
         } else {
-            //            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            //            application.registerUserNotificationSettings(settings)
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
         }
         
         application.registerForRemoteNotifications()
-
+        
+        Messaging.messaging().delegate = self
+        
         return true
     }
     
+//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//        if let token = Messaging.messaging().apnsToken {
+//            print("FCM token: \(token)")
+//        }
+//    }
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        if let token = Messaging.messaging().fcmToken {
-            print("FCM token: \(token)")
-        }
+        Messaging.messaging().apnsToken = deviceToken
     }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Remote instance \(fcmToken)");
         InstanceID.instanceID().instanceID { (result, error) in
-          if let error = error {
-            print("Error fetching remote instance ID: \(error)")
-          } else if let result = result {
-            print("Remote instance ID token: \(result.token)")
-//            self.instanceIDTokenMessage.text  = "Remote InstanceID token: \(result.token)"
-          }
+            if let error = error {
+                print("Error fetching remote instance ID: \(error)")
+            } else if let result = result {
+                print("Remote instance ID token: \(result.token)")
+
+            }
         }
     }
     
@@ -96,5 +101,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         hud.dismiss(afterDelay: 0.0)
     }
     
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Oh no! Failed to register for remote notifications with error \(error)")
+    }
 }
 

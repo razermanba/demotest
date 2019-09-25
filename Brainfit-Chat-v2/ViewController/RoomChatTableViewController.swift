@@ -19,8 +19,8 @@ class RoomChatTableViewController: UITableViewController {
     var roomID : Int = 0
     let appdelgate = UIApplication.shared.delegate as? AppDelegate
     internal let refresh = UIRefreshControl()
-
-
+    var pageNumber : Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,14 +40,30 @@ class RoomChatTableViewController: UITableViewController {
         refresh.addTarget(self, action: #selector(actionRefresh), for: UIControl.Event.valueChanged)
         tableView.addSubview(refresh)
         
-        getListRoom(pageNumber: 0)
+        //        pageNumber = 0
+        //        getListRoom(pageNumber: pageNumber)
         
     }
     
     @objc func actionRefresh() {
         // Code to refresh table view
-        getListRoom(pageNumber: 0)
+        pageNumber = 0
+        arrayRoom.removeAll()
+        
+        getListRoom(pageNumber: pageNumber)
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        pageNumber = 0
+        arrayRoom.removeAll()
+        
+        getListRoom(pageNumber: pageNumber)
+        
+    }
+    
+    
     
     // MARK: - Table view data source
     
@@ -64,14 +80,16 @@ class RoomChatTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(withIdentifier: "RoomChatCell", for: indexPath) as! ChatRoomTableViewCell
-        
-        cell.lblTitle.text = arrayRoom[indexPath.row].name
-        let url = URL(string: arrayRoom[indexPath.row].avatar!)!
-        let placeholderImage = UIImage(named: "avatar_student (1)")!
-        DispatchQueue.main.async {
-            cell.imageRoom.af_setImage( withURL: url,placeholderImage: placeholderImage)
+        if arrayRoom.count > 0{
+            cell.lblTitle.text = arrayRoom[indexPath.row].name
+            print ("12345 \(arrayRoom[indexPath.row].avatar!)")
+            let url = URL(string: arrayRoom[indexPath.row].avatar!)!
+            let placeholderImage = UIImage(named: "avatar_student (1)")!
+            DispatchQueue.main.async {
+                cell.imageRoom.af_setImage( withURL: url,placeholderImage: placeholderImage)
+            }
+            cell.lblContent.text = arrayRoom[indexPath.row].message?.content
         }
-        cell.lblContent.text = arrayRoom[indexPath.row].message?.content
         
         return cell
     }
@@ -87,6 +105,19 @@ class RoomChatTableViewController: UITableViewController {
         
     }
     
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let currentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+        
+        // Change 10.0 to adjust the distance from bottom
+        if maximumOffset - currentOffset <= 10.0 {
+            getListRoom(pageNumber: pageNumber)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
     
     
     // MARK: - Navigation
@@ -107,19 +138,24 @@ extension RoomChatTableViewController{
         self.appdelgate?.showLoading()
         APIService.sharedInstance.getListRoom([:], pagenumber: String(pageNumber) , completionHandle: {(result, error) in
             if error == nil {
-                self.arrayRoom = Mapper<RoomChat>().mapArray(JSONArray: result as! [[String : Any]])
-                DispatchQueue.main.async {
+                if pageNumber == 0 {
+                    self.arrayRoom = Mapper<RoomChat>().mapArray(JSONArray: result as! [[String : Any]])
+                }else {
+                    self.arrayRoom += Mapper<RoomChat>().mapArray(JSONArray: result as! [[String : Any]])
+                }
+//                DispatchQueue.main.async {
+                    self.pageNumber = pageNumber + 1
                     self.tableView.reloadData()
                     self.appdelgate?.dismissLoading()
                     self.refresh.endRefreshing()
-                }
+//                }
             }else {
                 self.refresh.endRefreshing()
                 self.appdelgate?.dismissLoading()
                 let alert = UIAlertController(title: "Error", message: (error as! String), preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
-
+                
             }
         })
     }

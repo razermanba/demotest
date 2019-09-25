@@ -71,8 +71,9 @@ class ChatViewController: MessagesViewController  {
     
     override func viewWillDisappear(_ animated: Bool) {
         super .viewWillDisappear(true)
-        
-        SocketIOManager.sharedInstance.socketDissconectRoom()
+        if self.isMovingFromParent {
+            SocketIOManager.sharedInstance.socketDissconectRoom()
+        }
     }
     
     func configureMessageCollectionView() {
@@ -145,7 +146,6 @@ extension ChatViewController {
                 DispatchQueue.main.async {
                     self.messagesCollectionView.reloadDataAndKeepOffset()
                     self.refreshControl.endRefreshing()
-                    
                 }
             }
         })

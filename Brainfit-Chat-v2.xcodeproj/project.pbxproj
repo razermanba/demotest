@@ -21,7 +21,6 @@
 		FA08E26E226DA4D6002EABFB /* ListTokenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E26D226DA4D6002EABFB /* ListTokenTableViewCell.swift */; };
 		FA08E272226DA4FE002EABFB /* ListTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E271226DA4FE002EABFB /* ListTokenViewController.swift */; };
 		FA08E276226DAE2E002EABFB /* alertToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08E275226DAE2E002EABFB /* alertToken.swift */; };
-		FA1E6606233A03F800DB85F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA1E6605233A03F800DB85F4 /* GoogleService-Info.plist */; };
 		FA2652282268696800A7131E /* LogOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2652272268696800A7131E /* LogOutViewController.swift */; };
 		FA26522B22686D1E00A7131E /* ChatRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26522A22686D1E00A7131E /* ChatRoomTableViewCell.swift */; };
 		FA26522D22686DA300A7131E /* RoomChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26522C22686DA300A7131E /* RoomChatTableViewController.swift */; };
@@ -36,6 +35,7 @@
 		FA29DBA82293DF7A00BE34A6 /* Progress_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29DBA52293DF7A00BE34A6 /* Progress_data.swift */; };
 		FA29DBA92293DF7A00BE34A6 /* ProgressScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29DBA62293DF7A00BE34A6 /* ProgressScore.swift */; };
 		FA29DBAA2293DF7A00BE34A6 /* Datasets.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29DBA72293DF7A00BE34A6 /* Datasets.swift */; };
+		FA3D5359233B15FD00DD5FF0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA3D5358233B15FD00DD5FF0 /* GoogleService-Info.plist */; };
 		FA50503B2292559000FE9848 /* ReportCMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA50503A2292559000FE9848 /* ReportCMViewController.swift */; };
 		FA505046229256FD00FE9848 /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA50503F229256FD00FE9848 /* Levels.swift */; };
 		FA505047229256FD00FE9848 /* Tuk.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA505040229256FD00FE9848 /* Tuk.swift */; };
@@ -96,7 +96,6 @@
 		FA08E26D226DA4D6002EABFB /* ListTokenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTokenTableViewCell.swift; sourceTree = "<group>"; };
 		FA08E271226DA4FE002EABFB /* ListTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTokenViewController.swift; sourceTree = "<group>"; };
 		FA08E275226DAE2E002EABFB /* alertToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertToken.swift; sourceTree = "<group>"; };
-		FA1E6605233A03F800DB85F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA2652272268696800A7131E /* LogOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutViewController.swift; sourceTree = "<group>"; };
 		FA26522A22686D1E00A7131E /* ChatRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewCell.swift; sourceTree = "<group>"; };
 		FA26522C22686DA300A7131E /* RoomChatTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomChatTableViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +110,7 @@
 		FA29DBA52293DF7A00BE34A6 /* Progress_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Progress_data.swift; sourceTree = "<group>"; };
 		FA29DBA62293DF7A00BE34A6 /* ProgressScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressScore.swift; sourceTree = "<group>"; };
 		FA29DBA72293DF7A00BE34A6 /* Datasets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Datasets.swift; sourceTree = "<group>"; };
+		FA3D5358233B15FD00DD5FF0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA50503A2292559000FE9848 /* ReportCMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCMViewController.swift; sourceTree = "<group>"; };
 		FA50503F229256FD00FE9848 /* Levels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
 		FA505040229256FD00FE9848 /* Tuk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tuk.swift; sourceTree = "<group>"; };
@@ -316,7 +316,7 @@
 				FAFF3F442266CBCA00225C94 /* Main.storyboard */,
 				FAFF3F472266CBCC00225C94 /* Assets.xcassets */,
 				FAFF3F492266CBCC00225C94 /* LaunchScreen.storyboard */,
-				FA1E6605233A03F800DB85F4 /* GoogleService-Info.plist */,
+				FA3D5358233B15FD00DD5FF0 /* GoogleService-Info.plist */,
 				FAFF3F4C2266CBCC00225C94 /* Info.plist */,
 			);
 			path = "Brainfit-Chat-v2";
@@ -456,7 +456,7 @@
 				FA08E25C226D72A7002EABFB /* alertToken.xib in Resources */,
 				FAFF3F482266CBCC00225C94 /* Assets.xcassets in Resources */,
 				FAFF3F462266CBCA00225C94 /* Main.storyboard in Resources */,
-				FA1E6606233A03F800DB85F4 /* GoogleService-Info.plist in Resources */,
+				FA3D5359233B15FD00DD5FF0 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,6 +777,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Brainfit-Chat-v2/Brainfit-Chat-v2.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = P9265767DK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";
@@ -799,6 +800,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Brainfit-Chat-v2/Brainfit-Chat-v2.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = P9265767DK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";

@@ -66,10 +66,16 @@ extension LogOutViewController{
             UserDefaults.standard.removeObject(forKey: "avatar")
             
             SocketIOManager.sharedInstance.socketDisconnect()
-//            self.performSegue(withIdentifier: "logOut", sender: self)
-            var controller: UINavigationController
-            controller = self.storyboard?.instantiateViewController(withIdentifier: "NavigationStoryboard") as! UINavigationController
-            self.present(controller, animated: true, completion: nil)
+            
+            DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "logout", sender: self)
+                
+            }
+            
+            
+//            var controller: UINavigationController
+//            controller = self.storyboard?.instantiateViewController(withIdentifier: "NavigationStoryboard") as! UINavigationController
+//            self.present(controller, animated: true, completion: nil)
             
         })
     }

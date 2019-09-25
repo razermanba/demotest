@@ -34,6 +34,7 @@ class APIService {
         }
         
         if (UserDefaults.standard.value(forKey: "token") != nil && String(describing: UserDefaults.standard.value(forKey: "token")).count > 0) {
+//            print(String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg))
             
             let authorizationValue = String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg)
             my_headers["Authorization"] = authorizationValue
@@ -158,6 +159,10 @@ class APIService {
         guard let imageData = photo.jpegData(compressionQuality: 1) else { return }
         
         let manager = AFHTTPSessionManager()
+        
+        print(String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg))
+        
+        print(API.base_url + API.BASE_URL_API_User + "/avatar" )
         
         
         manager.requestSerializer.setValue(String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg), forHTTPHeaderField: "Authorization")

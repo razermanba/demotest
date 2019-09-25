@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3D3FB4B5-4505-4EB0-AEEC-27E0A8289752"
+            uuid = "867E1605-CE3A-49E8-AB39-4565A25AC3C3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Brainfit-Chat-v2/Sever/APIServer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "getURL(_:url:params:headers:completionHandle:)"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "uploadImage(_:_:completionHandle:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

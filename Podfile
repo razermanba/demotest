@@ -9,6 +9,7 @@ target 'Brainfit-Chat-v2' do
     pod 'AFNetworking', '~> 3.0'
     pod 'Firebase/Auth'
     pod 'Firebase/Core'
+    pod 'Firebase/Analytics'
     pod 'Firebase/Messaging'
     pod 'Alamofire', '~> 4.0'
     pod 'AlamofireImage'

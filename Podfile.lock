@@ -20,6 +20,8 @@ PODS:
   - AlamofireObjectMapper (5.2.0):
     - Alamofire (~> 4.7)
     - ObjectMapper (~> 3.4)
+  - Firebase/Analytics (5.20.2):
+    - Firebase/Core
   - Firebase/Auth (5.20.2):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.4.2)
@@ -117,6 +119,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.0)
   - AlamofireImage
   - AlamofireObjectMapper (~> 5.0)
+  - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Messaging
@@ -204,6 +207,6 @@ SPEC CHECKSUMS:
   VIMVideoPlayer: f4ed0a9986294ec3684a2e6bdc738e30051ef4ef
   YouTubePlayer: 028451f6772f372d4759866db99824c676ac1473
 
-PODFILE CHECKSUM: 781fdb25120dca7c557a2153e6093b504e5e226d
+PODFILE CHECKSUM: bec5b313d5bd0f63d08ced2091e7e1008d7e3a93
 
 COCOAPODS: 1.5.2
