@@ -49,6 +49,21 @@
 		FA68EE5A2269ABC4007BF7DD /* BasicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68EE592269ABC4007BF7DD /* BasicExampleViewController.swift */; };
 		FAC731BB22670AA700C59F10 /* URLServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC731BA22670AA700C59F10 /* URLServer.swift */; };
 		FAC731BD22670C6300C59F10 /* APIServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC731BC22670C6300C59F10 /* APIServer.swift */; };
+		FAD25BBA233DB30F00DAA8EE /* ListCoursesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BB9233DB30F00DAA8EE /* ListCoursesTableViewController.swift */; };
+		FAD25BC0233DB76800DAA8EE /* RecordsTotal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BBC233DB76800DAA8EE /* RecordsTotal.swift */; };
+		FAD25BC1233DB76800DAA8EE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BBD233DB76800DAA8EE /* Data.swift */; };
+		FAD25BC2233DB76800DAA8EE /* RecordsFiltered.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BBE233DB76800DAA8EE /* RecordsFiltered.swift */; };
+		FAD25BC3233DB76800DAA8EE /* courses.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BBF233DB76800DAA8EE /* courses.swift */; };
+		FAD25BC5233DB7F600DAA8EE /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BC4233DB7F600DAA8EE /* CourseTableViewCell.swift */; };
+		FAD25BC7233DC21F00DAA8EE /* CoursesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BC6233DC21F00DAA8EE /* CoursesDetailViewController.swift */; };
+		FAD25BCB233DC25500DAA8EE /* CoursesTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BCA233DC25500DAA8EE /* CoursesTitleTableViewCell.swift */; };
+		FAD25BCD233DC26300DAA8EE /* CoursesButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BCC233DC26300DAA8EE /* CoursesButtonTableViewCell.swift */; };
+		FAD25BCF233DC28600DAA8EE /* CoursesTopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BCE233DC28600DAA8EE /* CoursesTopicTableViewCell.swift */; };
+		FAD25BD5233DC50400DAA8EE /* Center.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BD1233DC50400DAA8EE /* Center.swift */; };
+		FAD25BD6233DC50400DAA8EE /* Topics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BD2233DC50400DAA8EE /* Topics.swift */; };
+		FAD25BD7233DC50400DAA8EE /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BD3233DC50400DAA8EE /* Media.swift */; };
+		FAD25BD8233DC50400DAA8EE /* CoursesDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BD4233DC50400DAA8EE /* CoursesDetail.swift */; };
+		FAD25BDA233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BD9233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift */; };
 		FAEB0288226858A9002F54EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0287226858A9002F54EA /* LoginViewController.swift */; };
 		FAEB028A22685E5B002F54EA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB028922685E5B002F54EA /* UserProfile.swift */; };
 		FAFF3F412266CBCA00225C94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFF3F402266CBCA00225C94 /* AppDelegate.swift */; };
@@ -124,6 +139,21 @@
 		FA68EE592269ABC4007BF7DD /* BasicExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicExampleViewController.swift; sourceTree = "<group>"; };
 		FAC731BA22670AA700C59F10 /* URLServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLServer.swift; sourceTree = "<group>"; };
 		FAC731BC22670C6300C59F10 /* APIServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServer.swift; sourceTree = "<group>"; };
+		FAD25BB9233DB30F00DAA8EE /* ListCoursesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCoursesTableViewController.swift; sourceTree = "<group>"; };
+		FAD25BBC233DB76800DAA8EE /* RecordsTotal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsTotal.swift; sourceTree = "<group>"; };
+		FAD25BBD233DB76800DAA8EE /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		FAD25BBE233DB76800DAA8EE /* RecordsFiltered.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsFiltered.swift; sourceTree = "<group>"; };
+		FAD25BBF233DB76800DAA8EE /* courses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = courses.swift; sourceTree = "<group>"; };
+		FAD25BC4233DB7F600DAA8EE /* CourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
+		FAD25BC6233DC21F00DAA8EE /* CoursesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesDetailViewController.swift; sourceTree = "<group>"; };
+		FAD25BCA233DC25500DAA8EE /* CoursesTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesTitleTableViewCell.swift; sourceTree = "<group>"; };
+		FAD25BCC233DC26300DAA8EE /* CoursesButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesButtonTableViewCell.swift; sourceTree = "<group>"; };
+		FAD25BCE233DC28600DAA8EE /* CoursesTopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesTopicTableViewCell.swift; sourceTree = "<group>"; };
+		FAD25BD1233DC50400DAA8EE /* Center.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Center.swift; sourceTree = "<group>"; };
+		FAD25BD2233DC50400DAA8EE /* Topics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Topics.swift; sourceTree = "<group>"; };
+		FAD25BD3233DC50400DAA8EE /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		FAD25BD4233DC50400DAA8EE /* CoursesDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesDetail.swift; sourceTree = "<group>"; };
+		FAD25BD9233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		FAEB0287226858A9002F54EA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FAEB028922685E5B002F54EA /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		FAF2E765228EBEB200FA1440 /* Brainfit-Chat-v2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Brainfit-Chat-v2.entitlements"; sourceTree = "<group>"; };
@@ -204,6 +234,11 @@
 				FA26522A22686D1E00A7131E /* ChatRoomTableViewCell.swift */,
 				FA08E263226D7D82002EABFB /* ListMemberTableViewCell.swift */,
 				FA08E26D226DA4D6002EABFB /* ListTokenTableViewCell.swift */,
+				FAD25BC4233DB7F600DAA8EE /* CourseTableViewCell.swift */,
+				FAD25BCA233DC25500DAA8EE /* CoursesTitleTableViewCell.swift */,
+				FAD25BCC233DC26300DAA8EE /* CoursesButtonTableViewCell.swift */,
+				FAD25BCE233DC28600DAA8EE /* CoursesTopicTableViewCell.swift */,
+				FAD25BD9233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -257,6 +292,8 @@
 				FA50504F2292696B00FE9848 /* StandardScoreTableViewController.swift */,
 				FA29DBA02293B0B300BE34A6 /* TabBarViewController.swift */,
 				FA29DBA22293DDE500BE34A6 /* ProgressScoreTableViewController.swift */,
+				FAD25BB9233DB30F00DAA8EE /* ListCoursesTableViewController.swift */,
+				FAD25BC6233DC21F00DAA8EE /* CoursesDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -264,6 +301,8 @@
 		FAC731B9226709AB00C59F10 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FAD25BD0233DC50400DAA8EE /* CoursesDetail */,
+				FAD25BBB233DB76800DAA8EE /* Courses */,
 				FA29DBA42293DF7A00BE34A6 /* ProgressScore */,
 				FA50503E229256FD00FE9848 /* StandardScore */,
 				FA28ADFD22697B59002DC95B /* Id.swift */,
@@ -278,6 +317,28 @@
 				FA08E268226D81EC002EABFB /* Users.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		FAD25BBB233DB76800DAA8EE /* Courses */ = {
+			isa = PBXGroup;
+			children = (
+				FAD25BBC233DB76800DAA8EE /* RecordsTotal.swift */,
+				FAD25BBD233DB76800DAA8EE /* Data.swift */,
+				FAD25BBE233DB76800DAA8EE /* RecordsFiltered.swift */,
+				FAD25BBF233DB76800DAA8EE /* courses.swift */,
+			);
+			path = Courses;
+			sourceTree = "<group>";
+		};
+		FAD25BD0233DC50400DAA8EE /* CoursesDetail */ = {
+			isa = PBXGroup;
+			children = (
+				FAD25BD1233DC50400DAA8EE /* Center.swift */,
+				FAD25BD2233DC50400DAA8EE /* Topics.swift */,
+				FAD25BD3233DC50400DAA8EE /* Media.swift */,
+				FAD25BD4233DC50400DAA8EE /* CoursesDetail.swift */,
+			);
+			path = CoursesDetail;
 			sourceTree = "<group>";
 		};
 		FAFF3F342266CBCA00225C94 = {
@@ -352,6 +413,7 @@
 				FAFF3F3A2266CBCA00225C94 /* Frameworks */,
 				FAFF3F3B2266CBCA00225C94 /* Resources */,
 				14FE7E25B066848D4972E788 /* [CP] Embed Pods Frameworks */,
+				FA088218233C9C16006FB822 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -551,6 +613,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FA088218233C9C16006FB822 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -558,12 +637,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAD25BBA233DB30F00DAA8EE /* ListCoursesTableViewController.swift in Sources */,
 				FA08E251226D6FE5002EABFB /* ProfileTableViewController.swift in Sources */,
 				FA50503B2292559000FE9848 /* ReportCMViewController.swift in Sources */,
 				FA50504B229256FD00FE9848 /* En.swift in Sources */,
 				FA28ADFF22697B5A002DC95B /* Id.swift in Sources */,
 				FA29DBA82293DF7A00BE34A6 /* Progress_data.swift in Sources */,
 				FA28ADFE22697B5A002DC95B /* listChat.swift in Sources */,
+				FAD25BC3233DB76800DAA8EE /* courses.swift in Sources */,
+				FAD25BCF233DC28600DAA8EE /* CoursesTopicTableViewCell.swift in Sources */,
+				FAD25BC5233DB7F600DAA8EE /* CourseTableViewCell.swift in Sources */,
+				FAD25BC0233DB76800DAA8EE /* RecordsTotal.swift in Sources */,
 				FAFF3F432266CBCA00225C94 /* ViewController.swift in Sources */,
 				FA2652282268696800A7131E /* LogOutViewController.swift in Sources */,
 				FAC731BB22670AA700C59F10 /* URLServer.swift in Sources */,
@@ -572,10 +656,15 @@
 				FA08E26B226D81EC002EABFB /* listUserChat.swift in Sources */,
 				FA50504A229256FD00FE9848 /* Strategy.swift in Sources */,
 				FA505046229256FD00FE9848 /* Levels.swift in Sources */,
+				FAD25BC1233DB76800DAA8EE /* Data.swift in Sources */,
 				FA08E264226D7D82002EABFB /* ListMemberTableViewCell.swift in Sources */,
+				FAD25BD5233DC50400DAA8EE /* Center.swift in Sources */,
 				FA08E25E226D72C8002EABFB /* ChangePassword.swift in Sources */,
+				FAD25BC2233DB76800DAA8EE /* RecordsFiltered.swift in Sources */,
 				FAFF3F412266CBCA00225C94 /* AppDelegate.swift in Sources */,
+				FAD25BC7233DC21F00DAA8EE /* CoursesDetailViewController.swift in Sources */,
 				FA29DBA32293DDE500BE34A6 /* ProgressScoreTableViewController.swift in Sources */,
+				FAD25BD6233DC50400DAA8EE /* Topics.swift in Sources */,
 				FA08E26C226D81EC002EABFB /* Users.swift in Sources */,
 				FA2652352268840300A7131E /* SocketIOManager.swift in Sources */,
 				FA505049229256FD00FE9848 /* Points.swift in Sources */,
@@ -586,13 +675,18 @@
 				FA08E269226D81EC002EABFB /* Room_centers.swift in Sources */,
 				FA265231226870C000A7131E /* Message.swift in Sources */,
 				FAEB0288226858A9002F54EA /* LoginViewController.swift in Sources */,
+				FAD25BCD233DC26300DAA8EE /* CoursesButtonTableViewCell.swift in Sources */,
 				FA26522B22686D1E00A7131E /* ChatRoomTableViewCell.swift in Sources */,
 				FA08E26A226D81EC002EABFB /* Tokens.swift in Sources */,
+				FAD25BCB233DC25500DAA8EE /* CoursesTitleTableViewCell.swift in Sources */,
 				FA505047229256FD00FE9848 /* Tuk.swift in Sources */,
 				FA50504C229256FD00FE9848 /* StandardScore.swift in Sources */,
+				FAD25BD7233DC50400DAA8EE /* Media.swift in Sources */,
+				FAD25BD8233DC50400DAA8EE /* CoursesDetail.swift in Sources */,
 				FAC731BD22670C6300C59F10 /* APIServer.swift in Sources */,
 				FA5050502292696B00FE9848 /* StandardScoreTableViewController.swift in Sources */,
 				FA29DBA12293B0B300BE34A6 /* TabBarViewController.swift in Sources */,
+				FAD25BDA233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift in Sources */,
 				FA08E262226D7CF1002EABFB /* ListMemberChatTableViewController.swift in Sources */,
 				FA29DBAA2293DF7A00BE34A6 /* Datasets.swift in Sources */,
 				FA08E276226DAE2E002EABFB /* alertToken.swift in Sources */,
@@ -777,7 +871,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Brainfit-Chat-v2/Brainfit-Chat-v2.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P9265767DK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";
@@ -786,6 +880,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.BF.BrainFitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -800,7 +895,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Brainfit-Chat-v2/Brainfit-Chat-v2.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P9265767DK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";
@@ -809,6 +904,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.BF.BrainFitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

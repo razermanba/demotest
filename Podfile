@@ -22,7 +22,8 @@ target 'Brainfit-Chat-v2' do
     pod 'Socket.IO-Client-Swift', '~> 15.0.0'
     pod 'YouTubePlayer'
     pod 'VIMVideoPlayer'
-#    pod 'Charts', '~> 3.1.1'
+    #    pod 'Charts', '~> 3.1.1'
     pod 'JGProgressHUD'
-
+    pod 'Crashlytics'
+    pod 'Fabric'
 end

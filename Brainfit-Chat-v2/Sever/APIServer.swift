@@ -34,7 +34,7 @@ class APIService {
         }
         
         if (UserDefaults.standard.value(forKey: "token") != nil && String(describing: UserDefaults.standard.value(forKey: "token")).count > 0) {
-//            print(String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg))
+            print(String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg))
             
             let authorizationValue = String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg)
             my_headers["Authorization"] = authorizationValue
@@ -152,6 +152,16 @@ class APIService {
         getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API + "/students/" + user_id + "/progress-report", params: params, headers: [:], completionHandle: completionHandle)
     }
     
+    func getListCourses(_ params : [String : AnyObject], completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
+        print(API.base_url + API.BASE_URL_API + "/courses")
+        getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API + "/courses" , params: params, headers: [:], completionHandle: completionHandle)
+    }
+    
+    func coursesDetail(_ params : [String : AnyObject], courses_id : String , completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
+        getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API + "/courses/" + courses_id , params: params, headers: [:], completionHandle: completionHandle)
+    }
+
+
     
     
     func uploadImage(_ keyUpload : String ,_ photo: UIImage, completionHandle:@escaping (_ result:[String:AnyObject]?,_ error:AnyObject?) -> Void) {

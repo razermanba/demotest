@@ -25,6 +25,7 @@ class SocketIOManager{
         
     }
     
+    let appdelgate = UIApplication.shared.delegate as? AppDelegate
     
     let manager = SocketManager(socketURL:URL(string: API.SOCKET_URL)!, config:nil)
     
@@ -32,7 +33,7 @@ class SocketIOManager{
     let NotificationMessage_DidGotSocketEvent = "NotificationMessage_DidGotSocketEvent"
     var socket : SocketIOClient!
     func socketConnect (){
-        
+        appdelgate?.showLoading()
         print(UserDefaults.standard.value(forKey: "room")! as! CVarArg)
         
         manager.setConfigs( [.connectParams(["room":  UserDefaults.standard.value(forKey: "room")! as! CVarArg ,
@@ -49,6 +50,9 @@ class SocketIOManager{
         
         socket.onAny({ ( event: SocketAnyEvent) -> Void in
             print(event)
+            if event.event == "room connected"{
+                self.appdelgate?.dismissLoading()
+            }
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: self.NotificationMessage_DidGotSocketEvent), object: event)
         })
         
@@ -56,15 +60,17 @@ class SocketIOManager{
     }
     
     func socketSendMessage(text : String , message : String , link : String , timeStamp : String) {
-        socket.emit("send message", with: [["type":"text","content":message,"link":"","client_id":timeStamp]])
+        if socket != nil {
+            socket.emit("send message", with: [["type":"text","content":message,"link":"","client_id":timeStamp]])
+        }
     }
     
     func socketDissconectRoom (){
         if socket != nil {
-//            socket.emit("disconnect",with:[])
+            //            socket.emit("disconnect",with:[])
             socket.manager?.disconnect()
             socket.disconnect()
-
+            
         }
     }
     

@@ -58,6 +58,7 @@ class RoomChatTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         pageNumber = 0
         arrayRoom.removeAll()
+        self.tabBarController?.tabBar.isHidden = false
         
         getListRoom(pageNumber: pageNumber)
         
@@ -82,7 +83,6 @@ class RoomChatTableViewController: UITableViewController {
         let cell =  tableView.dequeueReusableCell(withIdentifier: "RoomChatCell", for: indexPath) as! ChatRoomTableViewCell
         if arrayRoom.count > 0{
             cell.lblTitle.text = arrayRoom[indexPath.row].name
-            print ("12345 \(arrayRoom[indexPath.row].avatar!)")
             let url = URL(string: arrayRoom[indexPath.row].avatar!)!
             let placeholderImage = UIImage(named: "avatar_student (1)")!
             DispatchQueue.main.async {
@@ -104,13 +104,15 @@ class RoomChatTableViewController: UITableViewController {
         self.performSegue(withIdentifier: "Chat", sender: self)
         
     }
+ 
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let currentOffset = scrollView.contentOffset.y
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
-        
+
         // Change 10.0 to adjust the distance from bottom
-        if maximumOffset - currentOffset <= 10.0 {
+        print(maximumOffset - currentOffset)
+        if  maximumOffset - currentOffset <= 10.0 && maximumOffset - currentOffset >= -200 {
             getListRoom(pageNumber: pageNumber)
         }
     }
@@ -148,6 +150,7 @@ extension RoomChatTableViewController{
                     self.tableView.reloadData()
                     self.appdelgate?.dismissLoading()
                     self.refresh.endRefreshing()
+                    
 //                }
             }else {
                 self.refresh.endRefreshing()

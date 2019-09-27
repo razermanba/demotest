@@ -29,15 +29,19 @@ class ChatViewController: MessagesViewController  {
     let img = UIImageView()
     var contentPlayer: AVPlayer?
     var playerLayer: AVPlayerLayer?
+    var player : AVPlayer?
     let imageToken = UIImageView()
     var clickVideo : Int = 0
     var indexold : Int = 0
     
+    
+    
     let formatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium
+        formatter.dateStyle = .short
         return formatter
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +63,7 @@ class ChatViewController: MessagesViewController  {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.didGotSocketEvent), name: NSNotification.Name(rawValue: "NotificationMessage_DidGotSocketEvent"), object: nil)
         
+        
         loadHistoryChat()
         
     }
@@ -71,10 +76,18 @@ class ChatViewController: MessagesViewController  {
     
     override func viewWillDisappear(_ animated: Bool) {
         super .viewWillDisappear(true)
-        if self.isMovingFromParent {
-            SocketIOManager.sharedInstance.socketDissconectRoom()
-        }
+        player?.pause()
+        player = nil
+        
     }
+    @IBAction func backAction(_ sender: Any) {
+        self.tabBarController?.tabBar.isHidden = false
+        SocketIOManager.sharedInstance.socketDissconectRoom()
+        
+        performSegue(withIdentifier: "backVC", sender: nil)
+        
+    }
+    
     
     func configureMessageCollectionView() {
         
@@ -101,7 +114,7 @@ extension ChatViewController {
     func loadHistoryChat(){
         APIService.sharedInstance.getHistoryChat([:], roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , pagenumber: String(pageNumber), completionHandle: {(result, error) in
             if  error == nil {
-                print(result)
+                //                print(result)
                 self.arrayListChat = Mapper<listChat>().mapArray(JSONArray: result as! [[String : Any]])
                 
                 for chat in self.arrayListChat {
@@ -140,6 +153,14 @@ extension ChatViewController {
                 DispatchQueue.main.async {
                     self.messagesCollectionView.reloadDataAndKeepOffset()
                     self.refreshControl.endRefreshing()
+                    
+                    self.player?.pause()
+                    
+                    for subview in self.messagesCollectionView.layer.sublayers! {
+                        if subview.value(forKey: "tag") as? Int == 1{
+                            subview.removeFromSuperlayer()
+                        }
+                    }
                 }
                 
             }else {
@@ -171,40 +192,40 @@ extension ChatViewController {
         
         switch type {
         case "text":
-            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: Date() , link: link , type: type)
+            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date:formatDate(strDate: create_at) , link: link , type: type)
             self.messageList.insert(message, at: 0)
             
             break
         case "youtube":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
             self.messageList.insert(message, at: 0)
             
             break
         case "vimeo":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at), link: link, type : type)
             self.messageList.insert(message, at: 0)
             
             break
         case "video":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at), link: link, type : type)
             self.messageList.insert(message, at: 0)
             
             break
         case "document":
-            let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date(),link: link , type:type)
+            let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
             self.messageList.insert(message, at: 0)
             break
         case "token":
             let url = URL(string:link)
             let placeholderImage = UIImage(named: "bg (1)")!
             img.af_setImage( withURL: url! ,placeholderImage: placeholderImage)
-            let message = MockMessage(attributedText: tokenImage(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date(),link: link , type:type)
+            let message = MockMessage(attributedText: tokenImage(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
             self.messageList.insert(message, at: 0)
             break
             
@@ -220,40 +241,40 @@ extension ChatViewController {
         
         switch type {
         case "text":
-            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: Date() , link: link , type: type)
+            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type)
             self.messageList.append(message)
             
             break
         case "youtube":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
             self.messageList.append(message)
             
             break
         case "vimeo":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date:formatDate(strDate: create_at) , link: link, type : type)
             self.messageList.append(message)
             
             break
         case "video":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
             self.messageList.append(message)
             
             break
         case "document":
-            let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date(),link: link , type:type)
+            let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
             self.messageList.append(message)
             break
         case "token":
             let url = URL(string:link)
             let placeholderImage = UIImage(named: "bg (1)")!
             img.af_setImage( withURL: url! ,placeholderImage: placeholderImage)
-            let message = MockMessage(attributedText: tokenImage(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date(),link: link , type:type)
+            let message = MockMessage(attributedText: tokenImage(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
             self.messageList.append(message)
             break
             
@@ -267,40 +288,40 @@ extension ChatViewController {
         
         switch type {
         case "text":
-            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: Date() , link: link , type: type)
+            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type)
             self.messageList.append(message)
             
             break
         case "youtube":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
             self.messageList.append(message)
             
             break
         case "vimeo":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
             self.messageList.append(message)
             
             break
         case "video":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date() , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
             self.messageList.append(message)
             
             break
         case "document":
-            let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date(),link: link , type:type)
+            let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
             self.messageList.append(message)
             break
         case "token":
             let url = URL(string:link)
             let placeholderImage = UIImage(named: "bg (1)")!
             img.af_setImage( withURL: url! ,placeholderImage: placeholderImage)
-            let message = MockMessage(attributedText: tokenImage(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: Date(),link: link , type:type)
+            let message = MockMessage(attributedText: tokenImage(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
             self.messageList.append(message)
             break
             
@@ -317,7 +338,7 @@ extension ChatViewController {
             if self?.isLastSectionVisible() == true {
                 self?.messagesCollectionView.scrollToBottom(animated: true)
             }else {
-                 self?.messagesCollectionView.scrollToBottom(animated: true)
+                self?.messagesCollectionView.scrollToBottom(animated: true)
             }
         })
     }
@@ -413,11 +434,20 @@ extension ChatViewController : MessagesDataSource {
         return NSAttributedString(string: name, attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption1)])
     }
     
-    //    func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-    //
-    ////        let dateString = Formatter.string(for:message.sentDate)
-    ////        return NSAttributedString(string: dateString, attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption2)])
-    //    }
+    func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        
+        return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption2)])
+    }
+    
+    func formatDate(strDate : String) -> Date {
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.timeZone = TimeZone(secondsFromGMT: 0)
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatterGet.locale = Locale.current
+        let date: Date = dateFormatterGet.date(from: strDate )!
+        
+        return date
+    }
     
 }
 
@@ -436,7 +466,6 @@ extension ChatViewController: MessageCellDelegate {
         
         if let indexPath = messagesCollectionView.indexPath(for: cell) {
             let message = messageList[indexPath.section]
-            
             switch message.Type {
             case "youtube":
                 let videoPlayer = YouTubePlayerView(frame: CGRect(x: 50, y: cell.frame.minY + 50, width: 300 , height: 190))
@@ -457,7 +486,9 @@ extension ChatViewController: MessageCellDelegate {
                 UIApplication.shared.open(myVideoURL! as URL, options: [:], completionHandler: nil)
                 break
             case "video":
-                let player = AVPlayer(url: URL(string:message.Link)!)
+                player?.pause()
+//                player = nil
+                player = AVPlayer(url: URL(string:message.Link)!)
                 
                 if indexold == indexPath.section{
                     clickVideo = 1
@@ -466,11 +497,13 @@ extension ChatViewController: MessageCellDelegate {
                 }
                 
                 if clickVideo == 0  {
-                    let playerLayer = AVPlayerLayer(player: player)
-                    playerLayer.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: 300 , height: 250)
-                    player.play()
+                    playerLayer = AVPlayerLayer(player: player)
+                    
+                    playerLayer!.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: 300 , height: 250)
+                    player?.play()
+                    playerLayer?.setValue(1, forKey: "tag")
                     clickVideo = 1;
-                    messagesCollectionView.layer.addSublayer(playerLayer)
+                    messagesCollectionView.layer.addSublayer(playerLayer!)
                     indexold = indexPath.section
                 }else {
                     let window = UIApplication.shared.keyWindow!
@@ -547,24 +580,12 @@ extension ChatViewController: MessageInputBarDelegate {
     
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
         
-        //                for component in inputBar.inputTextView.components {
-        //
-        //        //            if let str = component as? String {
-        //        //                let message = MockMessage(text: str, sender: currentSender(), messageId: UUID().uuidString, date: Date())
-        //        //                insertMessage(message)
-        //        //            } else if let img = component as? UIImage {
-        //        //                let message = MockMessage(image: img, sender: currentSender(), messageId: UUID().uuidString, date: Date())
-        //        //                insertMessage(message)
-        //        //            }
-        //
-        //                }
-        
         let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
         
         SocketIOManager.sharedInstance.socketSendMessage(text: "text", message: text, link: "", timeStamp: String(format:"%@", timestamp))
         
         inputBar.inputTextView.text = String()
-        messagesCollectionView.scrollToBottom(animated: true)
+        //  messagesCollectionView.scrollToBottom(animated: true)
     }
     
 }

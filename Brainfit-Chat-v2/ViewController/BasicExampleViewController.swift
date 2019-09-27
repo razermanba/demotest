@@ -33,6 +33,8 @@ final class BasicExampleViewController: ChatViewController {
     override func configureMessageCollectionView() {
         super.configureMessageCollectionView()
         
+        
+ 
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         
@@ -83,7 +85,7 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
                 avatarView.sd_setImage(with: url, placeholderImage: placeholderImage)
             }
         }else {
-            print(String(format: "%@/api/v1/users/%@/avatar?v=%@",API.base_url,self.messageList[indexPath.section].sender.id, timestamp))
+//            print(String(format: "%@/api/v1/users/%@/avatar?v=%@",API.base_url,self.messageList[indexPath.section].sender.id, timestamp))
             
             let placeholderImage = UIImage(named: "avatar_student (1)")!
             let url = URL(string: String(format: "%@/api/v1/users/%@/avatar?v=%@",API.base_url,self.messageList[indexPath.section].sender.id, timestamp))!

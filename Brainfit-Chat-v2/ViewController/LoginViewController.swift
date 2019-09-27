@@ -135,7 +135,7 @@ extension LoginviewController{
                         UserDefaults.standard.set(user?.username, forKey: "username")
                         UserDefaults.standard.set(user?.avatar, forKey: "avatar")
                         
-                        if (user?.room)! > 0 {
+                        if user?.room ?? 0 > 0 {
                             self.appdelgate?.dismissLoading()
                             self.performSegue(withIdentifier: "roomChat", sender: self)
                             
@@ -163,34 +163,34 @@ extension LoginviewController{
         })
     }
     
-    func needsUpdate() {
-        let infoDictionary = Bundle.main.infoDictionary
-        let appID = infoDictionary!["CFBundleIdentifier"] as! String
-        let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(appID)")
-        guard let data = try? Data(contentsOf: url!) else {
-            print("There is an error!")
-            return 
-        }
-        let lookup = (try? JSONSerialization.jsonObject(with: data , options: [])) as? [String: Any]
-        if let resultCount = lookup!["resultCount"] as? Int, resultCount == 1 {
-            if let results = lookup!["results"] as? [[String:Any]] {
-                if let appStoreVersion = results[0]["version"] as? String{
-                    let currentVersion = infoDictionary!["CFBundleShortVersionString"] as? String
-                    if !(appStoreVersion == currentVersion) {
-                        print("Need to update [\(appStoreVersion) != \(String(describing: currentVersion))]")
-                    }else {
-                        let alert = UIAlertController(title: "Announcement", message: "Please update new version \(String(describing: currentVersion))", preferredStyle: UIAlertController.Style.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default){ action -> Void in
-                            guard let url = URL(string: "itms://itunes.apple.com/us/app/personal-brain-coach/id1244995154?ls=1&mt=8") else { return }
-                            UIApplication.shared.open(url)
-                        })
-                        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
-            }
-        }
-    }
+//    func needsUpdate() {
+//        let infoDictionary = Bundle.main.infoDictionary
+//        let appID = infoDictionary!["CFBundleIdentifier"] as! String
+//        let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(appID)")
+//        guard let data = try? Data(map: url) else {
+//            print("There is an error!")
+//            return 
+//        }
+//        let lookup = (try? JSONSerialization.jsonObject(with: data , options: [])) as? [String: Any]
+//        if let resultCount = lookup!["resultCount"] as? Int, resultCount == 1 {
+//            if let results = lookup!["results"] as? [[String:Any]] {
+//                if let appStoreVersion = results[0]["version"] as? String{
+//                    let currentVersion = infoDictionary!["CFBundleShortVersionString"] as? String
+//                    if !(appStoreVersion == currentVersion) {
+//                        print("Need to update [\(appStoreVersion) != \(String(describing: currentVersion))]")
+//                    }else {
+//                        let alert = UIAlertController(title: "Announcement", message: "Please update new version \(String(describing: currentVersion))", preferredStyle: UIAlertController.Style.alert)
+//                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default){ action -> Void in
+//                            guard let url = URL(string: "itms://itunes.apple.com/us/app/personal-brain-coach/id1244995154?ls=1&mt=8") else { return }
+//                            UIApplication.shared.open(url)
+//                        })
+//                        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+//                        self.present(alert, animated: true, completion: nil)
+//                    }
+//                }
+//            }
+//        }
+//    }
     
 }
 

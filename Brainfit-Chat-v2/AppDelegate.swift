@@ -10,6 +10,8 @@ import UIKit
 import UserNotifications
 import JGProgressHUD
 import Firebase
+import Crashlytics
+import Fabric
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
@@ -22,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
+        
+        Fabric.with([Crashlytics.self])
+
         
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -40,18 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         
         Messaging.messaging().delegate = self
         
+        Fabric.sharedSDK().debug = true
+
         return true
     }
     
-//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        if let token = Messaging.messaging().apnsToken {
-//            print("FCM token: \(token)")
-//        }
+//    private func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//        Messaging.messaging().apnsToken = deviceToken
 //    }
-    
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        Messaging.messaging().apnsToken = deviceToken
-    }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Remote instance \(fcmToken)");
@@ -60,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
                 print("Error fetching remote instance ID: \(error)")
             } else if let result = result {
                 print("Remote instance ID token: \(result.token)")
-
+                
             }
         }
     }
@@ -81,6 +82,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         if  UserDefaults.standard.value(forKey: "room") != nil {
             SocketIOManager.sharedInstance.socketConnect()
+        }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil);
+        let navigation: UINavigationController = storyboard.instantiateViewController(withIdentifier: "chatNavigationStoryboard") as! UINavigationController
+        let chatVC  = (storyboard.instantiateViewController(withIdentifier: "ChatStoryBoardId") as! BasicExampleViewController)
+        
+        if UserDefaults.standard.value(forKey: "token") as? String != nil {
+            guard !response.notification.request.content.userInfo.isEmpty else {
+                return
+            }
+            
+            if response.notification.request.content.userInfo["room_id"] as? String != nil{
+                let roomID = response.notification.request.content.userInfo["room_id"] as? String
+                UserDefaults.standard.set(roomID ?? "", forKey: "room")
+                SocketIOManager.sharedInstance.socketConnect()
+
+                
+                navigation.pushViewController(chatVC, animated: true)
+                self.window?.rootViewController = navigation
+                self.window?.makeKeyAndVisible()
+                            
+            }
         }
     }
     
