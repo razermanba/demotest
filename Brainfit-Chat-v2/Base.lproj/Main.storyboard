@@ -311,7 +311,7 @@
             <objects>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="4Om-Ex-qLT" customClass="ListMemberChatTableViewController" customModule="Brainfit_Chat_v2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4jP-MV-fZ4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -369,7 +369,7 @@
             <objects>
                 <viewController id="lbX-Yc-hgY" customClass="ListTokenViewController" customModule="Brainfit_Chat_v2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8np-72-Syc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T4E-i5-gRo">
@@ -1047,11 +1047,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellCourses" rowHeight="153" id="oPG-yC-7uk" customClass="CourseTableViewCell" customModule="Brainfit_Chat_v2" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="153"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellCourses" rowHeight="120" id="oPG-yC-7uk" customClass="CourseTableViewCell" customModule="Brainfit_Chat_v2" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oPG-yC-7uk" id="I1F-nH-vAO">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gSn-rF-G2x">
@@ -1070,16 +1070,15 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8W-Cy-jGI">
-                                            <rect key="frame" x="124" y="40" width="243" height="105"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8W-Cy-jGI">
+                                            <rect key="frame" x="124" y="40" width="243" height="72"/>
                                             <string key="text">&lt;p&gt;Jump! is a series of structured and progressive aerobic workout exercises that work on body coordination, motor planning, timing and focus.&lt;/p&gt;&lt;p&gt;There are 4 levels in this beginning module that caters to Primary School students. Progress to the next level after every 3-4 weeks, when students have fully mastered the movements. Mastery in coordination and timing is the key. &amp;nbsp; &amp;nbsp;&lt;/p&gt;&lt;p&gt;Equipment: Nil&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="gSn-rF-G2x" secondAttribute="bottom" constant="31" id="2ZF-g7-V3o"/>
                                         <constraint firstAttribute="bottom" secondItem="I8W-Cy-jGI" secondAttribute="bottom" constant="8" id="9fn-sA-rcf"/>
                                         <constraint firstItem="I8W-Cy-jGI" firstAttribute="top" secondItem="4w5-hj-e3Q" secondAttribute="bottom" constant="8" id="LDl-Yl-YaZ"/>
                                         <constraint firstAttribute="trailing" secondItem="I8W-Cy-jGI" secondAttribute="trailing" constant="8" id="MpE-rg-iy3"/>
@@ -1239,15 +1238,16 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDx-kr-WJC">
-                                                    <rect key="frame" x="330" y="7" width="30" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDx-kr-WJC" customClass="SubClassButton" customModule="Brainfit_Chat_v2" customModuleProvider="target">
+                                                    <rect key="frame" x="332" y="8" width="28" height="28"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="KRV-qs-GHz"/>
+                                                        <constraint firstAttribute="width" constant="28" id="KRV-qs-GHz"/>
                                                     </constraints>
-                                                    <state key="normal" image="icons8-Download From Cloud-30"/>
+                                                    <state key="normal" image="ic_file_download-1"/>
                                                 </button>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="V8I-I6-s39">
-                                                    <rect key="frame" x="75" y="17" width="15" height="10.666666666666668"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_attachment" translatesAutoresizingMaskIntoConstraints="NO" id="V8I-I6-s39">
+                                                    <rect key="frame" x="75" y="14.333333333333336" width="15" height="15"/>
+                                                    <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="BYG-sy-Qtw"/>
                                                         <constraint firstAttribute="width" constant="15" id="V5G-Wt-dfH"/>
@@ -1263,7 +1263,7 @@
                                                 <constraint firstItem="XDx-kr-WJC" firstAttribute="centerY" secondItem="uRG-fm-KYL" secondAttribute="centerY" id="kOc-xm-5rK"/>
                                                 <constraint firstItem="V8I-I6-s39" firstAttribute="centerY" secondItem="uRG-fm-KYL" secondAttribute="centerY" id="lXk-qX-Jvu"/>
                                                 <constraint firstAttribute="trailing" secondItem="XDx-kr-WJC" secondAttribute="trailing" constant="15" id="o4j-fS-tvY"/>
-                                                <constraint firstItem="XDx-kr-WJC" firstAttribute="leading" secondItem="PdJ-A4-8XR" secondAttribute="trailing" constant="8" id="uAO-L7-Fcs"/>
+                                                <constraint firstItem="XDx-kr-WJC" firstAttribute="leading" secondItem="PdJ-A4-8XR" secondAttribute="trailing" constant="10" id="uAO-L7-Fcs"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1322,11 +1322,46 @@
                     <connections>
                         <outlet property="tableView" destination="6fB-xH-yt9" id="Pnz-T0-1jj"/>
                         <outlet property="viewPlayer" destination="mFi-wZ-bPk" id="OQp-gf-JW9"/>
+                        <segue destination="Gf6-Zl-oEq" kind="push" identifier="document" id="KeM-dn-oYi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QCU-XN-RcJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4456.8000000000002" y="2890.6403940886703"/>
+        </scene>
+        <!--Document View Controller-->
+        <scene sceneID="Ipt-L2-x3e">
+            <objects>
+                <viewController id="Gf6-Zl-oEq" customClass="DocumentViewController" customModule="Brainfit_Chat_v2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zB0-OT-gOT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xSa-kx-b4M">
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Gf6-Zl-oEq" id="Yep-Nc-Ufv"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="xSa-kx-b4M" firstAttribute="top" secondItem="Uws-VO-RAP" secondAttribute="top" id="CUb-FM-rPv"/>
+                            <constraint firstItem="xSa-kx-b4M" firstAttribute="bottom" secondItem="Uws-VO-RAP" secondAttribute="bottom" id="Doq-Eg-nJt"/>
+                            <constraint firstItem="xSa-kx-b4M" firstAttribute="leading" secondItem="Uws-VO-RAP" secondAttribute="leading" id="bSw-2w-EI1"/>
+                            <constraint firstItem="xSa-kx-b4M" firstAttribute="trailing" secondItem="Uws-VO-RAP" secondAttribute="trailing" id="vmT-5T-9bE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Uws-VO-RAP"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="knX-aa-TiY"/>
+                    <connections>
+                        <outlet property="viewWeb" destination="xSa-kx-b4M" id="dTG-wi-9Qc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TSL-tg-n1X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5213.6000000000004" y="2890.6403940886703"/>
         </scene>
         <!--User-->
         <scene sceneID="amQ-Iq-DN1">
@@ -1391,11 +1426,11 @@
             </objects>
             <point key="canvasLocation" x="2386" y="3658"/>
         </scene>
-        <!--Item-->
+        <!--Video-->
         <scene sceneID="wnC-Bi-Zlv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MKX-H0-2fI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Q72-Dh-ryc"/>
+                    <tabBarItem key="tabBarItem" title="Video" image="ic_video_library" id="Q72-Dh-ryc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="smC-OU-pkn">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -1420,16 +1455,16 @@
         <image name="bg-(1)" width="640" height="1136"/>
         <image name="cm-performance" width="3543" height="2362"/>
         <image name="group" width="25" height="25"/>
-        <image name="icons8-Download From Cloud-30" width="30" height="30"/>
+        <image name="ic_attachment" width="28" height="28"/>
+        <image name="ic_file_download-1" width="28" height="28"/>
+        <image name="ic_video_library" width="28" height="28"/>
         <image name="icons8-Edit-48" width="48" height="48"/>
         <image name="logo-1" width="446" height="124"/>
         <image name="logout" width="24" height="24"/>
         <image name="message" width="27" height="24"/>
         <image name="user" width="28" height="24"/>
-        <image name="video" catalog="system" width="64" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lfA-q4-Mey"/>
         <segue reference="VVD-1s-TeJ"/>
     </inferredMetricsTieBreakers>
 </document>

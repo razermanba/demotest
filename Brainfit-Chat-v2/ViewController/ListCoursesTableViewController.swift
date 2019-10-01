@@ -45,14 +45,14 @@ class ListCoursesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.courses?.data?.count ?? 0
+        return self.courses?.dataCourses?.count ?? 0
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellCourses", for: indexPath) as! CourseTableViewCell
         
-        let course = self.courses?.data?[indexPath.row]
+        let course = self.courses?.dataCourses?[indexPath.row]
         let url = URL(string: course?.image ?? "")!
         
         cell.imgCourses.sd_setImage(with: url)
@@ -63,8 +63,13 @@ class ListCoursesTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+    
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let course = self.courses?.data?[indexPath.row]
+        let course = self.courses?.dataCourses?[indexPath.row]
         courseId = course?.id ?? 0
         self.performSegue(withIdentifier: "detailCourse", sender: self)
         
@@ -112,5 +117,22 @@ extension String {
     }
     var htmlToString: String {
         return htmlToAttributedString?.string ?? ""
+    }
+}
+
+public extension UIImage {
+
+    func tint(with fillColor: UIColor) -> UIImage? {
+        let image = withRenderingMode(.alwaysTemplate)
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        fillColor.set()
+        image.draw(in: CGRect(origin: .zero, size: size))
+
+        guard let imageColored = UIGraphicsGetImageFromCurrentImageContext() else {
+            return nil
+        }
+
+        UIGraphicsEndImageContext()
+        return imageColored
     }
 }

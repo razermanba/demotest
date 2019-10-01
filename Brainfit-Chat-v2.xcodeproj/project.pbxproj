@@ -49,9 +49,11 @@
 		FA68EE5A2269ABC4007BF7DD /* BasicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68EE592269ABC4007BF7DD /* BasicExampleViewController.swift */; };
 		FAC731BB22670AA700C59F10 /* URLServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC731BA22670AA700C59F10 /* URLServer.swift */; };
 		FAC731BD22670C6300C59F10 /* APIServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC731BC22670C6300C59F10 /* APIServer.swift */; };
+		FACA1D8423432C71007B959C /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACA1D8323432C71007B959C /* DocumentViewController.swift */; };
+		FACA1D8623433C32007B959C /* SubClassButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACA1D8523433C32007B959C /* SubClassButton.swift */; };
 		FAD25BBA233DB30F00DAA8EE /* ListCoursesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BB9233DB30F00DAA8EE /* ListCoursesTableViewController.swift */; };
 		FAD25BC0233DB76800DAA8EE /* RecordsTotal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BBC233DB76800DAA8EE /* RecordsTotal.swift */; };
-		FAD25BC1233DB76800DAA8EE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BBD233DB76800DAA8EE /* Data.swift */; };
+		FAD25BC1233DB76800DAA8EE /* DataCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BBD233DB76800DAA8EE /* DataCourses.swift */; };
 		FAD25BC2233DB76800DAA8EE /* RecordsFiltered.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BBE233DB76800DAA8EE /* RecordsFiltered.swift */; };
 		FAD25BC3233DB76800DAA8EE /* courses.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BBF233DB76800DAA8EE /* courses.swift */; };
 		FAD25BC5233DB7F600DAA8EE /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BC4233DB7F600DAA8EE /* CourseTableViewCell.swift */; };
@@ -139,9 +141,11 @@
 		FA68EE592269ABC4007BF7DD /* BasicExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicExampleViewController.swift; sourceTree = "<group>"; };
 		FAC731BA22670AA700C59F10 /* URLServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLServer.swift; sourceTree = "<group>"; };
 		FAC731BC22670C6300C59F10 /* APIServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServer.swift; sourceTree = "<group>"; };
+		FACA1D8323432C71007B959C /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
+		FACA1D8523433C32007B959C /* SubClassButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubClassButton.swift; sourceTree = "<group>"; };
 		FAD25BB9233DB30F00DAA8EE /* ListCoursesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCoursesTableViewController.swift; sourceTree = "<group>"; };
 		FAD25BBC233DB76800DAA8EE /* RecordsTotal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsTotal.swift; sourceTree = "<group>"; };
-		FAD25BBD233DB76800DAA8EE /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		FAD25BBD233DB76800DAA8EE /* DataCourses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCourses.swift; sourceTree = "<group>"; };
 		FAD25BBE233DB76800DAA8EE /* RecordsFiltered.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsFiltered.swift; sourceTree = "<group>"; };
 		FAD25BBF233DB76800DAA8EE /* courses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = courses.swift; sourceTree = "<group>"; };
 		FAD25BC4233DB7F600DAA8EE /* CourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 				FA08E257226D72A7002EABFB /* alertToken.xib */,
 				FA08E25D226D72C8002EABFB /* ChangePassword.swift */,
 				FA08E275226DAE2E002EABFB /* alertToken.swift */,
+				FACA1D8523433C32007B959C /* SubClassButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 				FA29DBA22293DDE500BE34A6 /* ProgressScoreTableViewController.swift */,
 				FAD25BB9233DB30F00DAA8EE /* ListCoursesTableViewController.swift */,
 				FAD25BC6233DC21F00DAA8EE /* CoursesDetailViewController.swift */,
+				FACA1D8323432C71007B959C /* DocumentViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -323,7 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				FAD25BBC233DB76800DAA8EE /* RecordsTotal.swift */,
-				FAD25BBD233DB76800DAA8EE /* Data.swift */,
+				FAD25BBD233DB76800DAA8EE /* DataCourses.swift */,
 				FAD25BBE233DB76800DAA8EE /* RecordsFiltered.swift */,
 				FAD25BBF233DB76800DAA8EE /* courses.swift */,
 			);
@@ -618,11 +624,7 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-			);
-			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
@@ -643,6 +645,7 @@
 				FA50504B229256FD00FE9848 /* En.swift in Sources */,
 				FA28ADFF22697B5A002DC95B /* Id.swift in Sources */,
 				FA29DBA82293DF7A00BE34A6 /* Progress_data.swift in Sources */,
+				FACA1D8623433C32007B959C /* SubClassButton.swift in Sources */,
 				FA28ADFE22697B5A002DC95B /* listChat.swift in Sources */,
 				FAD25BC3233DB76800DAA8EE /* courses.swift in Sources */,
 				FAD25BCF233DC28600DAA8EE /* CoursesTopicTableViewCell.swift in Sources */,
@@ -656,7 +659,7 @@
 				FA08E26B226D81EC002EABFB /* listUserChat.swift in Sources */,
 				FA50504A229256FD00FE9848 /* Strategy.swift in Sources */,
 				FA505046229256FD00FE9848 /* Levels.swift in Sources */,
-				FAD25BC1233DB76800DAA8EE /* Data.swift in Sources */,
+				FAD25BC1233DB76800DAA8EE /* DataCourses.swift in Sources */,
 				FA08E264226D7D82002EABFB /* ListMemberTableViewCell.swift in Sources */,
 				FAD25BD5233DC50400DAA8EE /* Center.swift in Sources */,
 				FA08E25E226D72C8002EABFB /* ChangePassword.swift in Sources */,
@@ -666,6 +669,7 @@
 				FA29DBA32293DDE500BE34A6 /* ProgressScoreTableViewController.swift in Sources */,
 				FAD25BD6233DC50400DAA8EE /* Topics.swift in Sources */,
 				FA08E26C226D81EC002EABFB /* Users.swift in Sources */,
+				FACA1D8423432C71007B959C /* DocumentViewController.swift in Sources */,
 				FA2652352268840300A7131E /* SocketIOManager.swift in Sources */,
 				FA505049229256FD00FE9848 /* Points.swift in Sources */,
 				FA505048229256FD00FE9848 /* Contents.swift in Sources */,
@@ -870,8 +874,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Brainfit-Chat-v2/Brainfit-Chat-v2.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P9265767DK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";
@@ -883,6 +888,7 @@
 				MARKETING_VERSION = 3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.BF.BrainFitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -894,8 +900,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Brainfit-Chat-v2/Brainfit-Chat-v2.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P9265767DK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";
@@ -907,6 +914,7 @@
 				MARKETING_VERSION = 3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.BF.BrainFitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

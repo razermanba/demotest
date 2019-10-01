@@ -15,7 +15,7 @@ import Foundation
 import ObjectMapper
 
 struct courses : Mappable {
-	var data : [Data]?
+	var dataCourses : [DataCourses]?
 	var draw : String?
 	var recordsFiltered : RecordsFiltered?
 	var recordsTotal : RecordsTotal?
@@ -26,7 +26,7 @@ struct courses : Mappable {
 
 	mutating func mapping(map: Map) {
 
-		data <- map["data"]
+		dataCourses <- map["data"]
 		draw <- map["draw"]
 		recordsFiltered <- map["recordsFiltered"]
 		recordsTotal <- map["recordsTotal"]

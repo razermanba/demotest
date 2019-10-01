@@ -6,12 +6,15 @@
 //  Copyright © 2019 macbook. All rights reserved.
 //
 
+import Foundation
+import Fabric
 import UIKit
+import Firebase
+import ObjectMapper
+import Crashlytics
 import UserNotifications
 import JGProgressHUD
-import Firebase
-import Crashlytics
-import Fabric
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
@@ -24,18 +27,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
-        
-        Fabric.with([Crashlytics.self])
-
+        Messaging.messaging().delegate = self
         
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
             
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
+            UNUserNotificationCenter.current().requestAuthorization(options: authOptions,
+                                                                    completionHandler: { (bool, err) in
+                                                                        
+            })
+            
         } else {
             let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
@@ -43,27 +46,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         
         application.registerForRemoteNotifications()
         
-        Messaging.messaging().delegate = self
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+        Messaging.messaging().isAutoInitEnabled = true
+        
+        let token = Messaging.messaging().fcmToken
+        print("FCM token: \(token ?? "")")
+        
+        
+        Fabric.with([Crashlytics.self])
         
         Fabric.sharedSDK().debug = true
-
+        
+        
         return true
     }
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken as Data
+    }
     
-//    private func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        Messaging.messaging().apnsToken = deviceToken
-//    }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print("Remote instance \(fcmToken)");
         InstanceID.instanceID().instanceID { (result, error) in
             if let error = error {
                 print("Error fetching remote instance ID: \(error)")
             } else if let result = result {
                 print("Remote instance ID token: \(result.token)")
-                
             }
         }
+        
     }
     
     
@@ -99,12 +110,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
                 let roomID = response.notification.request.content.userInfo["room_id"] as? String
                 UserDefaults.standard.set(roomID ?? "", forKey: "room")
                 SocketIOManager.sharedInstance.socketConnect()
-
+                
                 
                 navigation.pushViewController(chatVC, animated: true)
                 self.window?.rootViewController = navigation
                 self.window?.makeKeyAndVisible()
-                            
+                
             }
         }
     }

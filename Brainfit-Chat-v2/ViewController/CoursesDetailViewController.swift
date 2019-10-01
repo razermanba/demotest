@@ -26,6 +26,7 @@ class CoursesDetailViewController: UIViewController {
     var cellButton : CoursesButtonTableViewCell! = nil
     
     var contentText : String = ""
+    var urlFile : String = ""
     
     
     var courses = Mapper<CoursesDetail>().map(JSONObject: ())
@@ -41,20 +42,11 @@ class CoursesDetailViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
         navigationItem.titleView = imageView
-
+        
         getCourses(courseID: String(courseID))
     }
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     @objc func actionResoucres(){
         
         contentText = "resoucres"
@@ -133,7 +125,7 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
             case "descrition":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellDescription", for: indexPath) as! CoursesDescriptionTableViewCell
                 cell.txtDesciption.text = self.courses?.description?.htmlToString
-
+                
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellTopic", for: indexPath) as! CoursesTopicTableViewCell
@@ -142,10 +134,9 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
                 cell.txtTitle.text = media.title
                 cell.txtIndex.text = String(indexPath.row + 1)
                 if media.context == "document" {
-                    cell.imgType.image = #imageLiteral(resourceName: "border_ticked_signin")
-                    //                    UIImage.init(named: "doc")
+                    cell.imgType.image = Image(named: "ic_attachment.png")
                 }else {
-                    cell.imgType.image = #imageLiteral(resourceName: "icons8-Edit-48")
+                    cell.imgType.image = Image(named: "ic_play_circle_outline.png")
                 }
                 
                 if indexRowSelect == indexPath.row && indexSectionSelect == indexPath.section {
@@ -155,6 +146,17 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
                     cell.txtIndex.textColor = UIColor.black
                     cell.txtTitle.textColor = UIColor.black
                 }
+                
+                if media.downloadable == true {
+                    cell.btnDownload.isHidden = false
+                    cell.btnDownload.urlString = media.file ?? ""
+                    cell.btnDownload.addTarget(self, action: #selector(actionDownFile(_: )), for: .touchUpInside)
+                    
+                }else {
+                    cell.btnDownload.isHidden = true
+                    
+                }
+                
                 
                 return cell
             }
@@ -181,6 +183,9 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
                 viewPlayer.addSubview(playerViewController.view)
                 playerViewController.player!.play()
                 playerViewController.didMove(toParent: self)
+            } else if media.context == "document"{
+                urlFile = media.file ?? ""
+                self.performSegue(withIdentifier: "document", sender: self)
             }
             
             tableView.reloadData()
@@ -211,6 +216,21 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
         }
     }
     
+    @objc func actionDownFile(_ sender : SubClassButton){
+        print("URL download \(sender.urlString)")
+        dowloadFile(urlString: sender.urlString )
+        
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "document" {
+            let documentVC = segue.destination as! DocumentViewController
+            documentVC.urlFile = urlFile
+        }
+    }
 }
 
 extension CoursesDetailViewController{
@@ -231,5 +251,37 @@ extension CoursesDetailViewController{
             }
         })
     }
+    
+    // MARK: - download file
+    func dowloadFile(urlString: String) {
+        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
+        
+        Alamofire.download(urlString,method: .get, encoding: JSONEncoding.default,to: destination).downloadProgress(closure: { (progress) in
+            //progress closure
+            print(progress)
+        }).response(completionHandler: { (DefaultDownloadResponse) in
+            //here you able to access the DefaultDownloadResponse
+            //result closure
+            if DefaultDownloadResponse.response?.statusCode == 200 {
+                
+                print(DefaultDownloadResponse.destinationURL ?? "")
+                do {
+                   
+                    let fileURL = DefaultDownloadResponse.destinationURL
+                    let objectsToShare = [fileURL]
+                    let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
+
+                    self.present(activityVC, animated: true, completion: nil)
+
+                } catch {
+                    print("cannot write file")
+                    // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
+                }
+                
+            }
+            
+        })
+    }
+    
 }
 

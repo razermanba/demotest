@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EFCE383D4DE93B1EAFA21212F213921B"
+               BlueprintIdentifier = "7F66DE5E75D1E186D54E004BB9D7DAA4"
                BuildableName = "Pods_Brainfit_Chat_v2.framework"
                BlueprintName = "Pods-Brainfit-Chat-v2"
                ReferencedContainer = "container:Pods.xcodeproj">

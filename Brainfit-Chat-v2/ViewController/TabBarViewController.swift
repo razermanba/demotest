@@ -13,13 +13,15 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        [self.tabBar setTintColor:[UIColor whiteColor]];
-//        self.tabBar.unselectedItemTintColor = [UIColor whiteColor];
 
         self.tabBar.tintColor = UIColor.white
         self.tabBar.unselectedItemTintColor = UIColor.white
+        let role = UserDefaults.standard.value(forKey: "role") as! String
+        if role == "student" {
+            self.viewControllers?.remove(at: 1)
+        }
+        
 
-        // Do any additional setup after loading the view.
     }
     
 

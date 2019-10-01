@@ -13,7 +13,7 @@ class CoursesTopicTableViewCell: UITableViewCell {
     @IBOutlet weak var txtIndex: UILabel!
     @IBOutlet weak var imgType: UIImageView!
     @IBOutlet weak var txtTitle: UILabel!
-    @IBOutlet weak var btnDownload: UIButton!
+    @IBOutlet weak var btnDownload: SubClassButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
