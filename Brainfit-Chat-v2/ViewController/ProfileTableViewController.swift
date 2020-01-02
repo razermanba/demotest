@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileTableViewController: UITableViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate {
+class ProfileTableViewController: UITableViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate , UITextFieldDelegate {
     
     @IBOutlet weak var imageAvatar: UIImageView!
     @IBOutlet weak var lblUsername: UILabel!
@@ -52,6 +52,18 @@ class ProfileTableViewController: UITableViewController,UINavigationControllerDe
         super.viewWillDisappear(animated)
     }
     
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        changePWView.txtNewPassword.resignFirstResponder()
+        changePWView.txtConfirmPassword.resignFirstResponder()
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
@@ -59,6 +71,14 @@ class ProfileTableViewController: UITableViewController,UINavigationControllerDe
             changePWView = (Bundle.main.loadNibNamed("ChangePassword", owner: self, options: nil)?.first as? ChangePassword)!
             changePWView.bounds = window.bounds
             changePWView.center = window.center
+            changePWView.txtNewPassword.delegate = self
+            changePWView.txtConfirmPassword.delegate = self
+            
+            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+            tap.cancelsTouchesInView = false
+            changePWView.addGestureRecognizer(tap)
+            
+            
             
             changePWView.btnClose.addTarget(self, action: #selector(self.actionClosePopUp), for: .touchUpInside)
             changePWView.btnChangePasword.addTarget(self, action: #selector(self.actionChangePassword), for: .touchUpInside)
@@ -112,7 +132,7 @@ extension ProfileTableViewController{
                      "password_confirmation":changePWView.txtConfirmPassword.text] as [String : AnyObject]
         
         APIService.sharedInstance.changePassword(param, completionHandle: {(result, error) in
-            if  error == nil {
+            if  error == nil || error as! String == "" {
                 self.animateViewHeight(self.changePWView, withAnimationType: CATransitionSubtype.fromBottom.rawValue, andflagClose: false)
                 
                 UserDefaults.standard.removeObject(forKey: "username")
@@ -121,8 +141,10 @@ extension ProfileTableViewController{
                 
                 var controller: UINavigationController
                 controller = self.storyboard?.instantiateViewController(withIdentifier: "NavigationStoryboard") as! UINavigationController
+                controller.modalPresentationStyle = .fullScreen
                 self.present(controller, animated: true, completion: nil)
                 self.appdelgate?.dismissLoading()
+                
             }else {
                 self.appdelgate?.dismissLoading()
                 let alert = UIAlertController(title: "Error", message: (error as! String), preferredStyle: UIAlertController.Style.alert)

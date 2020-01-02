@@ -66,6 +66,8 @@
 		FAD25BD7233DC50400DAA8EE /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BD3233DC50400DAA8EE /* Media.swift */; };
 		FAD25BD8233DC50400DAA8EE /* CoursesDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BD4233DC50400DAA8EE /* CoursesDetail.swift */; };
 		FAD25BDA233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BD9233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift */; };
+		FAE6722223615CB60003FC13 /* EmptyCourses.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE6722123615CB60003FC13 /* EmptyCourses.xib */; };
+		FAE6722423615CC70003FC13 /* EmptyCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE6722323615CC70003FC13 /* EmptyCourses.swift */; };
 		FAEB0288226858A9002F54EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0287226858A9002F54EA /* LoginViewController.swift */; };
 		FAEB028A22685E5B002F54EA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB028922685E5B002F54EA /* UserProfile.swift */; };
 		FAFF3F412266CBCA00225C94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFF3F402266CBCA00225C94 /* AppDelegate.swift */; };
@@ -158,6 +160,8 @@
 		FAD25BD3233DC50400DAA8EE /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		FAD25BD4233DC50400DAA8EE /* CoursesDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesDetail.swift; sourceTree = "<group>"; };
 		FAD25BD9233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesDescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		FAE6722123615CB60003FC13 /* EmptyCourses.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyCourses.xib; sourceTree = "<group>"; };
+		FAE6722323615CC70003FC13 /* EmptyCourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCourses.swift; sourceTree = "<group>"; };
 		FAEB0287226858A9002F54EA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FAEB028922685E5B002F54EA /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		FAF2E765228EBEB200FA1440 /* Brainfit-Chat-v2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Brainfit-Chat-v2.entitlements"; sourceTree = "<group>"; };
@@ -229,6 +233,8 @@
 				FA08E25D226D72C8002EABFB /* ChangePassword.swift */,
 				FA08E275226DAE2E002EABFB /* alertToken.swift */,
 				FACA1D8523433C32007B959C /* SubClassButton.swift */,
+				FAE6722123615CB60003FC13 /* EmptyCourses.xib */,
+				FAE6722323615CC70003FC13 /* EmptyCourses.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -520,6 +526,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA08E259226D72A7002EABFB /* ChangePassword.xib in Resources */,
+				FAE6722223615CB60003FC13 /* EmptyCourses.xib in Resources */,
 				FAFF3F4B2266CBCC00225C94 /* LaunchScreen.storyboard in Resources */,
 				FA08E25C226D72A7002EABFB /* alertToken.xib in Resources */,
 				FAFF3F482266CBCC00225C94 /* Assets.xcassets in Resources */,
@@ -675,6 +682,7 @@
 				FA505048229256FD00FE9848 /* Contents.swift in Sources */,
 				FA5EA2122269756D001BF077 /* MockMessage.swift in Sources */,
 				FA08E272226DA4FE002EABFB /* ListTokenViewController.swift in Sources */,
+				FAE6722423615CC70003FC13 /* EmptyCourses.swift in Sources */,
 				FA08E26E226DA4D6002EABFB /* ListTokenTableViewCell.swift in Sources */,
 				FA08E269226D81EC002EABFB /* Room_centers.swift in Sources */,
 				FA265231226870C000A7131E /* Message.swift in Sources */,
@@ -885,7 +893,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1;
+				MARKETING_VERSION = 3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.BF.BrainFitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -911,7 +919,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1;
+				MARKETING_VERSION = 3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.BF.BrainFitChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

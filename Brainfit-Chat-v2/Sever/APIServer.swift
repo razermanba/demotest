@@ -34,7 +34,7 @@ class APIService {
         }
         
         if (UserDefaults.standard.value(forKey: "token") != nil && String(describing: UserDefaults.standard.value(forKey: "token")).count > 0) {
-//            print(String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg))
+            print(String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg))
             
             let authorizationValue = String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg)
             my_headers["Authorization"] = authorizationValue

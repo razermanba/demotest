@@ -20,8 +20,6 @@ class TabBarViewController: UITabBarController {
         if role == "student" {
             self.viewControllers?.remove(at: 1)
         }
-        
-
     }
     
 

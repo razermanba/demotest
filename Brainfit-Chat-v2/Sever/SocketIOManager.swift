@@ -67,17 +67,18 @@ class SocketIOManager{
     
     func socketDissconectRoom (){
         if socket != nil {
-            //            socket.emit("disconnect",with:[])
+            socket.emit("disconnect",with:[])
             socket.manager?.disconnect()
             socket.disconnect()
-            
         }
     }
     
     func socketDisconnect() {
         if socket != nil {
-            socket.manager?.disconnect()
+            //            socket.emit("disconnect",with:[])
+            //            socket.manager?.disconnect()
             socket.disconnect()
+            socket = nil
         }
     }
 }

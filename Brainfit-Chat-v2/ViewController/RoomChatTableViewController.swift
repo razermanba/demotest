@@ -101,7 +101,7 @@ class RoomChatTableViewController: UITableViewController {
         
         SocketIOManager.sharedInstance.socketConnect()
         
-        self.performSegue(withIdentifier: "Chat", sender: self)
+        self.performSegue(withIdentifier: "Chat", sender: nil)
         
     }
  

@@ -33,7 +33,8 @@ class ChatViewController: MessagesViewController  {
     let imageToken = UIImageView()
     var clickVideo : Int = 0
     var indexold : Int = 0
-    
+    let appdelgate = UIApplication.shared.delegate as? AppDelegate
+    var videoPlayer: YouTubePlayerView!
     
     
     let formatter: DateFormatter = {
@@ -63,14 +64,13 @@ class ChatViewController: MessagesViewController  {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.didGotSocketEvent), name: NSNotification.Name(rawValue: "NotificationMessage_DidGotSocketEvent"), object: nil)
         
-        
         loadHistoryChat()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     
@@ -82,10 +82,11 @@ class ChatViewController: MessagesViewController  {
     }
     @IBAction func backAction(_ sender: Any) {
         self.tabBarController?.tabBar.isHidden = false
+
+        UserDefaults.standard.removeObject(forKey: "room")
         SocketIOManager.sharedInstance.socketDissconectRoom()
         
         performSegue(withIdentifier: "backVC", sender: nil)
-        
     }
     
     
@@ -112,6 +113,7 @@ class ChatViewController: MessagesViewController  {
 
 extension ChatViewController {
     func loadHistoryChat(){
+        self.appdelgate?.showLoading()
         APIService.sharedInstance.getHistoryChat([:], roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , pagenumber: String(pageNumber), completionHandle: {(result, error) in
             if  error == nil {
                 //                print(result)
@@ -123,14 +125,14 @@ extension ChatViewController {
                 
                 self.pageNumber = self.pageNumber + 1;
                 
-                //                DispatchQueue.main.async {
                 self.messagesCollectionView.reloadData()
                 self.refreshControl.endRefreshing()
                 self.messagesCollectionView.scrollToBottom(animated: true)
-                //                }
+                self.appdelgate?.dismissLoading()
             }else {
                 DispatchQueue.main.async {
                     self.refreshControl.endRefreshing()
+                    self.appdelgate?.dismissLoading()
                     self.messagesCollectionView.scrollToBottom(animated: true)
                 }
             }
@@ -140,7 +142,9 @@ extension ChatViewController {
     @objc func loadMoreMessages()  {
         APIService.sharedInstance.getHistoryChat([:], roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , pagenumber: String(pageNumber), completionHandle: {(result, error) in
             if error == nil {
+                print(result)
                 self.arrayListChat = Mapper<listChat>().mapArray(JSONArray: result as! [[String : Any]])
+                self.arrayListChat = Array(self.arrayListChat.reversed())
                 self.pageNumber = self.pageNumber + 1;
                 
                 print(self.pageNumber);
@@ -156,9 +160,15 @@ extension ChatViewController {
                     
                     self.player?.pause()
                     
+                    // remove subview video
                     for subview in self.messagesCollectionView.layer.sublayers! {
                         if subview.value(forKey: "tag") as? Int == 1{
                             subview.removeFromSuperlayer()
+                        }
+                    }
+                    for subview in self.messagesCollectionView.subviews {
+                        if subview.value(forKey: "tag") as? Int == 1{
+                            subview.removeFromSuperview()
                         }
                     }
                 }
@@ -175,13 +185,14 @@ extension ChatViewController {
     
     @objc func didGotSocketEvent(_ notifObject : NSNotification) {
         let event : SocketAnyEvent = notifObject.object as! SocketAnyEvent
-        
+    
         switch event.event {
         case "message":
             let dicReceive: NSDictionary = event.items![0] as! NSDictionary
             typeChatSocket(type: dicReceive["type"] as! String, content: dicReceive["content"] as! String, user_id: String(format: "%@", dicReceive["user_id"] as! CVarArg), name: dicReceive["name"] as! String, link: dicReceive["link"]! as! String,create_at: dicReceive["created_at"] as! String)
             break
         default:
+            print(event)
             break
         }
     }
@@ -463,12 +474,14 @@ extension ChatViewController: MessageCellDelegate {
     
     
     func didTapMessage(in cell: MessageCollectionViewCell) {
-        
         if let indexPath = messagesCollectionView.indexPath(for: cell) {
             let message = messageList[indexPath.section]
             switch message.Type {
             case "youtube":
-                let videoPlayer = YouTubePlayerView(frame: CGRect(x: 50, y: cell.frame.minY + 50, width: 300 , height: 190))
+                videoPlayer = YouTubePlayerView(frame: CGRect(x: 50, y: cell.frame.minY + 40, width: 300 , height: 190))
+                videoPlayer.setValue(1, forKey: "tag")
+                videoPlayer.delegate = self
+                
                 videoPlayer.playerVars = [
                     "playsinline": "1",
                     "modestbranding": "1",
@@ -478,6 +491,7 @@ extension ChatViewController: MessageCellDelegate {
                 
                 let myVideoURL = NSURL(string: "https://www.youtube.com/watch?v=" + message.Link)
                 videoPlayer.loadVideoURL(myVideoURL! as URL)
+                
                 messagesCollectionView.addSubview(videoPlayer)
                 break
             case "vimeo":
@@ -487,7 +501,6 @@ extension ChatViewController: MessageCellDelegate {
                 break
             case "video":
                 player?.pause()
-//                player = nil
                 player = AVPlayer(url: URL(string:message.Link)!)
                 
                 if indexold == indexPath.section{
@@ -534,18 +547,26 @@ extension ChatViewController: MessageCellDelegate {
     
     func didTapCellTopLabel(in cell: MessageCollectionViewCell) {
         print("Top cell label tapped")
+        //        messageInputBar.inputTextView.resignFirstResponder()
+        //        view.endEditing(true)
     }
     
     func didTapMessageTopLabel(in cell: MessageCollectionViewCell) {
         print("Top message label tapped")
+        //        messageInputBar.inputTextView.resignFirstResponder()
+        //        view.endEditing(true)
     }
     
     func didTapMessageBottomLabel(in cell: MessageCollectionViewCell) {
         print("Bottom label tapped")
+        //        messageInputBar.inputTextView.resignFirstResponder()
+        //        view.endEditing(true)
     }
     
     func didTapAccessoryView(in cell: MessageCollectionViewCell) {
         print("Accessory view tapped")
+        //        messageInputBar.inputTextView.resignFirstResponder()
+        //        view.endEditing(true)
     }
     
 }
@@ -580,12 +601,35 @@ extension ChatViewController: MessageInputBarDelegate {
     
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
         
-        let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
+        print(text.count)
         
-        SocketIOManager.sharedInstance.socketSendMessage(text: "text", message: text, link: "", timeStamp: String(format:"%@", timestamp))
-        
-        inputBar.inputTextView.text = String()
+        if text.count < 8000 {
+            let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
+            
+            SocketIOManager.sharedInstance.socketSendMessage(text: "text", message: text, link: "", timeStamp: String(format:"%@", timestamp))
+            
+            inputBar.inputTextView.text = String()
+        }else {
+            let alert = UIAlertController(title: "Warning", message: "Maximum character limit has been exceeded. Please reduce your chat.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+
+        }
         //  messagesCollectionView.scrollToBottom(animated: true)
+    }
+    
+}
+
+extension ChatViewController : YouTubePlayerDelegate{
+    func playerStateChanged(_ videoPlayer: YouTubePlayerView, playerState: YouTubePlayerState) {
+        print("playerStateChanged")
+        view.endEditing(true)
+    }
+    func playerReady(_ videoPlayer: YouTubePlayerView) {
+        print("playerReady")
+    }
+    func playerQualityChanged(_ videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {
+        print("playerQualityChanged")
     }
     
 }

@@ -53,8 +53,10 @@ class ListCoursesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellCourses", for: indexPath) as! CourseTableViewCell
         
         let course = self.courses?.dataCourses?[indexPath.row]
+        print (course?.image)
         let url = URL(string: course?.image ?? "")!
         
+//        cell.imgCourses.layer.borderWidth = 1
         cell.imgCourses.sd_setImage(with: url)
         cell.txtTitle.text = course?.title
         cell.txtContent.text = course?.content?.htmlToString
@@ -63,9 +65,9 @@ class ListCoursesTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
-    }
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 120
+//    }
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -92,9 +94,19 @@ extension ListCoursesTableViewController{
         APIService.sharedInstance.getListCourses([:], completionHandle: {(result, error) in
             if error == nil {
                 self.courses = Mapper<courses>().map(JSONObject: result)
+                
+                if self.courses?.dataCourses?.count ?? 0 <= 0 {
+//                    let window = UIApplication.shared.keyWindow!
+                            
+                    let changePWView = (Bundle.main.loadNibNamed("EmptyCourses", owner: self, options: nil)?.first as? EmptyCourses)!
+//                    changePWView.bounds = self.tableView.bounds
+                    changePWView.center = self.view.center
+                    self.view.addSubview(changePWView)
+                }
+                
                 self.tableView.reloadData()
                 self.appdelgate?.dismissLoading()
-                
+
             }else {
                 self.appdelgate?.dismissLoading()
                 let alert = UIAlertController(title: "Error", message: (error as! String), preferredStyle: UIAlertController.Style.alert)

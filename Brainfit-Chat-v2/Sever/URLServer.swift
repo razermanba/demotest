@@ -18,9 +18,13 @@ struct METHOD {
 struct API {
     static let base_url = "https://acp.brainfitstudio.com/"
 //    "https://brainfit-studio.puresolutions.international/"
+
+    
+    
     
     static let SOCKET_URL = "https://brainfitstudiosocket.puresolutions.com.sg"
 //    "https://socket.brainfit-studio.puresolutions.international/"
+    
     
 
     static let BASE_URL_API = "/api/v1/"

@@ -43,6 +43,9 @@ class CoursesDetailViewController: UIViewController {
         imageView.image = image
         navigationItem.titleView = imageView
         
+        self.tableView.sectionHeaderHeight = 0;
+
+        
         getCourses(courseID: String(courseID))
     }
     
@@ -90,7 +93,13 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return (self.courses?.topics?.count ?? 0) + 1
+        switch contentText {
+        case "descrition":
+            return 2
+        default:
+            return (self.courses?.topics?.count ?? 0) + 1
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -98,9 +107,13 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
         case 0:
             return 2
         default:
-            return self.courses?.topics?[section - 1].media?.count ?? 0
+            switch contentText {
+            case "descrition":
+                return 1
+            default:
+                return self.courses?.topics?[section - 1].media?.count ?? 0
+            }
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,7 +137,7 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
             switch contentText {
             case "descrition":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellDescription", for: indexPath) as! CoursesDescriptionTableViewCell
-                cell.txtDesciption.text = self.courses?.description?.htmlToString
+                cell.txtDesciption.text = self.courses?.description
                 
                 return cell
             default:
@@ -164,53 +177,68 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section > 0{
-            indexRowSelect = indexPath.row
-            indexSectionSelect = indexPath.section
-            
-            let course = self.courses?.topics![indexSectionSelect! - 1].media
-            let media = course![indexRowSelect!]
-            
-            if media.context == "video" {
-                player?.pause()
-                player = nil
+        switch contentText {
+        case "descrition":
+            break
+        default:
+            if indexPath.section > 0{
+                indexRowSelect = indexPath.row
+                indexSectionSelect = indexPath.section
                 
-                player = AVPlayer(url: URL(string:media.file ?? "")!)
-                let playerViewController = AVPlayerViewController()
-                playerViewController.player = player
-                playerViewController.view.frame = viewPlayer.bounds
-                self.addChild(playerViewController)
-                viewPlayer.addSubview(playerViewController.view)
-                playerViewController.player!.play()
-                playerViewController.didMove(toParent: self)
-            } else if media.context == "document"{
-                urlFile = media.file ?? ""
-                self.performSegue(withIdentifier: "document", sender: self)
+                let course = self.courses?.topics![indexSectionSelect! - 1].media
+                let media = course![indexRowSelect!]
+                
+                if media.context == "video" {
+                    player?.pause()
+                    player = nil
+                    
+                    player = AVPlayer(url: URL(string:media.file ?? "")!)
+                    let playerViewController = AVPlayerViewController()
+                    playerViewController.player = player
+                    playerViewController.view.frame = viewPlayer.bounds
+                    self.addChild(playerViewController)
+                    viewPlayer.addSubview(playerViewController.view)
+                    playerViewController.player!.play()
+                    playerViewController.didMove(toParent: self)
+                } else if media.context == "document"{
+                    urlFile = media.file ?? ""
+                    self.performSegue(withIdentifier: "document", sender: self)
+                }
+                
+                tableView.reloadData()
             }
-            
-            tableView.reloadData()
         }
     }
     
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        if  section >= 1{
-            let coures = self.courses?.topics?[section - 1]
-            let sectionLabel = UILabel(frame: CGRect(x: 16 , y: 0 , width:tableView.bounds.size.width, height: 10))
-            sectionLabel.font = UIFont(name: "Helvetica", size: 12)
-            sectionLabel.textColor = UIColor.darkGray
-            sectionLabel.text = coures?.title
-            sectionLabel.sizeToFit()
-            headerView.addSubview(sectionLabel)
+        switch contentText {
+        case "descrition":
+            return nil
+        default:
+            let headerView = UIView()
+            if  section >= 1{
+                let coures = self.courses?.topics?[section - 1]
+                let sectionLabel = UILabel(frame: CGRect(x: 16 , y: 0 , width:tableView.bounds.size.width, height: 10))
+                sectionLabel.font = UIFont(name: "Helvetica", size: 12)
+                sectionLabel.textColor = UIColor.darkGray
+                sectionLabel.text = coures?.title
+                sectionLabel.sizeToFit()
+                headerView.addSubview(sectionLabel)
+            }
+            return headerView
         }
-        return headerView
-        
+
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section >= 1{
-            return 10
+            switch contentText {
+            case "descrition":
+                return 0
+            default:
+                return 10
+            }
         }else {
             return 0
         }
@@ -238,6 +266,7 @@ extension CoursesDetailViewController{
         self.appdelgate?.showLoading()
         APIService.sharedInstance.coursesDetail([:], courses_id: courseID, completionHandle:{(result, error) in
             if error == nil {
+                print(result)
                 self.courses = Mapper<CoursesDetail>().map(JSONObject: result)
                 self.tableView.reloadData()
                 self.appdelgate?.dismissLoading()
@@ -266,13 +295,13 @@ extension CoursesDetailViewController{
                 
                 print(DefaultDownloadResponse.destinationURL ?? "")
                 do {
-                   
+                    
                     let fileURL = DefaultDownloadResponse.destinationURL
                     let objectsToShare = [fileURL]
                     let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
-
+                    
                     self.present(activityVC, animated: true, completion: nil)
-
+                    
                 } catch {
                     print("cannot write file")
                     // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding

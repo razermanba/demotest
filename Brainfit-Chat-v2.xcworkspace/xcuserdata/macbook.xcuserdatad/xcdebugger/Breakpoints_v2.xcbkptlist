@@ -3,4 +3,70 @@
    uuid = "1BDB1A73-ADE5-4C90-83CD-405CB092FCFF"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "709EFA8F-BF5A-4C99-B9E4-55918F51076D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Brainfit-Chat-v2/ViewController/CoursesDetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BAD0639A-C8E8-419D-B1BB-F603B7B99CEC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Brainfit-Chat-v2/ViewController/CoursesDetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "getCourses(courseID:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BAD0639A-C8E8-419D-B1BB-F603B7B99CEC - f0ff0620bd18c714"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Brainfit_Chat_v2.CoursesDetailViewController.getCourses(courseID: Swift.String) -&gt; ()"
+                  moduleName = "Brainfit-Chat-v2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Documents/swift-branfit-chat/Brainfit-Chat-v2/ViewController/CoursesDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "267"
+                  endingLineNumber = "267"
+                  offsetFromSymbolStart = "228">
+               </Location>
+               <Location
+                  uuid = "BAD0639A-C8E8-419D-B1BB-F603B7B99CEC - 3de8ab315f1e9cc7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.AnyObject, Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; () in Brainfit_Chat_v2.CoursesDetailViewController.getCourses(courseID: Swift.String) -&gt; ()"
+                  moduleName = "Brainfit-Chat-v2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Documents/swift-branfit-chat/Brainfit-Chat-v2/ViewController/CoursesDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "268"
+                  endingLineNumber = "268"
+                  offsetFromSymbolStart = "140">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
