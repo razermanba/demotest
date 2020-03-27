@@ -128,7 +128,7 @@ extension LoginviewController{
                         
                         UserDefaults.standard.set(self.txtUsername.text!, forKey: "username")
                         UserDefaults.standard.set(self.txtPassword.text!, forKey: "password")
-                        UserDefaults.standard.set(user?.room, forKey: "room")
+//                        UserDefaults.standard.set(user?.room, forKey: "room")
                         UserDefaults.standard.set(user?.role, forKey: "role")
                         UserDefaults.standard.set(user?.id, forKey: "id")
                         UserDefaults.standard.set(user?.name, forKey: "name")

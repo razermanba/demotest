@@ -90,7 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        if  UserDefaults.standard.value(forKey: "room") != nil {
+//        print(UserDefaults.standard.value(forKey: "room") as Any)
+        if UserDefaults.standard.value(forKey: "room") != nil {
             SocketIOManager.sharedInstance.socketConnect()
         }
     }
@@ -110,11 +111,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
                 UserDefaults.standard.set(roomID ?? "", forKey: "room")
                 SocketIOManager.sharedInstance.socketConnect()
                 
-                
                 navigation.pushViewController(chatVC, animated: true)
                 self.window?.rootViewController = navigation
                 self.window?.makeKeyAndVisible()
-                
             }
         }
     }

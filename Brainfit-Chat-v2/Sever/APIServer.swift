@@ -133,6 +133,7 @@ class APIService {
     }
     
     func changePassword(_ params : [String : AnyObject], completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
+        print(API.base_url + API.BASE_URL_API_User + "/update-password")
         getURL(METHOD.kPUT, url: API.base_url + API.BASE_URL_API_User + "/update-password", params: params, headers: [:], completionHandle: completionHandle)
     }
     
@@ -160,10 +161,6 @@ class APIService {
     func coursesDetail(_ params : [String : AnyObject], courses_id : String , completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
         getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API + "/courses/" + courses_id , params: params, headers: [:], completionHandle: completionHandle)
     }
-
-
-    
-    
     func uploadImage(_ keyUpload : String ,_ photo: UIImage, completionHandle:@escaping (_ result:[String:AnyObject]?,_ error:AnyObject?) -> Void) {
         
         guard let imageData = photo.jpegData(compressionQuality: 1) else { return }
