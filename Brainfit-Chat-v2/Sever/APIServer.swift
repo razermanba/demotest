@@ -129,6 +129,7 @@ class APIService {
     }
     
     func getHistoryChat(_ params : [String : AnyObject], roomId : String ,pagenumber: String, completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
+        print (API.base_url + API.BASE_URL_API_Chat + "/room/" + roomId + "/messages?page=" + pagenumber)
         getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API_Chat + "/room/" + roomId + "/messages?page=" + pagenumber , params: params, headers: [:], completionHandle: completionHandle)
     }
     

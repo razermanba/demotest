@@ -4,8 +4,8 @@
 target 'Brainfit-Chat-v2' do
     # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
     use_frameworks!
-    pod 'MessageKit'
     pod 'MessageInputBar', :git => 'https://github.com/MessageKit/MessageInputBar.git', :branch => 'master'
+    pod 'MessageKit', '~> 3.0.0'
     pod 'AFNetworking', '~> 3.0'
     pod 'Firebase/Auth'
     pod 'Firebase/Core'

@@ -8,7 +8,7 @@
 
 import UIKit
 import MessageKit
-import MessageInputBar
+import InputBarAccessoryView
 import ObjectMapper
 import Alamofire
 import AlamofireObjectMapper
@@ -66,11 +66,14 @@ class ChatViewController: MessagesViewController  {
         
         loadHistoryChat()
         
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
+        
     }
     
     
@@ -80,9 +83,14 @@ class ChatViewController: MessagesViewController  {
         player = nil
         
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
     @IBAction func backAction(_ sender: Any) {
         self.tabBarController?.tabBar.isHidden = false
-
+        
         UserDefaults.standard.removeObject(forKey: "room")
         SocketIOManager.sharedInstance.socketDissconectRoom()
         
@@ -95,8 +103,14 @@ class ChatViewController: MessagesViewController  {
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messageCellDelegate = self
         
-        scrollsToBottomOnKeyboardBeginsEditing = true // default false
-        maintainPositionOnKeyboardFrameChanged = true // default false
+        messageInputBar.delegate = self
+        
+        //        messageInputBar.butt
+        
+        messagesCollectionView.scrollIndicatorInsets.bottom = messageInputBar.frame.height
+        
+        scrollsToBottomOnKeyboardBeginsEditing = false // default false
+        maintainPositionOnKeyboardFrameChanged = false // default false
         
         messagesCollectionView.addSubview(refreshControl)
         refreshControl.addTarget(self, action: #selector(loadMoreMessages), for: .valueChanged)
@@ -104,10 +118,58 @@ class ChatViewController: MessagesViewController  {
     
     
     func configureMessageInputBar() {
-        messageInputBar.delegate = self
         messageInputBar.inputTextView.tintColor = UIColor.gray
         messageInputBar.sendButton.tintColor = UIColor.gray
+        configureInputBarItems()
     }
+    
+    private func configureInputBarItems() {
+        let bottomItems = [makeButton(named: "ic_at"),.flexibleSpace]
+        messageInputBar.middleContentViewPadding.left = 16
+        messageInputBar.setLeftStackViewWidthConstant(to: 16, animated: false)
+        
+        messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
+        
+        //        // This just adds some more flare
+        //        messageInputBar.sendButton
+        //            .onEnabled { item in
+        //                UIView.animate(withDuration: 0.3, animations: {
+        //                    item.imageView?.backgroundColor = .red
+        //                })
+        //            }.onDisabled { item in
+        //                UIView.animate(withDuration: 0.3, animations: {
+        //                    item.imageView?.backgroundColor = UIColor(white: 0.85, alpha: 1)
+        //                })
+        //        }
+    }
+    
+    private func makeButton(named: String) -> InputBarButtonItem {
+        return InputBarButtonItem()
+            .configure {
+                $0.spacing = .fixed(10)
+                $0.image = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
+                $0.setSize(CGSize(width: 40, height: 40), animated: false)
+                $0.tintColor = UIColor(white: 0.8, alpha: 1)
+        }.onSelected {
+            $0.tintColor = .gray
+        }.onDeselected {
+            $0.tintColor = UIColor(white: 0.8, alpha: 1)
+        }.onTouchUpInside { _ in
+            print("Item Tapped")
+            let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
+            do {
+                
+                let objectsToShare = ["fileURL"]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
+                
+                self.present(activityVC, animated: true, completion: nil)
+                
+            } catch {
+                print("cannot write file")
+            }
+        }
+    }
+    
 }
 
 extension ChatViewController {
@@ -115,7 +177,7 @@ extension ChatViewController {
         self.appdelgate?.showLoading()
         APIService.sharedInstance.getHistoryChat([:], roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , pagenumber: String(pageNumber), completionHandle: {(result, error) in
             if  error == nil {
-                //                print(result)
+                print(result)
                 self.arrayListChat = Mapper<listChat>().mapArray(JSONArray: result as! [[String : Any]])
                 
                 for chat in self.arrayListChat {
@@ -184,7 +246,7 @@ extension ChatViewController {
     
     @objc func didGotSocketEvent(_ notifObject : NSNotification) {
         let event : SocketAnyEvent = notifObject.object as! SocketAnyEvent
-    
+        
         switch event.event {
         case "message":
             let dicReceive: NSDictionary = event.items![0] as! NSDictionary
@@ -251,7 +313,10 @@ extension ChatViewController {
         
         switch type {
         case "text":
-            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type)
+            //            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type)
+            //            let message = MockMessage(attributedText:  ,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
+            let message = MockMessage(image:thumbnailForVideoAtURL(url: "https://news.zing.vn"), sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
+            
             self.messageList.append(message)
             
             break
@@ -298,8 +363,11 @@ extension ChatViewController {
         
         switch type {
         case "text":
-            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type)
-            self.messageList.append(message)
+            //            message = MockMessage(text:"<meta name=\"twitter:image\" content=\"http://www.example.com/image.jpg\">", sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type)
+            //            self.messageList.append(message)
+            //            let message = MockMessage(attributedText: thumbnailWebsite ,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
+            //            self.messageList.append(message)
+            
             
             break
         case "youtube":
@@ -417,9 +485,38 @@ extension ChatViewController {
         
         return string
     }
+    
+    func thumbnailWebsite() -> NSAttributedString {
+        let attrStringhtml = NSAttributedString(string: "<meta name=\"twitter:image\" content=\"http://www.example.com/image.jpg\">")
+        
+        return attrStringhtml as! NSAttributedString
+    }
+    
+    private func thumbnailForVideoAtURL(url: String) -> UIImage {
+        let asset = AVAsset(url: URL(string: url)!)
+        let assetImgGenerate = AVAssetImageGenerator(asset: asset)
+        assetImgGenerate.appliesPreferredTrackTransform = true
+        //Can set this to improve performance if target size is known before hand
+        //assetImgGenerate.maximumSize = CGSize(width,height)
+        let time = CMTimeMakeWithSeconds(1.0, preferredTimescale: 600)
+        do {
+            let img = try assetImgGenerate.copyCGImage(at: time, actualTime: nil)
+            let thumbnail = UIImage(cgImage: img)
+            return thumbnail
+        } catch {
+          print(error.localizedDescription)
+          return UIImage()
+        }
+        
+    }
+    
 }
 
 extension ChatViewController : MessagesDataSource {
+    func currentSender() -> SenderType {
+        return userSender
+    }
+    
     func currentSender() -> Sender {
         return userSender
     }
@@ -596,10 +693,32 @@ extension ChatViewController: MessageLabelDelegate {
 }
 
 // MARK: - MessageInputBarDelegate
-extension ChatViewController: MessageInputBarDelegate {
+//extension ChatViewController: MessageInputBarDelegate {
+
+//    func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
+//
+//        (text.count)
+//
+//        if text.count < 8000 {
+//            let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
+//
+//            SocketIOManager.sharedInstance.socketSendMessage(text: "text", message: text, link: "", timeStamp: String(format:"%@", timestamp))
+//
+//            inputBar.inputTextView.text = String()
+//        }else {
+//            let alert = UIAlertController(title: "Warning", message: "Maximum character limit has been exceeded. Please reduce your chat.", preferredStyle: UIAlertController.Style.alert)
+//            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//
+//        }
+//    }
+
+//}
+
+
+extension ChatViewController : MessageInputBarDelegate {
     
-    func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
-        
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         print(text.count)
         
         if text.count < 8000 {
@@ -612,11 +731,11 @@ extension ChatViewController: MessageInputBarDelegate {
             let alert = UIAlertController(title: "Warning", message: "Maximum character limit has been exceeded. Please reduce your chat.", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-
+            
         }
         //  messagesCollectionView.scrollToBottom(animated: true)
+        
     }
-    
 }
 
 extension ChatViewController : YouTubePlayerDelegate{

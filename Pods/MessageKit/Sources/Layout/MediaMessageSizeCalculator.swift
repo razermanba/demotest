@@ -1,7 +1,7 @@
 /*
  MIT License
 
- Copyright (c) 2017-2018 MessageKit
+ Copyright (c) 2017-2019 MessageKit
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -34,8 +34,7 @@ open class MediaMessageSizeCalculator: MessageSizeCalculator {
                 let height = maxWidth * item.size.height / item.size.width
                 return CGSize(width: maxWidth, height: height)
             }
-            return CGSize(width: maxWidth, height: 200)
-//                item.size
+            return item.size
         }
         switch message.kind {
         case .photo(let item):

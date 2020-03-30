@@ -76,7 +76,7 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
         let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
         //        var message = messageList[indexPath.row]
           
-        if userSender.id == self.messageList[indexPath.section].sender.id{
+        if userSender.id == self.messageList[indexPath.section].sender.senderId{
             let url = URL(string: String(format: "%@?v=%@",UserDefaults.standard.value(forKey: "avatar")! as! String, timestamp))!
             let placeholderImage = UIImage(named: "avatar_student (1)")!
             DispatchQueue.main.async {
@@ -86,7 +86,7 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
 //            print(String(format: "%@/api/v1/users/%@/avatar?v=%@",API.base_url,self.messageList[indexPath.section].sender.id, timestamp))
             
             let placeholderImage = UIImage(named: "avatar_student (1)")!
-            let url = URL(string: String(format: "%@/api/v1/users/%@/avatar?v=%@",API.base_url,self.messageList[indexPath.section].sender.id, timestamp))!
+            let url = URL(string: String(format: "%@/api/v1/users/%@/avatar?v=%@",API.base_url,self.messageList[indexPath.section].sender.senderId, timestamp))!
             DispatchQueue.main.async {
                 avatarView.sd_setImage(with: url, placeholderImage: placeholderImage)
             }

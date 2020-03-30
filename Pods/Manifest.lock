@@ -104,12 +104,13 @@ PODS:
   - GoogleUtilities/UserDefaults (6.3.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.2)
+  - InputBarAccessoryView (4.2.2)
   - JGProgressHUD (2.0.3)
   - MessageInputBar (0.4.1):
     - MessageInputBar/Core (= 0.4.1)
   - MessageInputBar/Core (0.4.1)
-  - MessageKit (2.0.0):
-    - MessageInputBar/Core
+  - MessageKit (3.0.0):
+    - InputBarAccessoryView (~> 4.2.2)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -141,7 +142,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - JGProgressHUD
   - MessageInputBar (from `https://github.com/MessageKit/MessageInputBar.git`, branch `master`)
-  - MessageKit
+  - MessageKit (~> 3.0.0)
   - ObjectMapper (~> 3.3)
   - SDWebImage (~> 4.0)
   - Socket.IO-Client-Swift (~> 15.0.0)
@@ -174,6 +175,7 @@ SPEC REPOS:
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - GTMSessionFetcher
+    - InputBarAccessoryView
     - JGProgressHUD
     - MessageKit
     - nanopb
@@ -220,9 +222,10 @@ SPEC CHECKSUMS:
   GoogleDataTransportCCTSupport: 9f352523e8785a71f6754f51eeff09f49ec19268
   GoogleUtilities: 9c2c544202301110b29f7974a82e77fdcf12bf51
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
+  InputBarAccessoryView: 2b937602598e2fab3149f37f51dd7ad795653812
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   MessageInputBar: 156d0e3e8284b341b04702811f9ce9330975844d
-  MessageKit: 29c1c87e5a396d2ca7a3f712e5171dc9aba42a1e
+  MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   Protobuf: 67fb42ba613def994e61854de2b3164f13790cc4
@@ -235,6 +238,6 @@ SPEC CHECKSUMS:
   VIMVideoPlayer: f4ed0a9986294ec3684a2e6bdc738e30051ef4ef
   YouTubePlayer: 028451f6772f372d4759866db99824c676ac1473
 
-PODFILE CHECKSUM: d71d28222978811f8a9e94608bc85bd75b796d10
+PODFILE CHECKSUM: a1d922c4a9d452910272794a80945724b3c69fe4
 
 COCOAPODS: 1.5.2
