@@ -33,8 +33,6 @@ final class BasicExampleViewController: ChatViewController {
     override func configureMessageCollectionView() {
         super.configureMessageCollectionView()
         
-        
- 
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         
