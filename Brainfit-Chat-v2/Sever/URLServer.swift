@@ -30,6 +30,7 @@ struct API {
     static let BASE_URL_API_User = "/api/v1/users"
     static let BASE_URL_API_Chat = "/api/v1/chat"
     static let BASE_URL_API_Room = "/api/v1/rooms"
+    static let BASE_URL_API_SendFile = "/api/v1/chat/room/"
 //    static let BASE_URL_API = "/categories"
     
 //    #define RESOURCES_URL(key)      [NSString stringWithFormat:@"%@%@", BASE_URL, key]

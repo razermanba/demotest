@@ -124,6 +124,7 @@ PODS:
   - Socket.IO-Client-Swift (15.0.0):
     - Starscream (~> 3.1)
   - Starscream (3.1.0)
+  - SwiftLinkPreview (3.1.0)
   - SwiftyJSON (4.1.0)
   - SwiftySound (1.0.0)
   - SwiftyStoreKit (0.11.3)
@@ -146,6 +147,7 @@ DEPENDENCIES:
   - ObjectMapper (~> 3.3)
   - SDWebImage (~> 4.0)
   - Socket.IO-Client-Swift (~> 15.0.0)
+  - SwiftLinkPreview
   - SwiftyJSON
   - SwiftySound
   - SwiftyStoreKit (~> 0.11.0)
@@ -184,6 +186,7 @@ SPEC REPOS:
     - SDWebImage
     - Socket.IO-Client-Swift
     - Starscream
+    - SwiftLinkPreview
     - SwiftyJSON
     - SwiftySound
     - SwiftyStoreKit
@@ -232,12 +235,13 @@ SPEC CHECKSUMS:
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   Socket.IO-Client-Swift: c039a808195d22a7192962841b8c035cb61ea49e
   Starscream: 08172b481e145289c4930cb567230fb55897cfa4
+  SwiftLinkPreview: 3d924eeaae8d17410a827a4b37675713af1a0a8a
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   SwiftySound: b9c3370956fd4ed65ed79d45563070077a50a2cd
   SwiftyStoreKit: 783df8530cd444b3cce886196b11ff6cdc55bc11
   VIMVideoPlayer: f4ed0a9986294ec3684a2e6bdc738e30051ef4ef
   YouTubePlayer: 028451f6772f372d4759866db99824c676ac1473
 
-PODFILE CHECKSUM: a1d922c4a9d452910272794a80945724b3c69fe4
+PODFILE CHECKSUM: 627a505298d7f0b555884294f727662b022d9bb8
 
 COCOAPODS: 1.5.2

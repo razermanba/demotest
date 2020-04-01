@@ -18,6 +18,9 @@ import YouTubePlayer
 import VIMVideoPlayer
 import AVKit
 import AVFoundation
+import SwiftLinkPreview
+import LinkPresentation
+import MobileCoreServices
 //import GoogleInteractiveMediaAds
 
 class ChatViewController: MessagesViewController  {
@@ -35,7 +38,9 @@ class ChatViewController: MessagesViewController  {
     var indexold : Int = 0
     let appdelgate = UIApplication.shared.delegate as? AppDelegate
     var videoPlayer: YouTubePlayerView!
+    let imagePickerController = UIImagePickerController()
     
+    private let slp = SwiftLinkPreview(cache: InMemoryCache())
     
     let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -124,7 +129,7 @@ class ChatViewController: MessagesViewController  {
     }
     
     private func configureInputBarItems() {
-        let bottomItems = [makeButton(named: "ic_at"),.flexibleSpace]
+        let bottomItems = [makeButton(named: "ic_at"),makeButton(named: "ic_at"),.flexibleSpace]
         messageInputBar.middleContentViewPadding.left = 16
         messageInputBar.setLeftStackViewWidthConstant(to: 16, animated: false)
         
@@ -156,17 +161,19 @@ class ChatViewController: MessagesViewController  {
             $0.tintColor = UIColor(white: 0.8, alpha: 1)
         }.onTouchUpInside { _ in
             print("Item Tapped")
-            let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
-            do {
-                
-                let objectsToShare = ["fileURL"]
-                let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
-                
-                self.present(activityVC, animated: true, completion: nil)
-                
-            } catch {
-                print("cannot write file")
-            }
+            //            self.clickFunction()
+            self.getFile()
+            //            let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
+            //            do {
+            //
+            //                let objectsToShare = ["fileURL"]
+            //                let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
+            //
+            //                self.present(activityVC, animated: true, completion: nil)
+            //
+            //            } catch {
+            //                print("cannot write file")
+            //            }
         }
     }
     
@@ -181,7 +188,7 @@ extension ChatViewController {
                 self.arrayListChat = Mapper<listChat>().mapArray(JSONArray: result as! [[String : Any]])
                 
                 for chat in self.arrayListChat {
-                    self.typeChat(type: chat.type! , content: chat.content!, user_id: String(chat.user_id), name: chat.name!, link: chat.link! , create_at: chat.created_at!)
+                    //                    self.typeChat(type: chat.type! , content: chat.content!, user_id: String(chat.user_id), name: chat.name!, link: chat.link! , create_at: chat.created_at!)
                 }
                 
                 self.pageNumber = self.pageNumber + 1;
@@ -313,9 +320,9 @@ extension ChatViewController {
         
         switch type {
         case "text":
-            //            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type)
-            //            let message = MockMessage(attributedText:  ,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
-            let message = MockMessage(image:thumbnailForVideoAtURL(url: "https://news.zing.vn"), sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
+            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type)
+            //                        let message = MockMessage(attributedText:  ,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
+            //            let message = MockMessage(image:thumbnailForVideoAtURL(urltext: "https://github.com/nathantannar4/InputBarAccessoryView/tree/master/Example/Example"), sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
             
             self.messageList.append(message)
             
@@ -363,8 +370,8 @@ extension ChatViewController {
         
         switch type {
         case "text":
-            //            message = MockMessage(text:"<meta name=\"twitter:image\" content=\"http://www.example.com/image.jpg\">", sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type)
-            //            self.messageList.append(message)
+            message = MockMessage(text:"<meta name=\"twitter:image\" content=\"http://www.example.com/image.jpg\">", sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type)
+            self.messageList.append(message)
             //            let message = MockMessage(attributedText: thumbnailWebsite ,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
             //            self.messageList.append(message)
             
@@ -492,22 +499,28 @@ extension ChatViewController {
         return attrStringhtml as! NSAttributedString
     }
     
-    private func thumbnailForVideoAtURL(url: String) -> UIImage {
-        let asset = AVAsset(url: URL(string: url)!)
-        let assetImgGenerate = AVAssetImageGenerator(asset: asset)
-        assetImgGenerate.appliesPreferredTrackTransform = true
-        //Can set this to improve performance if target size is known before hand
-        //assetImgGenerate.maximumSize = CGSize(width,height)
-        let time = CMTimeMakeWithSeconds(1.0, preferredTimescale: 600)
-        do {
-            let img = try assetImgGenerate.copyCGImage(at: time, actualTime: nil)
-            let thumbnail = UIImage(cgImage: img)
-            return thumbnail
-        } catch {
-          print(error.localizedDescription)
-          return UIImage()
-        }
+    private func thumbnailForVideoAtURL(urltext: String) -> UIImage {
         
+        if let url = self.slp.extractURL(text: urltext),
+            let cached = self.slp.cache.slp_getCachedResponse(url: url.absoluteString) {
+            print(cached)
+            
+        } else {
+            self.slp.preview( urltext,onSuccess: { result in
+                
+                let url = URL(string: result.icon ?? "")
+                
+                DispatchQueue.global().async {
+                    let data = try? Data(contentsOf: url! ) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                    DispatchQueue.main.async {
+                        return UIImage(data: data!)
+                    }
+                }
+            },onError: { error in
+                print(error)
+            })
+        }
+        return UIImage()
     }
     
 }
@@ -749,5 +762,70 @@ extension ChatViewController : YouTubePlayerDelegate{
     func playerQualityChanged(_ videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {
         print("playerQualityChanged")
     }
+}
+
+extension ChatViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    func getFile(){
+        
+        imagePickerController.sourceType = .photoLibrary
+        
+        imagePickerController.delegate = self
+        
+        imagePickerController.mediaTypes = ["public.image", "public.movie"]
+        
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[UIImagePickerController.InfoKey.mediaURL] as! URL
+//        guard let videoData = image.jpegData(compressionQuality: 1) else { return }
+        
+        let videoData = try! Data.init(contentsOf: image )
+        
+        APIService.sharedInstance.uploadFile(roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , fileUrl: videoData, imageData: nil, parameters: [:], completionHandle: {(result, error) in
+            
+        })
+        imagePickerController.dismiss(animated: true, completion: nil)
+    }
+}
+
+
+extension ChatViewController : UIDocumentMenuDelegate,UIDocumentPickerDelegate{
+    func clickFunction(){
+        
+        let importMenu = UIDocumentMenuViewController(documentTypes: [String(kUTTypePDF)], in: .import)
+        importMenu.delegate = self
+        importMenu.modalPresentationStyle = .formSheet
+        self.present(importMenu, animated: true, completion: nil)
+    }
+    
+    
+    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let myURL = urls.first else {
+            return
+        }
+        //        let data = try! Data(contentsOf: myURL)
+        let data = try! Data(contentsOf: myURL.asURL())
+        
+        
+        APIService.sharedInstance.uploadFile(roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , fileUrl: data , imageData: nil, parameters: [:], completionHandle: {(result, error) in
+            
+        })
+        
+        print("import result : \(myURL)")
+    }
+    
+    
+    public func documentMenu(_ documentMenu:UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
+        documentPicker.delegate = self
+        present(documentPicker, animated: true, completion: nil)
+    }
+    
+    
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        print("view was cancelled")
+        dismiss(animated: true, completion: nil)
+    }
 }

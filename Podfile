@@ -25,4 +25,5 @@ target 'Brainfit-Chat-v2' do
     pod 'JGProgressHUD'
     pod 'Crashlytics'
     pod 'Fabric'
+    pod 'SwiftLinkPreview'
 end
