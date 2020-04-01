@@ -65,6 +65,12 @@ class SocketIOManager{
         }
     }
     
+    func sockectSendFile(type : String , file_type:String, content : String , link : String, timeStamp : String) {
+        if socket != nil {
+            socket.emit("send message", with: [["type": type, "file_type":file_type, "content":content, "link":link, "client_id":timeStamp]])
+        }
+    }
+    
     func socketDissconectRoom (){
         if socket != nil {
             socket.emit("disconnect",with:[])

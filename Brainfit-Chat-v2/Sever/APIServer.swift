@@ -196,7 +196,7 @@ class APIService {
         }.resume()
     }
     
-    func uploadFile(roomId : String , fileUrl : Data ,imageData: Data?, parameters: [String : Any] , completionHandle:@escaping (_ result:[String:AnyObject]?,_ error:AnyObject?) -> Void) {
+    func uploadFile(roomId : String , fileUrl : Data , fileType : String ,imageData: Data?, parameters: [String : Any] , completionHandle:@escaping (_ result:[String:AnyObject]?,_ error:AnyObject?) -> Void) {
         let url = API.base_url + API.BASE_URL_API_SendFile + roomId + "/send-file"
         
         let headers: HTTPHeaders = [
@@ -205,51 +205,49 @@ class APIService {
         ]
         
         //        guard let imageData = fileUrl.jpegData(compressionQuality: 1) else { return }
+        var filename : String = ""
+        var mimetype : String = ""
+        let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
         
-                Alamofire.upload(multipartFormData: { multipartFormData in
-                    multipartFormData.append(fileUrl, withName: "file", fileName: "file.mov", mimeType: "video/mp4")
-                }, to: url, method: .post, headers: headers) { (result) in
-                    switch result {
-                    case .success(let upload, _, _):
-                        upload.responseJSON { response in
-                            print("Succesfully uploaded")
-                            if let err = response.error{
-                                print(err)
-                                return
-                            }
-                            print(response.result.value)
-                            completionHandle([:],"" as AnyObject)
-        
-                        }
-        
-                    case .failure(let encodingError):
-                        print(encodingError)
+        switch fileType {
+        case "video":
+            filename = timestamp + ".mov"
+            mimetype = "video/mp4"
+            break
+        case "image":
+            filename = timestamp + ".png"
+            mimetype = "image/jpeg"
+            break
+        case "doc":
+            filename = timestamp + ".pdf"
+            mimetype = "application/pdf"
+            break
+        default:
+            break
+        }
+                    
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(fileUrl, withName: "file", fileName:filename, mimeType:mimetype)
+        }, to: url, method: .post, headers: headers) { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseJSON { response in
+                    print("Succesfully uploaded")
+                    if let err = response.error{
+                        completionHandle(nil,err as AnyObject)
+                        print(err)
+                        return
                     }
+                 
+                    completionHandle(response.result.value as? [String : AnyObject],nil)
+                    
                 }
-        
-        
-//        let manager = AFHTTPSessionManager()
-//
-//        manager.requestSerializer.setValue(String(format: "Token token=\"%@\"", UserDefaults.standard.value(forKey: "token")! as! CVarArg), forHTTPHeaderField: "Authorization")
-//
-//
-//        let request: NSMutableURLRequest = manager.requestSerializer.multipartFormRequest(withMethod: "POST", urlString: url , parameters: nil, constructingBodyWith: {(formData: AFMultipartFormData!) -> Void in
-//
-//            formData.appendPart(withFileData: fileUrl, name: "file", fileName: "file", mimeType: "application/pdf")
-//
-//        }, error: nil)
-//
-//        manager.dataTask(with: request as URLRequest) { (response, responseObject, error) -> Void in
-//            if((error == nil)) {
-//                print(responseObject!)
-//                completionHandle(responseObject as? [String : AnyObject],nil)
-//            }
-//            else {
-//
-//                completionHandle(nil,error as AnyObject )
-//            }
-//
-//        }.resume()
+                
+            case .failure(let encodingError):
+                print(encodingError)
+                completionHandle(nil,encodingError as AnyObject)
+            }
+        }
     }
 }
 

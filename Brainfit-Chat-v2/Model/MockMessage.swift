@@ -61,45 +61,47 @@ internal struct MockMessage: MessageType {
     var kind: MessageKind
     var Link : String
     var `Type` : String
+    var file_type : String
 
-    private init(kind: MessageKind, sender: Sender, messageId: String, date: Date , link : String, type : String) {
+    private init(kind: MessageKind, sender: Sender, messageId: String, date: Date , link : String, type : String, file_type : String) {
         self.kind = kind
         self.sender = sender
         self.messageId = messageId
         self.sentDate = date
         self.Link = link
         self.Type = type
+        self.file_type = file_type
     }
     
-    init(custom: Any?, sender: Sender, messageId: String, date: Date,link : String , type : String) {
-        self.init(kind: .custom(custom), sender: sender, messageId: messageId, date: date , link: link , type: type)
+    init(custom: Any?, sender: Sender, messageId: String, date: Date,link : String , type : String, file_type : String) {
+        self.init(kind: .custom(custom), sender: sender, messageId: messageId, date: date , link: link , type: type , file_type : file_type )
     }
 
-    init(text: String, sender: Sender, messageId: String, date: Date , link : String , type : String) {
-        self.init(kind: .text(text), sender: sender, messageId: messageId, date: date ,link : link , type: type)
+    init(text: String, sender: Sender, messageId: String, date: Date , link : String , type : String, file_type : String) {
+        self.init(kind: .text(text), sender: sender, messageId: messageId, date: date ,link : link , type: type, file_type : file_type)
     }
 
-    init(attributedText: NSAttributedString, sender: Sender, messageId: String, date: Date ,link : String , type : String) {
-        self.init(kind: .attributedText(attributedText), sender: sender, messageId: messageId, date: date ,link : link , type: type)
+    init(attributedText: NSAttributedString, sender: Sender, messageId: String, date: Date ,link : String , type : String, file_type : String) {
+        self.init(kind: .attributedText(attributedText), sender: sender, messageId: messageId, date: date ,link : link , type: type, file_type : file_type)
     }
 
-    init(image: UIImage, sender: Sender, messageId: String, date: Date, link : String , type : String) {
+    init(image: UIImage, sender: Sender, messageId: String, date: Date, link : String , type : String, file_type : String) {
         let mediaItem = ImageMediaItem(image: image)
-        self.init(kind: .photo(mediaItem), sender: sender, messageId: messageId, date: date,link : link , type: type)
+        self.init(kind: .photo(mediaItem), sender: sender, messageId: messageId, date: date,link : link , type: type, file_type: file_type)
     }
 
-    init(thumbnail: UIImage, sender: Sender, messageId: String, date: Date, link : String , type : String) {
+    init(thumbnail: UIImage, sender: Sender, messageId: String, date: Date, link : String , type : String, file_type : String){
         let mediaItem = ImageMediaItem(image: thumbnail)
-        self.init(kind: .video(mediaItem), sender: sender, messageId: messageId, date: date,link : link , type: type)
+        self.init(kind: .video(mediaItem), sender: sender, messageId: messageId, date: date,link : link , type: type, file_type : file_type)
     }
 
-    init(location: CLLocation, sender: Sender, messageId: String, date: Date, link : String , type : String) {
+    init(location: CLLocation, sender: Sender, messageId: String, date: Date, link : String , type : String, file_type : String) {
         let locationItem = CoordinateItem(location: location)
-        self.init(kind: .location(locationItem), sender: sender, messageId: messageId, date: date,link : link , type: type)
+        self.init(kind: .location(locationItem), sender: sender, messageId: messageId, date: date,link : link , type: type, file_type : file_type)
     }
 
-    init(emoji: String, sender: Sender, messageId: String, date: Date, link : String , type : String) {
-        self.init(kind: .emoji(emoji), sender: sender, messageId: messageId, date: date,link : link , type: type)
+    init(emoji: String, sender: Sender, messageId: String, date: Date, link : String , type : String, file_type : String) {
+        self.init(kind: .emoji(emoji), sender: sender, messageId: messageId, date: date,link : link , type: type, file_type : file_type)
     }
 
 }

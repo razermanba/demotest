@@ -21,6 +21,7 @@ import AVFoundation
 import SwiftLinkPreview
 import LinkPresentation
 import MobileCoreServices
+import SDWebImage
 //import GoogleInteractiveMediaAds
 
 class ChatViewController: MessagesViewController  {
@@ -39,6 +40,7 @@ class ChatViewController: MessagesViewController  {
     let appdelgate = UIApplication.shared.delegate as? AppDelegate
     var videoPlayer: YouTubePlayerView!
     let imagePickerController = UIImagePickerController()
+    let imageview = UIImageView()
     
     private let slp = SwiftLinkPreview(cache: InMemoryCache())
     
@@ -129,31 +131,20 @@ class ChatViewController: MessagesViewController  {
     }
     
     private func configureInputBarItems() {
-        let bottomItems = [makeButton(named: "ic_at"),makeButton(named: "ic_at"),.flexibleSpace]
-        messageInputBar.middleContentViewPadding.left = 16
-        messageInputBar.setLeftStackViewWidthConstant(to: 16, animated: false)
+        let bottomItems = [makeButtonVideo(named: "ic_at"),makeButtonDoc(named: "ic_attachment"),.flexibleSpace]
+        messageInputBar.middleContentViewPadding.left = 8
+        //        messageInputBar.setLeftStackViewWidthConstant(to: 8, animated: false)
         
-        messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
+        messageInputBar.setStackViewItems(bottomItems, forStack: .bottom, animated: false)
         
-        //        // This just adds some more flare
-        //        messageInputBar.sendButton
-        //            .onEnabled { item in
-        //                UIView.animate(withDuration: 0.3, animations: {
-        //                    item.imageView?.backgroundColor = .red
-        //                })
-        //            }.onDisabled { item in
-        //                UIView.animate(withDuration: 0.3, animations: {
-        //                    item.imageView?.backgroundColor = UIColor(white: 0.85, alpha: 1)
-        //                })
-        //        }
     }
     
-    private func makeButton(named: String) -> InputBarButtonItem {
+    private func makeButtonVideo(named: String) -> InputBarButtonItem {
         return InputBarButtonItem()
             .configure {
                 $0.spacing = .fixed(10)
                 $0.image = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
-                $0.setSize(CGSize(width: 40, height: 40), animated: false)
+                $0.setSize(CGSize(width: 20, height: 20), animated: false)
                 $0.tintColor = UIColor(white: 0.8, alpha: 1)
         }.onSelected {
             $0.tintColor = .gray
@@ -161,21 +152,28 @@ class ChatViewController: MessagesViewController  {
             $0.tintColor = UIColor(white: 0.8, alpha: 1)
         }.onTouchUpInside { _ in
             print("Item Tapped")
-            //            self.clickFunction()
-            self.getFile()
-            //            let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
-            //            do {
-            //
-            //                let objectsToShare = ["fileURL"]
-            //                let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
-            //
-            //                self.present(activityVC, animated: true, completion: nil)
-            //
-            //            } catch {
-            //                print("cannot write file")
-            //            }
+            self.getFileMedia()
+            
         }
     }
+    
+    private func makeButtonDoc(named: String) -> InputBarButtonItem {
+        return InputBarButtonItem()
+            .configure {
+                $0.spacing = .fixed(10)
+                $0.image = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
+                $0.setSize(CGSize(width: 20, height: 20), animated: false)
+                $0.tintColor = UIColor(white: 0.8, alpha: 1)
+        }.onSelected {
+            $0.tintColor = .gray
+        }.onDeselected {
+            $0.tintColor = UIColor(white: 0.8, alpha: 1)
+        }.onTouchUpInside { _ in
+            print("Item Tapped")
+            self.clickFunction()
+        }
+    }
+    
     
 }
 
@@ -188,7 +186,7 @@ extension ChatViewController {
                 self.arrayListChat = Mapper<listChat>().mapArray(JSONArray: result as! [[String : Any]])
                 
                 for chat in self.arrayListChat {
-                    //                    self.typeChat(type: chat.type! , content: chat.content!, user_id: String(chat.user_id), name: chat.name!, link: chat.link! , create_at: chat.created_at!)
+                    self.typeChat(type: chat.type ?? "" , file_type: chat.file_type ?? "" , content: chat.content ?? "", user_id: String(chat.user_id), name: chat.name ?? "", link: chat.link ?? "" , create_at: chat.created_at ?? "")
                 }
                 
                 self.pageNumber = self.pageNumber + 1;
@@ -218,7 +216,7 @@ extension ChatViewController {
                 print(self.pageNumber);
                 
                 for chat in self.arrayListChat {
-                    self.loadMoreMessagesChat(type: chat.type! , content: chat.content!, user_id: String(chat.user_id), name: chat.name!, link: chat.link! , create_at: chat.created_at!)
+                    self.loadMoreMessagesChat(type: chat.type ?? ""  , file_type: chat.file_type ?? "" , content: chat.content ?? "" , user_id: String(chat.user_id), name: chat.name!, link: chat.link ?? ""  , create_at: chat.created_at ?? "" )
                     
                 }
                 
@@ -256,8 +254,9 @@ extension ChatViewController {
         
         switch event.event {
         case "message":
+            print(event)
             let dicReceive: NSDictionary = event.items![0] as! NSDictionary
-            typeChatSocket(type: dicReceive["type"] as! String, content: dicReceive["content"] as! String, user_id: String(format: "%@", dicReceive["user_id"] as! CVarArg), name: dicReceive["name"] as! String, link: dicReceive["link"]! as! String,create_at: dicReceive["created_at"] as! String)
+            typeChatSocket(type: dicReceive["type"] as! String , file_type: dicReceive["file_type"] as! String , content: dicReceive["content"] as! String, user_id: String(format: "%@", dicReceive["user_id"] as! CVarArg), name: dicReceive["name"] as! String, link: dicReceive["link"]! as! String,create_at: dicReceive["created_at"] as! String)
             break
         default:
             print(event)
@@ -266,45 +265,68 @@ extension ChatViewController {
     }
     
     
-    func loadMoreMessagesChat(type : String, content : String , user_id : String , name : String , link : String , create_at : String ){
+    func loadMoreMessagesChat(type : String , file_type : String, content : String , user_id : String , name : String , link : String , create_at : String ){
         var message : MockMessage
         
         switch type {
         case "text":
-            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date:formatDate(strDate: create_at) , link: link , type: type)
+            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date:formatDate(strDate: create_at) , link: link , type: type,file_type: file_type)
             self.messageList.insert(message, at: 0)
             
             break
         case "youtube":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
             self.messageList.insert(message, at: 0)
             
             break
         case "vimeo":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at), link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at), link: link, type : type,file_type: file_type)
             self.messageList.insert(message, at: 0)
             
             break
         case "video":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at), link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at), link: link, type : type,file_type: file_type)
             self.messageList.insert(message, at: 0)
             
             break
         case "document":
-            let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
-            self.messageList.insert(message, at: 0)
+            switch file_type {
+            case "mov","mp4":
+                let placeholderImage = UIImage(named: "bg (1)")!
+                
+                let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
+                self.messageList.insert(message, at: 0)
+                break
+            case "png":
+                let imageview = UIImageView()
+                
+                let placeholderImage = UIImage(named: "bg (1)")!
+                
+                let url = URL(string: String(format: "%@/%@",API.base_url,link))!
+                
+                imageview.sd_setImage(with: url, placeholderImage: placeholderImage)
+                
+                let message = MockMessage(image:imageview.image!, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
+                self.messageList.insert(message, at: 0)
+                
+                break
+            default:
+                let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type,file_type: file_type)
+                self.messageList.insert(message, at: 0)
+                
+            }
             break
         case "token":
             let url = URL(string:link)
             let placeholderImage = UIImage(named: "bg (1)")!
             img.af_setImage( withURL: url! ,placeholderImage: placeholderImage)
-            let message = MockMessage(attributedText: tokenImage(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
+            let message = MockMessage(attributedText: tokenImage(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type,file_type: file_type)
             self.messageList.insert(message, at: 0)
             break
             
@@ -315,48 +337,70 @@ extension ChatViewController {
         
     }
     
-    func typeChat(type : String, content : String , user_id : String , name : String , link : String , create_at : String ){
+    func typeChat(type : String , file_type : String, content : String , user_id : String , name : String , link : String , create_at : String ){
         var message : MockMessage
         
         switch type {
         case "text":
-            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type)
-            //                        let message = MockMessage(attributedText:  ,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
-            //            let message = MockMessage(image:thumbnailForVideoAtURL(urltext: "https://github.com/nathantannar4/InputBarAccessoryView/tree/master/Example/Example"), sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
-            
+            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type,file_type: file_type)
             self.messageList.append(message)
             
             break
         case "youtube":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
             self.messageList.append(message)
             
             break
         case "vimeo":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date:formatDate(strDate: create_at) , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date:formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
             self.messageList.append(message)
             
             break
         case "video":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
             self.messageList.append(message)
             
             break
         case "document":
-            let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
-            self.messageList.append(message)
+            switch file_type {
+            case "mov","mp4":
+                let placeholderImage = UIImage(named: "bg (1)")!
+                
+                let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
+                self.messageList.append(message)
+                
+                break
+            case "png":
+                let imageview = UIImageView()
+                
+                let placeholderImage = UIImage(named: "bg (1)")!
+                
+                let url = URL(string: String(format: "%@/%@",API.base_url,link))!
+                
+                imageview.sd_setImage(with: url, placeholderImage: placeholderImage)
+                
+                let message = MockMessage(image:imageview.image!, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
+                self.messageList.append(message)
+
+                break
+                
+            default:
+                let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type,file_type: file_type)
+                self.messageList.append(message)
+                
+            }
             break
         case "token":
             let url = URL(string:link)
             let placeholderImage = UIImage(named: "bg (1)")!
             img.af_setImage( withURL: url! ,placeholderImage: placeholderImage)
-            let message = MockMessage(attributedText: tokenImage(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
+            let message = MockMessage(attributedText: tokenImage(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type,file_type: file_type)
             self.messageList.append(message)
             break
             
@@ -365,12 +409,12 @@ extension ChatViewController {
         }
     }
     
-    func typeChatSocket(type : String, content : String , user_id : String , name : String , link : String , create_at : String ){
+    func typeChatSocket(type : String ,file_type : String , content : String , user_id : String , name : String , link : String , create_at : String ){
         var message : MockMessage
         
         switch type {
         case "text":
-            message = MockMessage(text:"<meta name=\"twitter:image\" content=\"http://www.example.com/image.jpg\">", sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type)
+            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type,file_type: file_type)
             self.messageList.append(message)
             //            let message = MockMessage(attributedText: thumbnailWebsite ,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
             //            self.messageList.append(message)
@@ -380,33 +424,57 @@ extension ChatViewController {
         case "youtube":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
             self.messageList.append(message)
             
             break
         case "vimeo":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
             self.messageList.append(message)
             
             break
         case "video":
             let placeholderImage = UIImage(named: "bg (1)")!
             
-            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type)
+            let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
             self.messageList.append(message)
             
             break
         case "document":
-            let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
-            self.messageList.append(message)
+            switch file_type {
+            case "mov","mp4":
+                let placeholderImage = UIImage(named: "bg (1)")!
+                
+                let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
+                self.messageList.append(message)
+                break
+            case "png":
+                let imageview = UIImageView()
+                
+                let placeholderImage = UIImage(named: "bg (1)")!
+                
+                let url = URL(string: String(format: "%@/%@",API.base_url,link))!
+                
+                imageview.sd_setImage(with: url, placeholderImage: placeholderImage)
+                
+                let message = MockMessage(image:imageview.image!, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
+                self.messageList.append(message)
+                
+                break
+                
+            default:
+                let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type,file_type: file_type)
+                self.messageList.append(message)
+                
+            }
             break
         case "token":
             let url = URL(string:link)
             let placeholderImage = UIImage(named: "bg (1)")!
             img.af_setImage( withURL: url! ,placeholderImage: placeholderImage)
-            let message = MockMessage(attributedText: tokenImage(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
+            let message = MockMessage(attributedText: tokenImage(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type,file_type: file_type)
             self.messageList.append(message)
             break
             
@@ -643,9 +711,47 @@ extension ChatViewController: MessageCellDelegate {
                 }
                 break
             case "document":
-                let docLink = NSURL(string: message.Link)
-                UIApplication.shared.open(docLink! as URL, options: [:], completionHandler: nil)
-                break
+                switch message.file_type {
+                case "mov","mp4":
+                    player?.pause()
+                    print(API.base_url + message.Link)
+                    player = AVPlayer(url: URL(string:API.base_url + message.Link)!)
+                    
+                    if indexold == indexPath.section{
+                        clickVideo = 1
+                    }else {
+                        clickVideo = 0
+                    }
+                    
+                    if clickVideo == 0  {
+                        playerLayer = AVPlayerLayer(player: player)
+                        
+                        playerLayer!.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: 300 , height: 250)
+                        player?.play()
+                        playerLayer?.setValue(1, forKey: "tag")
+                        clickVideo = 1;
+                        messagesCollectionView.layer.addSublayer(playerLayer!)
+                        indexold = indexPath.section
+                    }else {
+                        let window = UIApplication.shared.keyWindow!
+                        let playerViewController = AVPlayerViewController()
+                        playerViewController.player = player
+                        playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: cell.frame.width , height: cell.frame.height + 20)
+                        playerViewController.showsPlaybackControls = true
+                        playerViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                        
+                        self.present(playerViewController, animated: true) {
+                            playerViewController.player!.play()
+                        }
+                        window.addSubview(playerViewController.view)
+                        clickVideo = 0;
+                    }
+                default:
+                    let docLink = NSURL(string: API.base_url + message.Link)
+                    UIApplication.shared.open(docLink! as URL, options: [:], completionHandler: nil)
+                    break
+                    
+                }
             case "token":
                 break
             default:
@@ -766,7 +872,7 @@ extension ChatViewController : YouTubePlayerDelegate{
 
 extension ChatViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func getFile(){
+    func getFileMedia(){
         
         imagePickerController.sourceType = .photoLibrary
         
@@ -779,13 +885,34 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let image = info[UIImagePickerController.InfoKey.mediaURL] as! URL
-//        guard let videoData = image.jpegData(compressionQuality: 1) else { return }
+        var datafile = Data()
+        var fileType : String = ""
         
-        let videoData = try! Data.init(contentsOf: image )
-        
-        APIService.sharedInstance.uploadFile(roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , fileUrl: videoData, imageData: nil, parameters: [:], completionHandle: {(result, error) in
+        if let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String {
             
+            if mediaType  == "public.image" {
+                print("Image Selected")
+                fileType = "image"
+                let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+                
+                datafile = image!.jpegData(compressionQuality: 1)!
+            }
+            
+            if mediaType == "public.movie" {
+                print("Video Selected")
+                fileType = "video"
+                let image = info[UIImagePickerController.InfoKey.mediaURL] as! URL
+                datafile = try! Data.init(contentsOf: image )
+                
+            }
+        }
+        
+        APIService.sharedInstance.uploadFile(roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , fileUrl: datafile, fileType: fileType, imageData: nil, parameters: [:], completionHandle: {(result, error) in
+            if error == nil {
+                let sendfile = Mapper<SendFIle>().map(JSONObject: result)
+                let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
+                SocketIOManager.sharedInstance.sockectSendFile(type: "document", file_type: sendfile?.type ?? "", content: "\(timestamp)", link: sendfile?.link ?? "", timeStamp: timestamp)
+            }
         })
         imagePickerController.dismiss(animated: true, completion: nil)
     }
@@ -810,8 +937,13 @@ extension ChatViewController : UIDocumentMenuDelegate,UIDocumentPickerDelegate{
         let data = try! Data(contentsOf: myURL.asURL())
         
         
-        APIService.sharedInstance.uploadFile(roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , fileUrl: data , imageData: nil, parameters: [:], completionHandle: {(result, error) in
-            
+        APIService.sharedInstance.uploadFile(roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , fileUrl: data, fileType: "doc" , imageData: nil, parameters: [:], completionHandle: {(result, error) in
+            if error == nil {
+                let sendfile = Mapper<SendFIle>().map(JSONObject: result)
+                let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
+                SocketIOManager.sharedInstance.sockectSendFile(type: "document", file_type: sendfile?.type ?? "", content: "\(timestamp).pdf", link: sendfile?.link ?? "", timeStamp: timestamp)
+            }
+
         })
         
         print("import result : \(myURL)")
@@ -828,4 +960,22 @@ extension ChatViewController : UIDocumentMenuDelegate,UIDocumentPickerDelegate{
         print("view was cancelled")
         dismiss(animated: true, completion: nil)
     }
+}
+
+extension UIImage {
+
+    public static func loadFrom(url: URL, completion: @escaping (_ image: UIImage?) -> ()) {
+        DispatchQueue.global().async {
+            if let data = try? Data(contentsOf: url) {
+                DispatchQueue.main.async {
+                    completion(UIImage(data: data))
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            }
+        }
+    }
+
 }
