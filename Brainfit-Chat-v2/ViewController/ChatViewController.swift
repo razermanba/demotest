@@ -21,8 +21,7 @@ import AVFoundation
 import SwiftLinkPreview
 import LinkPresentation
 import MobileCoreServices
-import SDWebImage
-//import GoogleInteractiveMediaAds
+import SDWebImage//import GoogleInteractiveMediaAds
 
 class ChatViewController: MessagesViewController  {
     var arrayListChat = Mapper<listChat>().mapArray(JSONArray: [])
@@ -43,6 +42,8 @@ class ChatViewController: MessagesViewController  {
     let imageview = UIImageView()
     
     private let slp = SwiftLinkPreview(cache: InMemoryCache())
+    
+    open lazy var audioController = BasicAudioController(messageCollectionView: messagesCollectionView)
     
     let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -300,18 +301,24 @@ extension ChatViewController {
             case "mov","mp4":
                 let placeholderImage = UIImage(named: "bg (1)")!
                 
-                let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
+                let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date:formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
                 self.messageList.insert(message, at: 0)
                 break
+            case "mp3":
+                
+                let message = MockMessage(sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
+                self.messageList.append(message)
+                break
+                
             case "png":
                 let imageview = UIImageView()
                 
                 let placeholderImage = UIImage(named: "bg (1)")!
                 
-                let url = URL(string: String(format: "%@/%@",API.base_url,link))!
-                
-                imageview.sd_setImage(with: url, placeholderImage: placeholderImage)
-                
+                let url = URL(string: String(format: "%@",link))!
+                DispatchQueue.main.async {
+                    imageview.sd_setImage(with: url, placeholderImage: placeholderImage)
+                }
                 let message = MockMessage(image:imageview.image!, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
                 self.messageList.insert(message, at: 0)
                 
@@ -372,22 +379,31 @@ extension ChatViewController {
             case "mov","mp4":
                 let placeholderImage = UIImage(named: "bg (1)")!
                 
-                let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
+                let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date:formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
                 self.messageList.append(message)
                 
                 break
+            case "mp3":
+                
+                let message = MockMessage(sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
+                self.messageList.append(message)
+                break
+                
             case "png":
                 let imageview = UIImageView()
                 
-                let placeholderImage = UIImage(named: "bg (1)")!
+                let placeholderImage = UIImage(named: "bg-(1)")!
                 
-                let url = URL(string: String(format: "%@/%@",API.base_url,link))!
+                print(link)
+                let url = URL(string: String(format: "%@",link))!
                 
-                imageview.sd_setImage(with: url, placeholderImage: placeholderImage)
+                DispatchQueue.main.async {
+                    imageview.sd
+                }
                 
-                let message = MockMessage(image:imageview.image!, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
+                let message = MockMessage(image:imageview.image!, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: self.formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
                 self.messageList.append(message)
-
+                
                 break
                 
             default:
@@ -450,14 +466,21 @@ extension ChatViewController {
                 let message = MockMessage(image:placeholderImage, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
                 self.messageList.append(message)
                 break
+            case "mp3":
+                
+                let message = MockMessage(sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
+                self.messageList.append(message)
+                break
             case "png":
                 let imageview = UIImageView()
                 
-                let placeholderImage = UIImage(named: "bg (1)")!
+                let placeholderImage = UIImage(named: "bg-(1)")!
                 
-                let url = URL(string: String(format: "%@/%@",API.base_url,link))!
+                let url = URL(string: link)!
                 
-                imageview.sd_setImage(with: url, placeholderImage: placeholderImage)
+                DispatchQueue.main.async {
+                    imageview.sd_setImage(with: url, placeholderImage: placeholderImage)
+                }
                 
                 let message = MockMessage(image:imageview.image!, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
                 self.messageList.append(message)
@@ -677,77 +700,71 @@ extension ChatViewController: MessageCellDelegate {
                 UIApplication.shared.open(myVideoURL! as URL, options: [:], completionHandler: nil)
                 break
             case "video":
+                //                player?.pause()
+                //                player = AVPlayer(url: URL(string:message.Link)!)
+                //
+                //                if indexold == indexPath.section{
+                //                    clickVideo = 1
+                //                }else {
+                //                    clickVideo = 0
+                //                }
+                //
+                //                if clickVideo == 0  {
+                //                    playerLayer = AVPlayerLayer(player: player)
+                //
+                //                    playerLayer!.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: 300 , height: 250)
+                //                    player?.play()
+                //                    playerLayer?.setValue(1, forKey: "tag")
+                //                    clickVideo = 1;
+                //                    messagesCollectionView.layer.addSublayer(playerLayer!)
+                //                    indexold = indexPath.section
+                //                }else {
+                //                    let window = UIApplication.shared.keyWindow!
+                //                    let playerViewController = AVPlayerViewController()
+                //                    playerViewController.player = player
+                //                    playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: cell.frame.width , height: cell.frame.height + 20)
+                //                    playerViewController.showsPlaybackControls = true
+                //                    playerViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                //
+                //                    self.present(playerViewController, animated: true) {
+                //                        playerViewController.player!.play()
+                //                    }
+                //                    window.addSubview(playerViewController.view)
+                //                    clickVideo = 0;
+                //                }
+                
                 player?.pause()
+                let playerViewController = AVPlayerViewController()
                 player = AVPlayer(url: URL(string:message.Link)!)
+                playerViewController.player = player
+                playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: 280 , height: cell.frame.height - 30)
+                playerViewController.view.setValue(1, forKey: "tag")
+                self.addChild(playerViewController)
                 
-                if indexold == indexPath.section{
-                    clickVideo = 1
-                }else {
-                    clickVideo = 0
-                }
+                messagesCollectionView.addSubview(playerViewController.view)
+                playerViewController.player!.play()
+                playerViewController.didMove(toParent: self)
                 
-                if clickVideo == 0  {
-                    playerLayer = AVPlayerLayer(player: player)
-                    
-                    playerLayer!.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: 300 , height: 250)
-                    player?.play()
-                    playerLayer?.setValue(1, forKey: "tag")
-                    clickVideo = 1;
-                    messagesCollectionView.layer.addSublayer(playerLayer!)
-                    indexold = indexPath.section
-                }else {
-                    let window = UIApplication.shared.keyWindow!
-                    let playerViewController = AVPlayerViewController()
-                    playerViewController.player = player
-                    playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: cell.frame.width , height: cell.frame.height + 20)
-                    playerViewController.showsPlaybackControls = true
-                    playerViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                    
-                    self.present(playerViewController, animated: true) {
-                        playerViewController.player!.play()
-                    }
-                    window.addSubview(playerViewController.view)
-                    clickVideo = 0;
-                }
                 break
             case "document":
                 switch message.file_type {
                 case "mov","mp4":
                     player?.pause()
-                    print(API.base_url + message.Link)
-                    player = AVPlayer(url: URL(string:API.base_url + message.Link)!)
+                    let playerViewController = AVPlayerViewController()
+                    player = AVPlayer(url: URL(string:message.Link)!)
+                    playerViewController.player = player
+                    playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: 280 , height: cell.frame.height - 30)
+                    playerViewController.view.setValue(1, forKey: "tag")
+                    self.addChild(playerViewController)
                     
-                    if indexold == indexPath.section{
-                        clickVideo = 1
-                    }else {
-                        clickVideo = 0
-                    }
-                    
-                    if clickVideo == 0  {
-                        playerLayer = AVPlayerLayer(player: player)
-                        
-                        playerLayer!.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: 300 , height: 250)
-                        player?.play()
-                        playerLayer?.setValue(1, forKey: "tag")
-                        clickVideo = 1;
-                        messagesCollectionView.layer.addSublayer(playerLayer!)
-                        indexold = indexPath.section
-                    }else {
-                        let window = UIApplication.shared.keyWindow!
-                        let playerViewController = AVPlayerViewController()
-                        playerViewController.player = player
-                        playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: cell.frame.width , height: cell.frame.height + 20)
-                        playerViewController.showsPlaybackControls = true
-                        playerViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                        
-                        self.present(playerViewController, animated: true) {
-                            playerViewController.player!.play()
-                        }
-                        window.addSubview(playerViewController.view)
-                        clickVideo = 0;
-                    }
+                    messagesCollectionView.addSubview(playerViewController.view)
+                    playerViewController.player!.play()
+                    playerViewController.didMove(toParent: self)
+                    //                case "mp3":
+                    //
+                //                    break
                 default:
-                    let docLink = NSURL(string: API.base_url + message.Link)
+                    let docLink = NSURL(string: message.Link)
                     UIApplication.shared.open(docLink! as URL, options: [:], completionHandler: nil)
                     break
                     
@@ -782,6 +799,36 @@ extension ChatViewController: MessageCellDelegate {
         print("Accessory view tapped")
         //        messageInputBar.inputTextView.resignFirstResponder()
         //        view.endEditing(true)
+    }
+    func didTapPlayButton(in cell: AudioMessageCell) {
+        //        guard let indexPath = messagesCollectionView.indexPath(for: cell),
+        //            let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath, in: messagesCollectionView) else {
+        //                print(message)
+        //                print("Failed to identify message when audio cell receive tap gesture")
+        //                return
+        //        }
+        if let indexPath = messagesCollectionView.indexPath(for: cell) {
+            let message = messageList[indexPath.section]
+            
+            guard audioController.state != .stopped else {
+                // There is no audio sound playing - prepare to start playing for given audio message
+                print(message)
+                audioController.playSound(for: message, in: cell)
+                return
+            }
+            if audioController.playingMessage?.messageId == message.messageId {
+                // tap occur in the current cell that is playing audio sound
+                if audioController.state == .playing {
+                    audioController.pauseSound(for: message, in: cell)
+                } else {
+                    audioController.resumeSound()
+                }
+            } else {
+                // tap occur in a difference cell that the one is currently playing sound. First stop currently playing and start the sound for given message
+                audioController.stopAnyOngoingPlaying()
+                audioController.playSound(for: message, in: cell)
+            }
+        }
     }
     
 }
@@ -873,26 +920,71 @@ extension ChatViewController : YouTubePlayerDelegate{
 extension ChatViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func getFileMedia(){
+        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            self.openCamera()
+        }))
         
-        imagePickerController.sourceType = .photoLibrary
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+            self.openGallary()
+        }))
         
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        
+        /*If you want work actionsheet on ipad
+         then you have to use popoverPresentationController to present the actionsheet,
+         otherwise app will crash on iPad */
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func openCamera()
+    {
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
+        {
+            imagePickerController.sourceType = UIImagePickerController.SourceType.camera
+            imagePickerController.allowsEditing = true
+            
+            imagePickerController.delegate = self
+            
+            //            imagePickerController.mediaTypes = ["public.image", "public.movie"]
+            
+            self.present(imagePickerController, animated: true, completion: nil)
+        }
+        else
+        {
+            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func openGallary()
+    {
+        imagePickerController.sourceType = UIImagePickerController.SourceType.photoLibrary
+        imagePickerController.allowsEditing = true
         imagePickerController.delegate = self
         
         imagePickerController.mediaTypes = ["public.image", "public.movie"]
         
-        present(imagePickerController, animated: true, completion: nil)
-        
+        self.present(imagePickerController, animated: true, completion: nil)
     }
+    
+    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         var datafile = Data()
         var fileType : String = ""
+        var filename : String = ""
+        let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
         
         if let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String {
             
             if mediaType  == "public.image" {
                 print("Image Selected")
                 fileType = "image"
+                filename = timestamp + ".png"
                 let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
                 
                 datafile = image!.jpegData(compressionQuality: 1)!
@@ -901,19 +993,31 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
             if mediaType == "public.movie" {
                 print("Video Selected")
                 fileType = "video"
+                filename = timestamp + ".mov"
                 let image = info[UIImagePickerController.InfoKey.mediaURL] as! URL
                 datafile = try! Data.init(contentsOf: image )
                 
             }
         }
-        
-        APIService.sharedInstance.uploadFile(roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , fileUrl: datafile, fileType: fileType, imageData: nil, parameters: [:], completionHandle: {(result, error) in
+        //        if  datafile != 0 {
+        APIService.sharedInstance.uploadFile(roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , fileUrl: datafile, fileType: fileType, filename: filename, imageData: nil, parameters: [:], completionHandle: {(result, error) in
             if error == nil {
                 let sendfile = Mapper<SendFIle>().map(JSONObject: result)
                 let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
-                SocketIOManager.sharedInstance.sockectSendFile(type: "document", file_type: sendfile?.type ?? "", content: "\(timestamp)", link: sendfile?.link ?? "", timeStamp: timestamp)
+                SocketIOManager.sharedInstance.sockectSendFile(type: "document", file_type: sendfile?.type ?? "", content: sendfile?.filename ?? "", link: sendfile?.link ?? "", timeStamp: timestamp)
+            }else {
+                let alert = UIAlertController(title: "Error", message: "Send failed. Please try again.", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
+            
         })
+        //        }else {
+        //            let alert = UIAlertController(title: "Error", message: "Send failed. Please try again.", preferredStyle: UIAlertController.Style.alert)
+        //            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+        //            self.present(alert, animated: true, completion: nil)
+        //
+        //        }
         imagePickerController.dismiss(animated: true, completion: nil)
     }
 }
@@ -933,17 +1037,21 @@ extension ChatViewController : UIDocumentMenuDelegate,UIDocumentPickerDelegate{
         guard let myURL = urls.first else {
             return
         }
-        //        let data = try! Data(contentsOf: myURL)
+        guard let filename = urls.first?.lastPathComponent else  {
+            return
+        }
+        
+        print(filename)
+        
         let data = try! Data(contentsOf: myURL.asURL())
         
-        
-        APIService.sharedInstance.uploadFile(roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , fileUrl: data, fileType: "doc" , imageData: nil, parameters: [:], completionHandle: {(result, error) in
+        APIService.sharedInstance.uploadFile(roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , fileUrl: data, fileType: "doc" ,filename: filename, imageData: nil, parameters: [:], completionHandle: {(result, error) in
             if error == nil {
                 let sendfile = Mapper<SendFIle>().map(JSONObject: result)
                 let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
-                SocketIOManager.sharedInstance.sockectSendFile(type: "document", file_type: sendfile?.type ?? "", content: "\(timestamp).pdf", link: sendfile?.link ?? "", timeStamp: timestamp)
+                SocketIOManager.sharedInstance.sockectSendFile(type: "document", file_type: sendfile?.type ?? "", content: sendfile?.filename ?? "", link: sendfile?.link ?? "", timeStamp: timestamp)
             }
-
+            
         })
         
         print("import result : \(myURL)")
@@ -963,7 +1071,7 @@ extension ChatViewController : UIDocumentMenuDelegate,UIDocumentPickerDelegate{
 }
 
 extension UIImage {
-
+    
     public static func loadFrom(url: URL, completion: @escaping (_ image: UIImage?) -> ()) {
         DispatchQueue.global().async {
             if let data = try? Data(contentsOf: url) {
@@ -977,5 +1085,4 @@ extension UIImage {
             }
         }
     }
-
 }

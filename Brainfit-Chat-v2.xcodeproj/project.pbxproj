@@ -67,6 +67,7 @@
 		FAD25BD7233DC50400DAA8EE /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BD3233DC50400DAA8EE /* Media.swift */; };
 		FAD25BD8233DC50400DAA8EE /* CoursesDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BD4233DC50400DAA8EE /* CoursesDetail.swift */; };
 		FAD25BDA233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BD9233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift */; };
+		FAE057A72435D05200BEB545 /* BasicAudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE057A62435D05200BEB545 /* BasicAudioController.swift */; };
 		FAE6722223615CB60003FC13 /* EmptyCourses.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE6722123615CB60003FC13 /* EmptyCourses.xib */; };
 		FAE6722423615CC70003FC13 /* EmptyCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE6722323615CC70003FC13 /* EmptyCourses.swift */; };
 		FAEB0288226858A9002F54EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0287226858A9002F54EA /* LoginViewController.swift */; };
@@ -162,6 +163,7 @@
 		FAD25BD3233DC50400DAA8EE /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		FAD25BD4233DC50400DAA8EE /* CoursesDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesDetail.swift; sourceTree = "<group>"; };
 		FAD25BD9233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesDescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		FAE057A62435D05200BEB545 /* BasicAudioController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAudioController.swift; sourceTree = "<group>"; };
 		FAE6722123615CB60003FC13 /* EmptyCourses.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyCourses.xib; sourceTree = "<group>"; };
 		FAE6722323615CC70003FC13 /* EmptyCourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCourses.swift; sourceTree = "<group>"; };
 		FAEB0287226858A9002F54EA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 		FAC731B9226709AB00C59F10 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FAE057A52435D03E00BEB545 /* AuidoChat */,
 				FAD25BD0233DC50400DAA8EE /* CoursesDetail */,
 				FAD25BBB233DB76800DAA8EE /* Courses */,
 				FA29DBA42293DF7A00BE34A6 /* ProgressScore */,
@@ -354,6 +357,14 @@
 				FAD25BD4233DC50400DAA8EE /* CoursesDetail.swift */,
 			);
 			path = CoursesDetail;
+			sourceTree = "<group>";
+		};
+		FAE057A52435D03E00BEB545 /* AuidoChat */ = {
+			isa = PBXGroup;
+			children = (
+				FAE057A62435D05200BEB545 /* BasicAudioController.swift */,
+			);
+			path = AuidoChat;
 			sourceTree = "<group>";
 		};
 		FAFF3F342266CBCA00225C94 = {
@@ -688,6 +699,7 @@
 				FA505049229256FD00FE9848 /* Points.swift in Sources */,
 				FA505048229256FD00FE9848 /* Contents.swift in Sources */,
 				FA0B0B2124348AD400359EB4 /* SendFIle.swift in Sources */,
+				FAE057A72435D05200BEB545 /* BasicAudioController.swift in Sources */,
 				FA5EA2122269756D001BF077 /* MockMessage.swift in Sources */,
 				FA08E272226DA4FE002EABFB /* ListTokenViewController.swift in Sources */,
 				FAE6722423615CC70003FC13 /* EmptyCourses.swift in Sources */,

@@ -196,7 +196,7 @@ class APIService {
         }.resume()
     }
     
-    func uploadFile(roomId : String , fileUrl : Data , fileType : String ,imageData: Data?, parameters: [String : Any] , completionHandle:@escaping (_ result:[String:AnyObject]?,_ error:AnyObject?) -> Void) {
+    func uploadFile(roomId : String , fileUrl : Data , fileType : String , filename : String ,imageData: Data?, parameters: [String : Any] , completionHandle:@escaping (_ result:[String:AnyObject]?,_ error:AnyObject?) -> Void) {
         let url = API.base_url + API.BASE_URL_API_SendFile + roomId + "/send-file"
         
         let headers: HTTPHeaders = [
@@ -205,21 +205,21 @@ class APIService {
         ]
         
         //        guard let imageData = fileUrl.jpegData(compressionQuality: 1) else { return }
-        var filename : String = ""
+//        var filename : String = ""
         var mimetype : String = ""
         let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
         
         switch fileType {
         case "video":
-            filename = timestamp + ".mov"
+//            filename = timestamp + ".mov"
             mimetype = "video/mp4"
             break
         case "image":
-            filename = timestamp + ".png"
+//            filename = timestamp + ".png"
             mimetype = "image/jpeg"
             break
         case "doc":
-            filename = timestamp + ".pdf"
+//            filename = timestamp + ".pdf"
             mimetype = "application/pdf"
             break
         default:

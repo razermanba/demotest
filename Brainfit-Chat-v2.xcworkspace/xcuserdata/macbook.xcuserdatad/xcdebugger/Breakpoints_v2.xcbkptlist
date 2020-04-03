@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "709EFA8F-BF5A-4C99-B9E4-55918F51076D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Brainfit-Chat-v2/ViewController/CoursesDetailViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "BAD0639A-C8E8-419D-B1BB-F603B7B99CEC"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -71,32 +55,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7D21800A-AE2A-4E21-96F8-083BB93E45E4"
+            uuid = "C969BD9E-0078-4F7F-B6F4-BCD984679C98"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Brainfit-Chat-v2/ViewController/ChatViewController.swift"
+            filePath = "Brainfit-Chat-v2/Model/AuidoChat/BasicAudioController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
-            landmarkName = "typeChatSocket(type:file_type:content:user_id:name:link:create_at:)"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "playSound(for:in:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9018A779-1061-4C07-A6DE-E502B8208732"
+            uuid = "53D57C58-263F-461E-8517-A0630633BAF2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Brainfit-Chat-v2/ViewController/ChatViewController.swift"
+            filePath = "Pods/MessageKit/Sources/Controllers/MessagesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "750"
-            endingLineNumber = "750"
-            landmarkName = "didTapMessage(in:)"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
+            landmarkName = "collectionView(_:performAction:forItemAt:withSender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
