@@ -116,6 +116,7 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - Nuke (8.4.0)
   - ObjectMapper (3.4.2)
   - Protobuf (3.9.2)
   - SDWebImage (4.3.3):
@@ -144,6 +145,7 @@ DEPENDENCIES:
   - JGProgressHUD
   - MessageInputBar (from `https://github.com/MessageKit/MessageInputBar.git`, branch `master`)
   - MessageKit (~> 3.0.0)
+  - Nuke
   - ObjectMapper (~> 3.3)
   - SDWebImage (~> 4.0)
   - Socket.IO-Client-Swift (~> 15.0.0)
@@ -181,6 +183,7 @@ SPEC REPOS:
     - JGProgressHUD
     - MessageKit
     - nanopb
+    - Nuke
     - ObjectMapper
     - Protobuf
     - SDWebImage
@@ -230,6 +233,7 @@ SPEC CHECKSUMS:
   MessageInputBar: 156d0e3e8284b341b04702811f9ce9330975844d
   MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  Nuke: fa6f784c4f7e1c0f9313668510186c68b7af2509
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   Protobuf: 67fb42ba613def994e61854de2b3164f13790cc4
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
@@ -242,6 +246,6 @@ SPEC CHECKSUMS:
   VIMVideoPlayer: f4ed0a9986294ec3684a2e6bdc738e30051ef4ef
   YouTubePlayer: 028451f6772f372d4759866db99824c676ac1473
 
-PODFILE CHECKSUM: 627a505298d7f0b555884294f727662b022d9bb8
+PODFILE CHECKSUM: 25cbddb411ec75ee26022db364ea798122bb7949
 
 COCOAPODS: 1.5.2

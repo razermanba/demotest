@@ -63,7 +63,24 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
     // MARK: - All Messages
     
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return isFromCurrentSender(message: message) ? UIColor(red:0.00, green:0.64, blue:1.00, alpha:1.0) : UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
+        let message = messageList[indexPath.section]
+              
+        if isFromCurrentSender(message: message) == true {
+            switch message.file_type {
+            case "png","jpg":
+                return .clear
+            default:
+                 return UIColor(red:0.00, green:0.64, blue:1.00, alpha:1.0)
+            }
+           
+        }else {
+            switch message.file_type {
+            case "png","jpg":
+                return .clear
+            default:
+                return UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
+            }
+        }
     }
     
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
@@ -75,7 +92,7 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
         //        var message = messageList[indexPath.row]
-          
+        
         if userSender.id == self.messageList[indexPath.section].sender.senderId{
             let url = URL(string: String(format: "%@?v=%@",UserDefaults.standard.value(forKey: "avatar")! as! String, timestamp))!
             let placeholderImage = UIImage(named: "avatar_student (1)")!
@@ -83,14 +100,32 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
                 avatarView.sd_setImage(with: url, placeholderImage: placeholderImage)
             }
         }else {
-//            print(String(format: "%@/api/v1/users/%@/avatar?v=%@",API.base_url,self.messageList[indexPath.section].sender.id, timestamp))
-            
             let placeholderImage = UIImage(named: "avatar_student (1)")!
             let url = URL(string: String(format: "%@/api/v1/users/%@/avatar?v=%@",API.base_url,self.messageList[indexPath.section].sender.senderId, timestamp))!
             DispatchQueue.main.async {
                 avatarView.sd_setImage(with: url, placeholderImage: placeholderImage)
             }
         }
+    }
+    func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        let message = messageList[indexPath.section]
+        switch message.file_type {
+        case "png","jpg":
+            let placeholderImage = UIImage(named: "avatar_student (1)")!
+            let url = URL(string: message.Link)!
+            DispatchQueue.main.async {
+                imageView.backgroundColor = .clear
+                imageView.contentMode = .scaleAspectFit
+                imageView.sd_setShowActivityIndicatorView(true)
+                imageView.sd_setIndicatorStyle(.gray)
+                imageView.sd_setImage(with: url, placeholderImage: placeholderImage)
+//                imageView.image?.fixOrientation()
+                
+            }
+        default:
+            break
+        }
+        
     }
     
     // MARK: - Location Messages

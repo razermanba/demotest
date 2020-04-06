@@ -46,10 +46,10 @@ private struct ImageMediaItem: MediaItem {
     var placeholderImage: UIImage
     var size: CGSize
 
-    init(image: UIImage, url : URL) {
-        self.url = url
+    init(image: UIImage) {
+//        self.url = url
         self.image = image
-        self.size = CGSize(width: 240, height: 135)// sua o day 
+        self.size = CGSize(width: 100, height: 135)// sua o day 
         self.placeholderImage = UIImage()
     }
 
@@ -81,7 +81,7 @@ internal struct MockMessage: MessageType {
         var size: CGSize
         var duration: Float
 
-        init(url: URL, duration: Float) {
+        init(duration: Float , url : URL) {
             self.url = url
             self.size = CGSize(width: 160, height: 35)
             self.duration = duration
@@ -102,12 +102,12 @@ internal struct MockMessage: MessageType {
     }
 
     init(image: UIImage, sender: Sender, messageId: String, date: Date, link : String , type : String, file_type : String) {        
-        let mediaItem = ImageMediaItem(image: image, url: URL(string: link)! )
+        let mediaItem = ImageMediaItem(image: image)
         self.init(kind: .photo(mediaItem), sender: sender, messageId: messageId, date: date,link : link , type: type, file_type: file_type)
     }
 
     init(thumbnail: UIImage, sender: Sender, messageId: String, date: Date, link : String , type : String, file_type : String){
-        let mediaItem = ImageMediaItem(image: thumbnail, url: URL(string: link)!)
+        let mediaItem = ImageMediaItem(image: thumbnail)
         self.init(kind: .video(mediaItem), sender: sender, messageId: messageId, date: date,link : link , type: type, file_type : file_type)
     }
 
@@ -124,7 +124,7 @@ internal struct MockMessage: MessageType {
          let url = URL(string: link)!
         let asset = AVURLAsset(url: url, options: nil)
 
-        let audio = MockAudiotem(url: url, duration: Float(CMTimeGetSeconds(asset.duration)))
+        let audio = MockAudiotem(duration: Float(CMTimeGetSeconds(asset.duration)), url: url)
         self.init(kind: .audio(audio), sender: sender, messageId: messageId, date: date,link : link , type: type, file_type : file_type)
     }
 

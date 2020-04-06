@@ -26,4 +26,5 @@ target 'Brainfit-Chat-v2' do
     pod 'Crashlytics'
     pod 'Fabric'
     pod 'SwiftLinkPreview'
+    pod 'Nuke'
 end

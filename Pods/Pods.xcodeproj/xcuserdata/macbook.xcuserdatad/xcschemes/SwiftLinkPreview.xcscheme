@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FA5A887A2D43886C7959AF19598DAC55"
+               BlueprintIdentifier = "E496285914E1DC29C913A464CF9C49FF"
                BlueprintName = "SwiftLinkPreview"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "SwiftLinkPreview.framework">
