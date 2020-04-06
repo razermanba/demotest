@@ -1426,11 +1426,11 @@
             </objects>
             <point key="canvasLocation" x="2386" y="3658"/>
         </scene>
-        <!--Video-->
+        <!--Resources-->
         <scene sceneID="wnC-Bi-Zlv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MKX-H0-2fI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Video" image="ic_video_library_48px" id="Q72-Dh-ryc"/>
+                    <tabBarItem key="tabBarItem" title="Resources" image="ic_video_library_48px" id="Q72-Dh-ryc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="smC-OU-pkn">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>

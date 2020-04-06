@@ -68,6 +68,8 @@
 		FAD25BD8233DC50400DAA8EE /* CoursesDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BD4233DC50400DAA8EE /* CoursesDetail.swift */; };
 		FAD25BDA233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD25BD9233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift */; };
 		FAE057A72435D05200BEB545 /* BasicAudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE057A62435D05200BEB545 /* BasicAudioController.swift */; };
+		FAE061AB243AE61A003AD41B /* ViewFullImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE061AA243AE61A003AD41B /* ViewFullImage.xib */; };
+		FAE061AD243AE633003AD41B /* ViewFullImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE061AC243AE633003AD41B /* ViewFullImage.swift */; };
 		FAE6722223615CB60003FC13 /* EmptyCourses.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE6722123615CB60003FC13 /* EmptyCourses.xib */; };
 		FAE6722423615CC70003FC13 /* EmptyCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE6722323615CC70003FC13 /* EmptyCourses.swift */; };
 		FAEB0288226858A9002F54EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0287226858A9002F54EA /* LoginViewController.swift */; };
@@ -164,6 +166,8 @@
 		FAD25BD4233DC50400DAA8EE /* CoursesDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesDetail.swift; sourceTree = "<group>"; };
 		FAD25BD9233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		FAE057A62435D05200BEB545 /* BasicAudioController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAudioController.swift; sourceTree = "<group>"; };
+		FAE061AA243AE61A003AD41B /* ViewFullImage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewFullImage.xib; sourceTree = "<group>"; };
+		FAE061AC243AE633003AD41B /* ViewFullImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFullImage.swift; sourceTree = "<group>"; };
 		FAE6722123615CB60003FC13 /* EmptyCourses.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyCourses.xib; sourceTree = "<group>"; };
 		FAE6722323615CC70003FC13 /* EmptyCourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCourses.swift; sourceTree = "<group>"; };
 		FAEB0287226858A9002F54EA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -239,6 +243,8 @@
 				FACA1D8523433C32007B959C /* SubClassButton.swift */,
 				FAE6722123615CB60003FC13 /* EmptyCourses.xib */,
 				FAE6722323615CC70003FC13 /* EmptyCourses.swift */,
+				FAE061AA243AE61A003AD41B /* ViewFullImage.xib */,
+				FAE061AC243AE633003AD41B /* ViewFullImage.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -542,6 +548,7 @@
 				FA08E259226D72A7002EABFB /* ChangePassword.xib in Resources */,
 				FAE6722223615CB60003FC13 /* EmptyCourses.xib in Resources */,
 				FAFF3F4B2266CBCC00225C94 /* LaunchScreen.storyboard in Resources */,
+				FAE061AB243AE61A003AD41B /* ViewFullImage.xib in Resources */,
 				FA08E25C226D72A7002EABFB /* alertToken.xib in Resources */,
 				FAFF3F482266CBCC00225C94 /* Assets.xcassets in Resources */,
 				FAFF3F462266CBCA00225C94 /* Main.storyboard in Resources */,
@@ -706,6 +713,7 @@
 				FA08E272226DA4FE002EABFB /* ListTokenViewController.swift in Sources */,
 				FAE6722423615CC70003FC13 /* EmptyCourses.swift in Sources */,
 				FA08E26E226DA4D6002EABFB /* ListTokenTableViewCell.swift in Sources */,
+				FAE061AD243AE633003AD41B /* ViewFullImage.swift in Sources */,
 				FA08E269226D81EC002EABFB /* Room_centers.swift in Sources */,
 				FA265231226870C000A7131E /* Message.swift in Sources */,
 				FAEB0288226858A9002F54EA /* LoginViewController.swift in Sources */,
@@ -906,7 +914,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Brainfit-Chat-v2/Brainfit-Chat-v2.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = P9265767DK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";
@@ -932,7 +940,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Brainfit-Chat-v2/Brainfit-Chat-v2.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = P9265767DK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";

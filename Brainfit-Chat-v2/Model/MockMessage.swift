@@ -46,10 +46,15 @@ private struct ImageMediaItem: MediaItem {
     var placeholderImage: UIImage
     var size: CGSize
 
-    init(image: UIImage) {
+    init(image: UIImage, type : String) {
 //        self.url = url
         self.image = image
-        self.size = CGSize(width: 100, height: 135)// sua o day 
+        switch type{
+        case "video","mov","mp4":
+             self.size = CGSize(width: 240, height: 135)// sua o day
+        default:
+             self.size = CGSize(width: 100, height: 135)// sua o day
+        }
         self.placeholderImage = UIImage()
     }
 
@@ -102,12 +107,12 @@ internal struct MockMessage: MessageType {
     }
 
     init(image: UIImage, sender: Sender, messageId: String, date: Date, link : String , type : String, file_type : String) {        
-        let mediaItem = ImageMediaItem(image: image)
+        let mediaItem = ImageMediaItem(image: image,type: file_type)
         self.init(kind: .photo(mediaItem), sender: sender, messageId: messageId, date: date,link : link , type: type, file_type: file_type)
     }
 
     init(thumbnail: UIImage, sender: Sender, messageId: String, date: Date, link : String , type : String, file_type : String){
-        let mediaItem = ImageMediaItem(image: thumbnail)
+        let mediaItem = ImageMediaItem(image: thumbnail,type: file_type)
         self.init(kind: .video(mediaItem), sender: sender, messageId: messageId, date: date,link : link , type: type, file_type : file_type)
     }
 

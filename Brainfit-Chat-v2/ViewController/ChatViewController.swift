@@ -41,6 +41,8 @@ class ChatViewController: MessagesViewController  {
     let imagePickerController = UIImagePickerController()
     let imageview = UIImageView()
     
+    var viewFullImage = (Bundle.main.loadNibNamed("ViewFullImage", owner: self, options: nil)?.first as? ViewFullImage)!
+    
     private let slp = SwiftLinkPreview(cache: InMemoryCache())
     
     open lazy var audioController = BasicAudioController(messageCollectionView: messagesCollectionView)
@@ -64,7 +66,6 @@ class ChatViewController: MessagesViewController  {
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
         navigationItem.titleView = imageView
-        
         
         configureMessageCollectionView()
         
@@ -128,6 +129,7 @@ class ChatViewController: MessagesViewController  {
     func configureMessageInputBar() {
         messageInputBar.inputTextView.tintColor = UIColor.gray
         messageInputBar.sendButton.tintColor = UIColor.gray
+        messageInputBar.sendButton.setSize(CGSize(width: 50, height: 40), animated: true)
         configureInputBarItems()
     }
     
@@ -135,7 +137,6 @@ class ChatViewController: MessagesViewController  {
         let bottomItems = [makeButtonVideo(named: "bfchat-ic-camera"),makeButtonDoc(named: "bfchat-ic-file"),.flexibleSpace]
         messageInputBar.middleContentViewPadding.left = 0
         messageInputBar.setLeftStackViewWidthConstant(to: 80, animated: false)
-        
         messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
         
     }
@@ -145,12 +146,12 @@ class ChatViewController: MessagesViewController  {
             .configure {
                 $0.spacing = .fixed(0)
                 $0.image = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
-                $0.setSize(CGSize(width: 35, height: 35), animated: false)
-                $0.tintColor = UIColor(white: 0.8, alpha: 1)
+                $0.setSize(CGSize(width: 35, height: 40), animated: false)
+                $0.tintColor = UIColor(red:0.00, green:0.60, blue:0.80, alpha:1.00)
         }.onSelected {
             $0.tintColor = .gray
         }.onDeselected {
-            $0.tintColor = UIColor(white: 0.8, alpha: 1)
+            $0.tintColor = UIColor(red:0.00, green:0.60, blue:0.80, alpha:1.00)
         }.onTouchUpInside { _ in
             print("Item Tapped")
             self.getFileMedia()
@@ -163,13 +164,12 @@ class ChatViewController: MessagesViewController  {
             .configure {
                 $0.spacing = .fixed(0)
                 $0.image = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
-                $0.setSize(CGSize(width: 35, height: 35), animated: false)
-                $0.tintColor = UIColor(white: 0.8, alpha: 1)
-            
+                $0.setSize(CGSize(width: 35, height: 40), animated: false)
+                $0.tintColor = UIColor(red:1.00, green:0.20, blue:0.20, alpha:1.00)
         }.onSelected {
             $0.tintColor = .gray
         }.onDeselected {
-            $0.tintColor = UIColor(white: 0.8, alpha: 1)
+            $0.tintColor = UIColor(red:1.00, green:0.20, blue:0.20, alpha:1.00)
         }.onTouchUpInside { _ in
             print("Item Tapped")
             self.clickFunction()
@@ -311,7 +311,7 @@ extension ChatViewController {
                 self.messageList.append(message)
                 break
                 
-            case "png":
+            case "png","jpg","jpeg":
                 let imageview = UIImageView()
                 
                 
@@ -393,8 +393,7 @@ extension ChatViewController {
                 self.messageList.append(message)
                 break
                 
-            case "png":
-                
+            case "png","jpg","jpeg":
                 print(link)
                 let url = URL(string: link)!
                 
@@ -409,8 +408,8 @@ extension ChatViewController {
                 
                 let message = MockMessage(image:self.imageview.image ?? UIImage(), sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: self.formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
                 self.messageList.append(message)
-
-                                
+                
+                
                 break
                 
             default:
@@ -478,7 +477,7 @@ extension ChatViewController {
                 let message = MockMessage(sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
                 self.messageList.append(message)
                 break
-            case "png":
+            case "png","jpg","jpeg":
                 let url = URL(string: String(format: "%@",link))!
                 
                 let options = ImageLoadingOptions(
@@ -706,44 +705,12 @@ extension ChatViewController: MessageCellDelegate {
                 UIApplication.shared.open(myVideoURL! as URL, options: [:], completionHandler: nil)
                 break
             case "video":
-                //                player?.pause()
-                //                player = AVPlayer(url: URL(string:message.Link)!)
-                //
-                //                if indexold == indexPath.section{
-                //                    clickVideo = 1
-                //                }else {
-                //                    clickVideo = 0
-                //                }
-                //
-                //                if clickVideo == 0  {
-                //                    playerLayer = AVPlayerLayer(player: player)
-                //
-                //                    playerLayer!.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: 300 , height: 250)
-                //                    player?.play()
-                //                    playerLayer?.setValue(1, forKey: "tag")
-                //                    clickVideo = 1;
-                //                    messagesCollectionView.layer.addSublayer(playerLayer!)
-                //                    indexold = indexPath.section
-                //                }else {
-                //                    let window = UIApplication.shared.keyWindow!
-                //                    let playerViewController = AVPlayerViewController()
-                //                    playerViewController.player = player
-                //                    playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: cell.frame.width , height: cell.frame.height + 20)
-                //                    playerViewController.showsPlaybackControls = true
-                //                    playerViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                //
-                //                    self.present(playerViewController, animated: true) {
-                //                        playerViewController.player!.play()
-                //                    }
-                //                    window.addSubview(playerViewController.view)
-                //                    clickVideo = 0;
-                //                }
-                
+             
                 player?.pause()
                 let playerViewController = AVPlayerViewController()
                 player = AVPlayer(url: URL(string:message.Link)!)
                 playerViewController.player = player
-                playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: 280 , height: cell.frame.height - 30)
+                playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 15, width: 280 , height: cell.frame.height - 30)
                 playerViewController.view.setValue(1, forKey: "tag")
                 self.addChild(playerViewController)
                 
@@ -759,16 +726,17 @@ extension ChatViewController: MessageCellDelegate {
                     let playerViewController = AVPlayerViewController()
                     player = AVPlayer(url: URL(string:message.Link)!)
                     playerViewController.player = player
-                    playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 10, width: 280 , height: cell.frame.height - 30)
+                    playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 15, width: 280 , height: cell.frame.height - 30)
                     playerViewController.view.setValue(1, forKey: "tag")
                     self.addChild(playerViewController)
                     
                     messagesCollectionView.addSubview(playerViewController.view)
                     playerViewController.player!.play()
                     playerViewController.didMove(toParent: self)
-                    //                case "mp3":
-                    //
-                //                    break
+                case "png","jpg","jpeg","gif":
+                    messageInputBar.inputTextView.resignFirstResponder()
+                    loadFullImage(url: message.Link)
+                    break
                 default:
                     let docLink = NSURL(string: message.Link)
                     UIApplication.shared.open(docLink! as URL, options: [:], completionHandler: nil)
@@ -864,28 +832,47 @@ extension ChatViewController: MessageLabelDelegate {
     
 }
 
-// MARK: - MessageInputBarDelegate
-//extension ChatViewController: MessageInputBarDelegate {
-
-//    func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
-//
-//        (text.count)
-//
-//        if text.count < 8000 {
-//            let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
-//
-//            SocketIOManager.sharedInstance.socketSendMessage(text: "text", message: text, link: "", timeStamp: String(format:"%@", timestamp))
-//
-//            inputBar.inputTextView.text = String()
-//        }else {
-//            let alert = UIAlertController(title: "Warning", message: "Maximum character limit has been exceeded. Please reduce your chat.", preferredStyle: UIAlertController.Style.alert)
-//            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-//
-//        }
-//    }
-
-//}
+extension ChatViewController {
+    func animateViewHeight(_ animateView: UIView, withAnimationType animType: String, andflagClose flag: Bool) {
+        let animation = CATransition()
+        animation.type = CATransitionType.push
+        animation.subtype = CATransitionSubtype(rawValue: animType)
+        animation.duration = 0.5
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        animateView.layer.add(animation, forKey: kCATransition)
+        if flag == false {
+            animateView.isHidden = !animateView.isHidden
+        }
+    }
+    func loadFullImage(url : String){
+        let window = UIApplication.shared.keyWindow!
+        viewFullImage = (Bundle.main.loadNibNamed("ViewFullImage", owner: self, options: nil)?.first as? ViewFullImage)!
+        viewFullImage.bounds = window.bounds
+        viewFullImage.center = window.center
+        
+        viewFullImage.btnClose.addTarget(self, action: #selector(self.actionCloseFullImage), for: .touchUpInside)
+        
+        let placeholderImage = UIImage(named: "avatar_student (1)")!
+        let url = URL(string: url)!
+        DispatchQueue.main.async {
+            self.viewFullImage.imageView.backgroundColor = .clear
+            self.viewFullImage.imageView.contentMode = .scaleAspectFit
+            self.viewFullImage.imageView.sd_setShowActivityIndicatorView(true)
+            self.viewFullImage.imageView.sd_setIndicatorStyle(.gray)
+            self.viewFullImage.imageView.sd_setImage(with: url, placeholderImage: placeholderImage)
+            
+        }
+        
+        self.animateViewHeight(viewFullImage, withAnimationType: CATransitionSubtype.fromTop.rawValue, andflagClose: true)
+        window.addSubview(viewFullImage)
+        
+    }
+    
+    @objc func actionCloseFullImage (){
+         messageInputBar.inputTextView.becomeFirstResponder()
+        self.animateViewHeight(viewFullImage, withAnimationType: CATransitionSubtype.fromBottom.rawValue, andflagClose: false)
+    }
+}
 
 
 extension ChatViewController : MessageInputBarDelegate {
@@ -926,12 +913,12 @@ extension ChatViewController : YouTubePlayerDelegate{
 extension ChatViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func getFileMedia(){
-        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+        let alert = UIAlertController(title: "Choose image or video", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Choose from Camera", style: .default, handler: { _ in
             self.openCamera()
         }))
         
-        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Choose from Library", style: .default, handler: { _ in
             self.openGallary()
         }))
         
@@ -950,7 +937,7 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
         {
             imagePickerController.sourceType = UIImagePickerController.SourceType.camera
-            imagePickerController.allowsEditing = true
+            imagePickerController.allowsEditing = false
             
             imagePickerController.delegate = self
             
@@ -1028,9 +1015,10 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
 extension ChatViewController : UIDocumentMenuDelegate,UIDocumentPickerDelegate{
     func clickFunction(){
         
-        let importMenu = UIDocumentMenuViewController(documentTypes: [String(kUTTypePDF)], in: .import)
+        let importMenu = UIDocumentMenuViewController(documentTypes: [String(kUTTypePDF),String(kUTTypeGIF),String(kUTTypeText),String("com.microsoft.word.doc")], in: .import)
         importMenu.delegate = self
         importMenu.modalPresentationStyle = .formSheet
+        
         self.present(importMenu, animated: true, completion: nil)
     }
     
@@ -1047,12 +1035,20 @@ extension ChatViewController : UIDocumentMenuDelegate,UIDocumentPickerDelegate{
         
         let data = try! Data(contentsOf: myURL.asURL())
         appdelgate?.showLoading()
-          
+        
         APIService.sharedInstance.uploadFile(roomId: String(format: "%@", UserDefaults.standard.value(forKey: "room")  as! CVarArg) , fileUrl: data, fileType: "doc" ,filename: filename, imageData: nil, parameters: [:], completionHandle: {(result, error) in
             if error == nil {
-                let sendfile = Mapper<SendFIle>().map(JSONObject: result)
-                let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
-                SocketIOManager.sharedInstance.sockectSendFile(type: "document", file_type: sendfile?.type ?? "", content: sendfile?.filename ?? "", link: sendfile?.link ?? "", timeStamp: timestamp)
+                if result?.count ?? 0 >= 3 {
+                    let sendfile = Mapper<SendFIle>().map(JSONObject: result)
+                    let timestamp = "\(Date().timeIntervalSince1970 * 1000)"
+                    SocketIOManager.sharedInstance.sockectSendFile(type: "document", file_type: sendfile?.type ?? "", content: sendfile?.filename ?? "", link: sendfile?.link ?? "", timeStamp: timestamp)
+                }else {
+                    let error = result?["message"] as! String
+                    let alert = UIAlertController(title: "Error", message:error, preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+
+                }
             }else {
                 let alert = UIAlertController(title: "Error", message: "Send failed. Please try again.", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
@@ -1095,75 +1091,19 @@ extension UIImage {
 }
 
 extension UIImage {
-    
-     func fixOrientation() -> UIImage {
+    //https://stackoverflow.com/questions/51836652/swift-how-to-prevent-image-being-rotate-and-starch fix load image rotate 90
+    func fixOrientation() -> UIImage {
         if self.imageOrientation == UIImage.Orientation.up {
-               return self
-           }
-           UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
-           self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
-           if let normalizedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext() {
-               UIGraphicsEndImageContext()
-               return normalizedImage
-           } else {
-               return self
-           }
-       }
-//    func fixOrientation() -> UIImage {
-//
-//        // No-op if the orientation is already correct
-//        if ( self.imageOrientation == UIImage.Orientation.up ) {
-//            return self;
-//        }
-//
-//        // We need to calculate the proper transformation to make the image upright.
-//        // We do it in 2 steps: Rotate if Left/Right/Down, and then flip if Mirrored.
-//        var transform: CGAffineTransform = CGAffineTransform.identity
-//
-//        if ( self.imageOrientation == UIImage.Orientation.down || self.imageOrientation == UIImage.Orientation.downMirrored ) {
-//            transform = transform.translatedBy(x: self.size.width, y: self.size.height)
-//            transform = transform.rotated(by: CGFloat(Double.pi))
-//        }
-//
-//        if ( self.imageOrientation == UIImage.Orientation.left || self.imageOrientation == UIImage.Orientation.leftMirrored ) {
-//            transform = transform.translatedBy(x: self.size.width, y: 0)
-//            transform = transform.rotated(by: CGFloat(Double.pi / 2.0))
-//        }
-//
-//        if ( self.imageOrientation == UIImage.Orientation.right || self.imageOrientation == UIImage.Orientation.rightMirrored ) {
-//            transform = transform.translatedBy(x: 0, y: self.size.height);
-//            transform = transform.rotated(by: CGFloat(-Double.pi / 2.0));
-//        }
-//
-//        if ( self.imageOrientation == UIImage.Orientation.upMirrored || self.imageOrientation == UIImage.Orientation.downMirrored ) {
-//            transform = transform.translatedBy(x: self.size.width, y: 0)
-//            transform = transform.scaledBy(x: -1, y: 1)
-//        }
-//
-//        if ( self.imageOrientation == UIImage.Orientation.leftMirrored || self.imageOrientation == UIImage.Orientation.rightMirrored ) {
-//            transform = transform.translatedBy(x: self.size.height, y: 0);
-//            transform = transform.scaledBy(x: -1, y: 1);
-//        }
-//
-//        // Now we draw the underlying CGImage into a new context, applying the transform
-//        // calculated above.
-//        let ctx: CGContext = CGContext(data: nil, width: Int(self.size.width), height: Int(self.size.height),
-//                                                      bitsPerComponent: self.cgImage!.bitsPerComponent, bytesPerRow: 0,
-//                                                      space: self.cgImage!.colorSpace!,
-//                                                      bitmapInfo: self.cgImage!.bitmapInfo.rawValue)!;
-//
-//        ctx.concatenate(transform)
-//
-//        if ( self.imageOrientation == UIImage.Orientation.left ||
-//            self.imageOrientation == UIImage.Orientation.leftMirrored ||
-//            self.imageOrientation == UIImage.Orientation.right ||
-//            self.imageOrientation == UIImage.Orientation.rightMirrored ) {
-//            ctx.draw(self.cgImage!, in: CGRect(x: 0,y: 0,width: self.size.height,height: self.size.width))
-//        } else {
-//            ctx.draw(self.cgImage!, in: CGRect(x: 0,y: 0,width: self.size.width,height: self.size.height))
-//        }
-//
-//        // And now we just create a new UIImage from the drawing context and return it
-//        return UIImage(cgImage: ctx.makeImage()!)
-//    }
+            return self
+        }
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+        if let normalizedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext() {
+            UIGraphicsEndImageContext()
+            return normalizedImage
+        } else {
+            return self
+        }
+    }
+    
 }

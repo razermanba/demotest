@@ -67,7 +67,7 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
               
         if isFromCurrentSender(message: message) == true {
             switch message.file_type {
-            case "png","jpg":
+            case "png","jpg","video","mov","mp4":
                 return .clear
             default:
                  return UIColor(red:0.00, green:0.64, blue:1.00, alpha:1.0)
@@ -75,7 +75,7 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
            
         }else {
             switch message.file_type {
-            case "png","jpg":
+            case "png","jpg","video","mov","mp4":
                 return .clear
             default:
                 return UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
