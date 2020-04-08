@@ -914,7 +914,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Brainfit-Chat-v2/Brainfit-Chat-v2.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = P9265767DK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";
@@ -940,7 +940,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Brainfit-Chat-v2/Brainfit-Chat-v2.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = P9265767DK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";

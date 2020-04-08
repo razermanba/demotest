@@ -136,7 +136,10 @@ class ChatViewController: MessagesViewController  {
     private func configureInputBarItems() {
         let bottomItems = [makeButtonVideo(named: "bfchat-ic-camera"),makeButtonDoc(named: "bfchat-ic-file"),.flexibleSpace]
         messageInputBar.middleContentViewPadding.left = 0
+        messageInputBar.leftStackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 7, right: 0)
+        messageInputBar.leftStackView.isLayoutMarginsRelativeArrangement = true
         messageInputBar.setLeftStackViewWidthConstant(to: 80, animated: false)
+
         messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
         
     }
@@ -144,9 +147,9 @@ class ChatViewController: MessagesViewController  {
     private func makeButtonVideo(named: String) -> InputBarButtonItem {
         return InputBarButtonItem()
             .configure {
-                $0.spacing = .fixed(0)
-                $0.image = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
-                $0.setSize(CGSize(width: 35, height: 40), animated: false)
+                $0.spacing = .fixed(10)
+                $0.setBackgroundImage(UIImage(named: named), for: .normal)// = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
+                $0.setSize(CGSize(width: 30, height: 30), animated: false)
                 $0.tintColor = UIColor(red:0.00, green:0.60, blue:0.80, alpha:1.00)
         }.onSelected {
             $0.tintColor = .gray
@@ -162,9 +165,9 @@ class ChatViewController: MessagesViewController  {
     private func makeButtonDoc(named: String) -> InputBarButtonItem {
         return InputBarButtonItem()
             .configure {
-                $0.spacing = .fixed(0)
-                $0.image = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
-                $0.setSize(CGSize(width: 35, height: 40), animated: false)
+                $0.spacing = .fixed(10)
+                $0.setBackgroundImage(UIImage(named: named), for: .normal) //= UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
+                $0.setSize(CGSize(width: 30, height: 30), animated: false)
                 $0.tintColor = UIColor(red:1.00, green:0.20, blue:0.20, alpha:1.00)
         }.onSelected {
             $0.tintColor = .gray
@@ -734,7 +737,8 @@ extension ChatViewController: MessageCellDelegate {
                     playerViewController.player!.play()
                     playerViewController.didMove(toParent: self)
                 case "png","jpg","jpeg","gif":
-                    messageInputBar.inputTextView.resignFirstResponder()
+//                    messageInputBar.resignFirstResponder()
+                    inputAccessoryView?.isHidden = true
                     loadFullImage(url: message.Link)
                     break
                 default:
@@ -869,7 +873,8 @@ extension ChatViewController {
     }
     
     @objc func actionCloseFullImage (){
-         messageInputBar.inputTextView.becomeFirstResponder()
+         inputAccessoryView?.isHidden = false
+        
         self.animateViewHeight(viewFullImage, withAnimationType: CATransitionSubtype.fromBottom.rawValue, andflagClose: false)
     }
 }
