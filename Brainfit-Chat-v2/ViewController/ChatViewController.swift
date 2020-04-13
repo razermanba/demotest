@@ -138,7 +138,7 @@ class ChatViewController: MessagesViewController  {
         messageInputBar.middleContentViewPadding.left = 0
         messageInputBar.leftStackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 7, right: 0)
         messageInputBar.leftStackView.isLayoutMarginsRelativeArrangement = true
-        messageInputBar.setLeftStackViewWidthConstant(to: 80, animated: false)
+        messageInputBar.setLeftStackViewWidthConstant(to: 60, animated: false)
 
         messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
         
@@ -147,7 +147,7 @@ class ChatViewController: MessagesViewController  {
     private func makeButtonVideo(named: String) -> InputBarButtonItem {
         return InputBarButtonItem()
             .configure {
-                $0.spacing = .fixed(10)
+                $0.spacing = .fixed(0)
                 $0.setBackgroundImage(UIImage(named: named), for: .normal)// = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
                 $0.setSize(CGSize(width: 30, height: 30), animated: false)
                 $0.tintColor = UIColor(red:0.00, green:0.60, blue:0.80, alpha:1.00)
@@ -165,7 +165,7 @@ class ChatViewController: MessagesViewController  {
     private func makeButtonDoc(named: String) -> InputBarButtonItem {
         return InputBarButtonItem()
             .configure {
-                $0.spacing = .fixed(10)
+                $0.spacing = .fixed(0)
                 $0.setBackgroundImage(UIImage(named: named), for: .normal) //= UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
                 $0.setSize(CGSize(width: 30, height: 30), animated: false)
                 $0.tintColor = UIColor(red:1.00, green:0.20, blue:0.20, alpha:1.00)

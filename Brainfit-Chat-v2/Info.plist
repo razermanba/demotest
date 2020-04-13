@@ -36,13 +36,15 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>$(PRODUCT_NAME) camera use</string>
+	<string>Allow to send video to send to other users</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>$(PRODUCT_NAME) microphone use</string>
+	<string>Allow to record video to send to other users</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo Library Access Warning</string>
+	<string>Allow to send photo from local library to send to other users
+
+Allow to send photo from local library to send to other users</string>
 	<key>Privacy - Photo Library Usage Description </key>
-	<string>$(PRODUCT_NAME) photo use</string>
+	<string>Allow to send photo to send to other users</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
