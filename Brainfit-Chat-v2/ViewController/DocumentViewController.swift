@@ -14,7 +14,7 @@ class DocumentViewController: UIViewController ,UIWebViewDelegate {
     let appdelgate = UIApplication.shared.delegate as? AppDelegate
       
     @IBOutlet weak var viewWeb: UIWebView!
-    var urlFile : String?
+    var urlFile : URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +29,8 @@ class DocumentViewController: UIViewController ,UIWebViewDelegate {
         
         viewWeb.scalesPageToFit = true
         viewWeb.contentMode = .scaleToFill
-        let url: URL! = URL(string: urlFile ?? "")
-        viewWeb.loadRequest(URLRequest(url: url))
+//        let url: URL! = URL(string: urlFile ?? "")
+        viewWeb.loadRequest(URLRequest(url: urlFile))
         
     }
     

@@ -20,7 +20,6 @@ struct API {
 //    "https://brainfit-studio.puresolutions.international/"
     
     
-    
     static let SOCKET_URL = "https://brainfitstudiosocket.puresolutions.com.sg"
 //    "https://socket.brainfit-studio.puresolutions.international/"
     

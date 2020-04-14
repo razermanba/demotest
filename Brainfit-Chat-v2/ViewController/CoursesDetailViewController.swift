@@ -14,7 +14,7 @@ import AlamofireImage
 import AVKit
 
 
-class CoursesDetailViewController: UIViewController {
+class CoursesDetailViewController: UIViewController  {
     var courseID : Int = 0
     let appdelgate = UIApplication.shared.delegate as? AppDelegate
     @IBOutlet weak var tableView: UITableView!
@@ -26,7 +26,8 @@ class CoursesDetailViewController: UIViewController {
     var cellButton : CoursesButtonTableViewCell! = nil
     
     var contentText : String = ""
-    var urlFile : String = ""
+    var urlFile : URL!
+    //        = ""
     
     
     var courses = Mapper<CoursesDetail>().map(JSONObject: ())
@@ -44,7 +45,7 @@ class CoursesDetailViewController: UIViewController {
         navigationItem.titleView = imageView
         
         self.tableView.sectionHeaderHeight = 0;
-
+        
         
         getCourses(courseID: String(courseID))
     }
@@ -163,7 +164,7 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
                 if media.downloadable == true {
                     cell.btnDownload.isHidden = false
                     cell.btnDownload.urlString = media.file ?? ""
-                    cell.btnDownload.addTarget(self, action: #selector(actionDownFile(_: )), for: .touchUpInside)
+                    cell.btnDownload.addTarget(self, action: #selector(actionDownFile(_: )), for:.touchUpInside)
                     
                 }else {
                     cell.btnDownload.isHidden = true
@@ -201,8 +202,8 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
                     playerViewController.player!.play()
                     playerViewController.didMove(toParent: self)
                 } else if media.context == "document"{
-                    urlFile = media.file ?? ""
-                    self.performSegue(withIdentifier: "document", sender: self)
+                    //                    urlFile = media.file ?? ""
+                    //                    self.performSegue(withIdentifier: "document", sender: self)
                 }
                 
                 tableView.reloadData()
@@ -228,9 +229,9 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
             }
             return headerView
         }
-
+        
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section >= 1{
             switch contentText {
@@ -283,34 +284,32 @@ extension CoursesDetailViewController{
     
     // MARK: - download file
     func dowloadFile(urlString: String) {
-        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
+        appdelgate?.showLoading()
+        // https://stackoverflow.com/questions/39912905/download-file-using-alamofire-4-0-swift-3
+        // change ten file trong pdf
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            let fileName = URL(string : urlString)
+            var documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            documentsURL.appendPathComponent(fileName?.lastPathComponent ?? "")
+            return (documentsURL, [.removePreviousFile])
+        }
         
-        Alamofire.download(urlString,method: .get, encoding: JSONEncoding.default,to: destination).downloadProgress(closure: { (progress) in
-            //progress closure
-            print(progress)
-        }).response(completionHandler: { (DefaultDownloadResponse) in
-            //here you able to access the DefaultDownloadResponse
-            //result closure
-            if DefaultDownloadResponse.response?.statusCode == 200 {
+        Alamofire.download(
+            urlString,method: .get, encoding: JSONEncoding.default,to: destination).downloadProgress(closure: { (progress) in
+                //progress closure
+            }).response(completionHandler: { (DefaultDownloadResponse) in
+                //here you able to access the DefaultDownloadResponse
+                let fileURL = DefaultDownloadResponse.destinationURL
+                let objectsToShare = [fileURL]
                 
-                print(DefaultDownloadResponse.destinationURL ?? "")
-                do {
-                    
-                    let fileURL = DefaultDownloadResponse.destinationURL
-                    let objectsToShare = [fileURL]
-                    let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
-                    
-                    self.present(activityVC, animated: true, completion: nil)
-                    
-                } catch {
-                    print("cannot write file")
-                    // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
-                }
+                let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
                 
-            }
-            
-        })
+                self.present(activityVC, animated: true, completion: nil)
+                
+                self.appdelgate?.dismissLoading()
+            })
+        
     }
-    
 }
+
 
