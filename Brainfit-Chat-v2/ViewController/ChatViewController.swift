@@ -986,16 +986,18 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
                 // fix bug data rotate -90
                 let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
                 let imageupload = image?.fixOrientation()
-                datafile = imageupload!.pngData()!
+                datafile = imageupload!.jpegData(compressionQuality: 1.0)!
+                print("size of image in KB: %f ", Double(datafile.count) / 1000.0)
+
+                print(datafile)
             }
             
             if mediaType == "public.movie" {
                 print("Video Selected")
                 fileType = "video"
                 filename = timestamp + ".mov"
-                let image = info[UIImagePickerController.InfoKey.mediaURL] as! URL
-                datafile = try! Data.init(contentsOf: image )
-                
+                let video = info[UIImagePickerController.InfoKey.mediaURL] as! URL
+                datafile = try! Data.init(contentsOf: video )
             }
         }
         
