@@ -828,6 +828,7 @@ extension ChatViewController: MessageLabelDelegate {
     
     func didSelectURL(_ url: URL) {
         print("URL Selected: \(url)")
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     func didSelectTransitInformation(_ transitInformation: [String: String]) {

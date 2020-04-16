@@ -42,3 +42,4 @@ enum LOG_TYPE {
     case kREWARD
     case kGAME
 }
+ 

@@ -119,14 +119,13 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
                 imageView.sd_setShowActivityIndicatorView(true)
                 imageView.sd_setIndicatorStyle(.gray)
                 imageView.sd_setImage(with: url, placeholderImage: placeholderImage)
-//                imageView.image?.fixOrientation()
-                
             }
         default:
             break
         }
-        
     }
+    
+
     
     // MARK: - Location Messages
     
