@@ -993,7 +993,7 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
         {
             imagePickerController.sourceType = UIImagePickerController.SourceType.camera
-            imagePickerController.allowsEditing = false
+            imagePickerController.allowsEditing = true
             
             imagePickerController.delegate = self
             
@@ -1037,7 +1037,7 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
                 // fix bug data rotate -90
                 let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
                 let imageupload = image?.fixOrientation()
-                datafile = imageupload!.jpegData(compressionQuality: 1.0)!
+                datafile = imageupload!.jpegData(compressionQuality: 0.5)!
                 print("size of image in KB: %f ", Double(datafile.count) / 1000.0)
                 
                 print(datafile)

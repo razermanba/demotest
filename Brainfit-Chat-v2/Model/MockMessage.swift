@@ -53,7 +53,7 @@ private struct ImageMediaItem: MediaItem {
         case "video","mov","mp4":
             self.size = CGSize(width: 240, height: 135)// sua o day
         case "html":
-            self.size = CGSize(width: 194, height: 220)
+            self.size = CGSize(width: 178, height: 220)
         default:
             self.size = CGSize(width: 100, height: 135)// sua o day
         }

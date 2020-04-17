@@ -73,7 +73,7 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
         if isFromCurrentSender(message: message) == true {
             switch message.file_type {
             case "png","jpg","video","mov","mp4":
-                return UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.00) //.clear
+                return .clear
             case "html":
                 return UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.00)
             default:
@@ -137,32 +137,32 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
             }
             break
         case "html":
-                imageView.image = nil
-                imageView.setNeedsDisplay()
-                
-                self.slp.preview( message.Link,onSuccess: { result in
-                    let url = URL(string: result.image ?? "")
-                    let previewLink = (Bundle.main.loadNibNamed("PreviewLink", owner: self, options: nil)?.first as? PreviewLink)!
-                    previewLink.bounds = imageView.bounds
-                    previewLink.center = imageView.center
-                    previewLink.imgUrl.sd_setImage(with: url, placeholderImage: nil)
-                    previewLink.urlTitle.text = result.title
-                    var attributedString = NSMutableAttributedString(string: result.canonicalUrl ?? "", attributes:[NSAttributedString.Key.link: result.finalUrl])
-                    previewLink.urlLink.attributedText = attributedString
-                    previewLink.descriptionUrl.text = result.description
-                    imageView.addSubview(previewLink)
-                },onError: { error in
-                    print(error)
-                })
+            imageView.image = nil
+            imageView.setNeedsDisplay()
+            
+            self.slp.preview( message.Link,onSuccess: { result in
+                let url = URL(string: result.image ?? "")
+                let previewLink = (Bundle.main.loadNibNamed("PreviewLink", owner: self, options: nil)?.first as? PreviewLink)!
+                previewLink.bounds = imageView.bounds
+                previewLink.center = imageView.center
+                previewLink.imgUrl.sd_setImage(with: url, placeholderImage: nil)
+                previewLink.urlTitle.text = result.title
+                var attributedString = NSMutableAttributedString(string: result.canonicalUrl ?? "", attributes:[NSAttributedString.Key.link: result.finalUrl])
+                previewLink.urlLink.attributedText = attributedString
+                previewLink.descriptionUrl.text = result.description
+                imageView.addSubview(previewLink)
+            },onError: { error in
+                print(error)
+            })
             break
         default:
-            //            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-            //                for subView in imageView.subviews {
-            //                    if subView.tag == 0 {
-            //                        subView.removeFromSuperview()
-            //                    }
-            //                }
-            //            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                for subView in imageView.subviews {
+                    if subView.tag == 0 {
+                        subView.removeFromSuperview()
+                    }
+                }
+            })
             break
         }
     }
@@ -201,7 +201,7 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
     func dismissLoading(){
         hud.dismiss(afterDelay: 0.0)
     }
-
+    
     
 }
 
