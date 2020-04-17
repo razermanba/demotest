@@ -139,7 +139,7 @@ class ChatViewController: MessagesViewController  {
         messageInputBar.leftStackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 7, right: 0)
         messageInputBar.leftStackView.isLayoutMarginsRelativeArrangement = true
         messageInputBar.setLeftStackViewWidthConstant(to: 60, animated: false)
-
+        
         messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
         
     }
@@ -275,9 +275,22 @@ extension ChatViewController {
         
         switch type {
         case "text":
-            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date:formatDate(strDate: create_at) , link: link , type: type,file_type: file_type)
-            self.messageList.insert(message, at: 0)
-            
+            if  verifyUrl(urlString: content) {
+                let url = URL(string: String(format: "%@",content))!
+
+                let options = ImageLoadingOptions(
+                    placeholder: UIImage(named: "placeholder"),
+                    transition: .fadeIn(duration: 0.33)
+                )
+                Nuke.loadImage(with: url, options: options, into: imageview)
+
+                let message = MockMessage(image:imageview.image!, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: content, type : "html" ,file_type: "html")
+                self.messageList.append(message)
+
+            }else {
+                message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type,file_type: file_type)
+                self.messageList.append(message)
+            }
             break
         case "youtube":
             let placeholderImage = UIImage(named: "bg (1)")!
@@ -320,7 +333,7 @@ extension ChatViewController {
                 
                 let url = URL(string: String(format: "%@",link))!
                 let options = ImageLoadingOptions(
-                    placeholder: UIImage(named: "bg-(1)"),
+                    placeholder: UIImage(named: "placeholder"),
                     transition: .fadeIn(duration: 0.33)
                 )
                 
@@ -356,9 +369,22 @@ extension ChatViewController {
         
         switch type {
         case "text":
-            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type,file_type: file_type)
-            self.messageList.append(message)
-            
+            if  verifyUrl(urlString: content) {
+                let url = URL(string: String(format: "%@",content))!
+
+                let options = ImageLoadingOptions(
+                    placeholder: UIImage(named: "placeholder"),
+                    transition: .fadeIn(duration: 0.33)
+                )
+                Nuke.loadImage(with: url, options: options, into: imageview)
+
+                let message = MockMessage(image:imageview.image!, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: content, type : "html" ,file_type: "html")
+                self.messageList.append(message)
+
+            }else {
+                message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type,file_type: file_type)
+                self.messageList.append(message)
+            }
             break
         case "youtube":
             let placeholderImage = UIImage(named: "bg (1)")!
@@ -401,7 +427,7 @@ extension ChatViewController {
                 let url = URL(string: link)!
                 
                 let options = ImageLoadingOptions(
-                    placeholder: UIImage(named: "bg-(1)"),
+                    placeholder: UIImage(named: "placeholder"),
                     transition: .fadeIn(duration: 0.33)
                 )
                 
@@ -439,12 +465,21 @@ extension ChatViewController {
         
         switch type {
         case "text":
-            message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type,file_type: file_type)
-            self.messageList.append(message)
-            //            let message = MockMessage(attributedText: thumbnailWebsite ,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type)
-            //            self.messageList.append(message)
-            
-            
+            if  verifyUrl(urlString: content) {
+                 let url = URL(string: String(format: "%@",content))!
+
+                let options = ImageLoadingOptions(
+                    placeholder: UIImage(named: "placeholder"),
+                    transition: .fadeIn(duration: 0.33)
+                )
+                Nuke.loadImage(with: url, options: options, into: imageview)
+
+                let message = MockMessage(image:imageview.image!, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: content, type : "html" ,file_type: "html")
+                self.messageList.append(message)
+            }else {
+                message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type,file_type: file_type)
+                self.messageList.append(message)
+            }
             break
         case "youtube":
             let placeholderImage = UIImage(named: "bg (1)")!
@@ -484,17 +519,15 @@ extension ChatViewController {
                 let url = URL(string: String(format: "%@",link))!
                 
                 let options = ImageLoadingOptions(
-                    placeholder: UIImage(named: "bg-(1)"),
+                    placeholder: UIImage(named: "placeholder"),
                     transition: .fadeIn(duration: 0.33)
                 )
                 Nuke.loadImage(with: url, options: options, into: imageview)
-                
                 
                 let message = MockMessage(image:imageview.image!, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link, type : type,file_type: file_type)
                 self.messageList.append(message)
                 
                 break
-                
             default:
                 let message = MockMessage(attributedText: docmentText(content ,andLink: link)!,  sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at),link: link , type:type,file_type: file_type)
                 self.messageList.append(message)
@@ -708,7 +741,7 @@ extension ChatViewController: MessageCellDelegate {
                 UIApplication.shared.open(myVideoURL! as URL, options: [:], completionHandler: nil)
                 break
             case "video":
-             
+                
                 player?.pause()
                 let playerViewController = AVPlayerViewController()
                 player = AVPlayer(url: URL(string:message.Link)!)
@@ -737,7 +770,7 @@ extension ChatViewController: MessageCellDelegate {
                     playerViewController.player!.play()
                     playerViewController.didMove(toParent: self)
                 case "png","jpg","jpeg","gif":
-//                    messageInputBar.resignFirstResponder()
+                    //                    messageInputBar.resignFirstResponder()
                     inputAccessoryView?.isHidden = true
                     loadFullImage(url: message.Link)
                     break
@@ -749,7 +782,14 @@ extension ChatViewController: MessageCellDelegate {
                 }
             case "token":
                 break
+            case "html":
+                let docLink = NSURL(string: message.Link)
+                UIApplication.shared.open(docLink! as URL, options: [:], completionHandler: nil)
+                break
             default:
+                let docLink = NSURL(string: message.Link)
+                UIApplication.shared.open(docLink! as URL, options: [:], completionHandler: nil)
+
                 break
             }
         }
@@ -778,6 +818,7 @@ extension ChatViewController: MessageCellDelegate {
         //        messageInputBar.inputTextView.resignFirstResponder()
         //        view.endEditing(true)
     }
+    
     func didTapPlayButton(in cell: AudioMessageCell) {
         //        guard let indexPath = messagesCollectionView.indexPath(for: cell),
         //            let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath, in: messagesCollectionView) else {
@@ -874,9 +915,18 @@ extension ChatViewController {
     }
     
     @objc func actionCloseFullImage (){
-         inputAccessoryView?.isHidden = false
+        inputAccessoryView?.isHidden = false
         
         self.animateViewHeight(viewFullImage, withAnimationType: CATransitionSubtype.fromBottom.rawValue, andflagClose: false)
+    }
+    
+    func verifyUrl (urlString: String?) -> Bool {
+        if let urlString = urlString {
+            if let url = NSURL(string: urlString) {
+                return UIApplication.shared.canOpenURL(url as URL)
+            }
+        }
+        return false
     }
 }
 
@@ -989,7 +1039,7 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
                 let imageupload = image?.fixOrientation()
                 datafile = imageupload!.jpegData(compressionQuality: 1.0)!
                 print("size of image in KB: %f ", Double(datafile.count) / 1000.0)
-
+                
                 print(datafile)
             }
             
@@ -1055,7 +1105,7 @@ extension ChatViewController : UIDocumentMenuDelegate,UIDocumentPickerDelegate{
                     let alert = UIAlertController(title: "Error", message:error, preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
-
+                    
                 }
             }else {
                 let alert = UIAlertController(title: "Error", message: "Send failed. Please try again.", preferredStyle: UIAlertController.Style.alert)

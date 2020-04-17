@@ -27,8 +27,13 @@ import MapKit
 import MessageKit
 import MessageInputBar
 import SDWebImage
+import SwiftLinkPreview
+import JGProgressHUD
 
 final class BasicExampleViewController: ChatViewController {
+    private let slp = SwiftLinkPreview(cache: InMemoryCache())
+    
+    let hud = JGProgressHUD(style: .dark)
     
     override func configureMessageCollectionView() {
         super.configureMessageCollectionView()
@@ -64,18 +69,20 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
     
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
         let message = messageList[indexPath.section]
-              
+        
         if isFromCurrentSender(message: message) == true {
             switch message.file_type {
             case "png","jpg","video","mov","mp4":
-                return .clear
+                return UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.00) //.clear
+            case "html":
+                return UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.00)
             default:
-                 return UIColor(red:0.00, green:0.64, blue:1.00, alpha:1.0)
+                return UIColor(red:0.00, green:0.64, blue:1.00, alpha:1.0)
             }
-           
+            
         }else {
             switch message.file_type {
-            case "png","jpg","video","mov","mp4":
+            case "png","jpg","video","mov","mp4","html":
                 return .clear
             default:
                 return UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
@@ -111,21 +118,56 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
         let message = messageList[indexPath.section]
         switch message.file_type {
         case "png","jpg":
-            let placeholderImage = UIImage(named: "avatar_student (1)")!
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                for subView in imageView.subviews {
+                    if subView.tag == 0 {
+                        subView.removeFromSuperview()
+                    }
+                }
+            })
+            
+            let placeholderImage = UIImage(named: "placeholder")!
             let url = URL(string: message.Link)!
             DispatchQueue.main.async {
                 imageView.backgroundColor = .clear
-                imageView.contentMode = .scaleAspectFit
+                imageView.contentMode = .scaleAspectFill
                 imageView.sd_setShowActivityIndicatorView(true)
                 imageView.sd_setIndicatorStyle(.gray)
                 imageView.sd_setImage(with: url, placeholderImage: placeholderImage)
             }
+            break
+        case "html":
+                imageView.image = nil
+                imageView.setNeedsDisplay()
+                
+                self.slp.preview( message.Link,onSuccess: { result in
+                    let url = URL(string: result.image ?? "")
+                    let previewLink = (Bundle.main.loadNibNamed("PreviewLink", owner: self, options: nil)?.first as? PreviewLink)!
+                    previewLink.bounds = imageView.bounds
+                    previewLink.center = imageView.center
+                    previewLink.imgUrl.sd_setImage(with: url, placeholderImage: nil)
+                    previewLink.urlTitle.text = result.title
+                    var attributedString = NSMutableAttributedString(string: result.canonicalUrl ?? "", attributes:[NSAttributedString.Key.link: result.finalUrl])
+                    previewLink.urlLink.attributedText = attributedString
+                    previewLink.descriptionUrl.text = result.description
+                    imageView.addSubview(previewLink)
+                },onError: { error in
+                    print(error)
+                })
+            break
         default:
+            //            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            //                for subView in imageView.subviews {
+            //                    if subView.tag == 0 {
+            //                        subView.removeFromSuperview()
+            //                    }
+            //                }
+            //            })
             break
         }
     }
     
-
+    
     
     // MARK: - Location Messages
     
@@ -151,6 +193,16 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
         return LocationMessageSnapshotOptions(showsBuildings: true, showsPointsOfInterest: true, span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
     }
     
+    func showLoading(imageview : UIImageView ){
+        hud.textLabel.text = ""
+        hud.show(in: imageview)
+    }
+    
+    func dismissLoading(){
+        hud.dismiss(afterDelay: 0.0)
+    }
+
+    
 }
 
 // MARK: - MessagesLayoutDelegate
@@ -158,7 +210,7 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
 extension BasicExampleViewController: MessagesLayoutDelegate {
     
     func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        return 18
+        return 0
     }
     
     func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {

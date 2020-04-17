@@ -54,6 +54,13 @@ class LoginviewController : UIViewController, UITextFieldDelegate{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     
@@ -61,6 +68,8 @@ class LoginviewController : UIViewController, UITextFieldDelegate{
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
+    
+    
     
     
     @IBAction func actionKeep(_ sender: Any) {

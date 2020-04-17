@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FD1-Go-FxS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FD1-Go-FxS">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -71,10 +71,10 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kbq-Fc-YWs">
-                                <rect key="frame" x="70" y="729" width="228" height="38"/>
+                                <rect key="frame" x="70" y="747" width="228" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="txtVersion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uto-9J-rDI">
-                                        <rect key="frame" x="75.666666666666657" y="17.666666666666629" width="77" height="20.333333333333329"/>
+                                        <rect key="frame" x="75.666666666666657" y="-0.33333333333337123" width="77" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -82,7 +82,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="38" id="HTm-bc-EmS"/>
+                                    <constraint firstAttribute="height" constant="20" id="HTm-bc-EmS"/>
                                     <constraint firstItem="Uto-9J-rDI" firstAttribute="centerX" secondItem="kbq-Fc-YWs" secondAttribute="centerX" id="Z6n-uR-mbU"/>
                                     <constraint firstAttribute="bottom" secondItem="Uto-9J-rDI" secondAttribute="bottom" id="ieE-0h-MDS"/>
                                 </constraints>
@@ -120,7 +120,7 @@
                                 </connections>
                             </button>
                             <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="geg-5B-rNg">
-                                <rect key="frame" x="37" y="96" width="299" height="144"/>
+                                <rect key="frame" x="37" y="140" width="299" height="144"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-1" translatesAutoresizingMaskIntoConstraints="NO" id="lPA-AL-kzY" customClass="logo">
                                         <rect key="frame" x="0.0" y="0.0" width="298" height="138"/>
@@ -139,12 +139,29 @@
                                     <constraint firstAttribute="trailing" secondItem="lPA-AL-kzY" secondAttribute="trailing" constant="1" id="chR-l7-nXb"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCH-hR-cqo">
+                                <rect key="frame" x="150" y="713" width="75" height="26"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <state key="normal" title="Privacy policy">
+                                    <color key="titleColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="OhW-SG-o4B" kind="push" id="uN0-qe-m01"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Login means you agree with our" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmU-HE-jrf">
+                                <rect key="frame" x="89" y="697.66666666666663" width="197" height="15.333333333333371"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="lLX-bF-nkZ" secondAttribute="bottom" id="4hq-QG-dPI"/>
                             <constraint firstItem="lLX-bF-nkZ" firstAttribute="trailing" secondItem="qeM-rt-KwG" secondAttribute="trailing" id="7m2-4p-cID"/>
                             <constraint firstItem="kbq-Fc-YWs" firstAttribute="leading" secondItem="qeM-rt-KwG" secondAttribute="leading" constant="70" id="As1-hV-KJH"/>
+                            <constraint firstItem="kbq-Fc-YWs" firstAttribute="top" secondItem="HCH-hR-cqo" secondAttribute="bottom" constant="8" id="ERp-B1-Sk9"/>
                             <constraint firstItem="lLX-bF-nkZ" firstAttribute="top" secondItem="8Vn-QA-gKL" secondAttribute="top" id="GQj-Od-Qan"/>
                             <constraint firstItem="qeM-rt-KwG" firstAttribute="trailing" secondItem="B6I-R0-Sla" secondAttribute="trailing" constant="39" id="GvK-pE-jNe"/>
                             <constraint firstItem="9hp-Gk-UMX" firstAttribute="bottom" secondItem="0IM-kx-LVJ" secondAttribute="bottom" constant="-2" id="IOy-mq-DSM"/>
@@ -155,14 +172,17 @@
                             <constraint firstItem="geg-5B-rNg" firstAttribute="leading" secondItem="qeM-rt-KwG" secondAttribute="leading" constant="37" id="LqI-GQ-bgO"/>
                             <constraint firstItem="9hp-Gk-UMX" firstAttribute="leading" secondItem="0IM-kx-LVJ" secondAttribute="trailing" constant="4" id="R6a-jT-64m"/>
                             <constraint firstItem="geg-5B-rNg" firstAttribute="top" secondItem="qeM-rt-KwG" secondAttribute="top" constant="52" id="TZR-Hm-Ta6"/>
+                            <constraint firstItem="HCH-hR-cqo" firstAttribute="top" secondItem="cmU-HE-jrf" secondAttribute="bottom" id="TjG-Mg-Wt2"/>
                             <constraint firstItem="hIx-kd-3AK" firstAttribute="centerY" secondItem="8Vn-QA-gKL" secondAttribute="centerY" constant="-49.5" id="XOW-WQ-1Z1"/>
                             <constraint firstItem="nnh-y8-I83" firstAttribute="centerX" secondItem="8Vn-QA-gKL" secondAttribute="centerX" constant="-3.5" id="YmM-Hr-vVr"/>
                             <constraint firstItem="hIx-kd-3AK" firstAttribute="leading" secondItem="qeM-rt-KwG" secondAttribute="leading" constant="32" id="ZCq-Rr-L6J"/>
                             <constraint firstItem="nnh-y8-I83" firstAttribute="trailing" secondItem="hIx-kd-3AK" secondAttribute="trailing" id="ZhF-lI-Waw"/>
                             <constraint firstItem="nBn-qU-OM6" firstAttribute="leading" secondItem="qeM-rt-KwG" secondAttribute="leading" constant="31" id="af7-eb-g7Q"/>
+                            <constraint firstItem="HCH-hR-cqo" firstAttribute="centerX" secondItem="8Vn-QA-gKL" secondAttribute="centerX" id="dAi-2D-C2V"/>
                             <constraint firstItem="geg-5B-rNg" firstAttribute="centerX" secondItem="8Vn-QA-gKL" secondAttribute="centerX" constant="-1" id="gUH-ud-Ra2"/>
                             <constraint firstItem="nBn-qU-OM6" firstAttribute="top" secondItem="0IM-kx-LVJ" secondAttribute="bottom" constant="51.329999999999998" id="h3D-aN-bWa"/>
                             <constraint firstItem="B6I-R0-Sla" firstAttribute="top" secondItem="hIx-kd-3AK" secondAttribute="bottom" constant="2" id="hr1-Jm-5QQ"/>
+                            <constraint firstItem="cmU-HE-jrf" firstAttribute="centerX" secondItem="8Vn-QA-gKL" secondAttribute="centerX" id="hzG-kc-a1P"/>
                             <constraint firstItem="B6I-R0-Sla" firstAttribute="leading" secondItem="qeM-rt-KwG" secondAttribute="leading" constant="32" id="irF-ye-FmW"/>
                             <constraint firstItem="0IM-kx-LVJ" firstAttribute="leading" secondItem="qeM-rt-KwG" secondAttribute="leading" constant="31" id="mRr-se-Eqn"/>
                             <constraint firstItem="qeM-rt-KwG" firstAttribute="trailing" secondItem="kbq-Fc-YWs" secondAttribute="trailing" constant="77" id="nOL-E3-lab"/>
@@ -186,6 +206,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXj-mV-COE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="943.20000000000005" y="780.29556650246309"/>
+        </scene>
+        <!--Privacy policy-->
+        <scene sceneID="ZBn-1Y-hRe">
+            <objects>
+                <viewController id="OhW-SG-o4B" customClass="PrivacypolicyViewController" customModule="Brainfit_Chat_v2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="haH-m6-5Ua">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEt-JG-15r">
+                                <rect key="frame" x="0.0" y="128" width="375" height="650"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <string key="text">Thank you for downloading the BrainFit App.By downloading and using the app, you shall be deemed to have accepted and agree to be legally bound bythe terms of the Privacy Policy below.      Privacy Policy                                                        This is the privacy policy for services provided through applications byBrainFit StudioPte Ltd (hereinafter “BFS”), a company incorporated in Singapore.BFSis committed to protecting the privacy of the users of its services. BFStherefore undertakes commercially reasonable efforts to protect users’ personal information retained in our servers from loss and unauthorized access, use, disclosure, alteration, or destruction. However, due to the inherently open nature of the Internet, BFScannot and does not guarantee that the use of its services and the storage of information on its servers will be absolutely secure and without error.BFScollects user information that are voluntarily provided by users of its services and information that are generated in the course of users using its services. These information are used by BFS and its authorized business partners to render its services. BFS may also use a variety of technologies to better understand its users and to improve its services,.BFS may send emails to users containing updates, news or information relating to its services. Users will be able to opt-out of most of these emails.Without the explicit consent of users, BFS will not sell or disclose personal information of users to third parties except as specified in this policy. These exceptions include, but are not limited to, situations where BFS are legally required to disclose such information by appropriate authorities.BFS shall not be responsible for user and user-related information that users share, by choice or unintentionally, directly or indirectly, in any form or media, which makes that information available to anyone who has not been authorized by BFS to have access to that information. By using the services of BFS, users agree to defend, indemnify, and hold BFS, its directors, employees, licensees and suppliers, harmless from and against any claims, actions, demands, liabilities and settlements including, without limitation, reasonable legal and accounting fees arising out of and related to such information being made available by the user.BFS reserves the right to modify this privacy policy at any time; changes will be updated accordingly on this site. If material changes are made to this policy, users will be notified by email, on this website or by any other means as BFS deems appropriate.Governing LawThis Privacy Policy and all matters arising, shall be governed and construed in accordance with the laws of the Republic of Singapore and parties irrevocably submit to the exclusive jurisdiction of the Singapore courts savedthat BFSshall have the right to sue or recover its fees, payments or damagesin any jurisdiction in which you or your assets are situated.
+</string>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="JEt-JG-15r" firstAttribute="leading" secondItem="ylr-zo-RVx" secondAttribute="leading" id="88E-dn-0ba"/>
+                            <constraint firstItem="JEt-JG-15r" firstAttribute="bottom" secondItem="ylr-zo-RVx" secondAttribute="bottom" id="cOa-yu-btu"/>
+                            <constraint firstItem="JEt-JG-15r" firstAttribute="trailing" secondItem="ylr-zo-RVx" secondAttribute="trailing" id="n86-Fc-wCw"/>
+                            <constraint firstItem="JEt-JG-15r" firstAttribute="top" secondItem="ylr-zo-RVx" secondAttribute="top" constant="40" id="qyX-Bs-4ae"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ylr-zo-RVx"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Privacy policy" id="fQc-KR-D4l"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yiN-vJ-co3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="943" y="1535"/>
         </scene>
         <!--Room Chat Table View Controller-->
         <scene sceneID="kgF-sQ-c5T">
@@ -476,10 +529,11 @@
         <!--Navigation Controller-->
         <scene sceneID="d7a-sj-kan">
             <objects>
-                <navigationController storyboardIdentifier="NavigationStoryboard" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="FD1-Go-FxS" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationStoryboard" automaticallyAdjustsScrollViewInsets="NO" id="FD1-Go-FxS" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Y7F-Tq-OeO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="J2s-SJ-7Ju">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

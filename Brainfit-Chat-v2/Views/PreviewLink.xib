@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PreviewLink" customModule="Brainfit_Chat_v2" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="194" height="188"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="url" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKX-ds-IfX">
+                    <rect key="frame" x="8" y="122" width="176" height="19"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cvG-ew-Mo6">
+                    <rect key="frame" x="8" y="14" width="174" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="Ux7-60-WZt"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="KAJKLASGA" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rnk-dd-vOO">
+                    <rect key="frame" x="8" y="165" width="176" height="10"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3s-xS-vLw">
+                    <rect key="frame" x="8" y="147" width="176" height="10"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="9"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Q3s-xS-vLw" secondAttribute="trailing" constant="10" id="0A7-DY-7gG"/>
+                <constraint firstItem="cvG-ew-Mo6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="14" id="5O2-ey-h91"/>
+                <constraint firstItem="HKX-ds-IfX" firstAttribute="top" secondItem="cvG-ew-Mo6" secondAttribute="bottom" constant="8" id="Ns1-N5-jBg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HKX-ds-IfX" secondAttribute="trailing" constant="10" id="Ygl-7w-qEf"/>
+                <constraint firstItem="Q3s-xS-vLw" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="f7K-Jp-fi3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cvG-ew-Mo6" secondAttribute="trailing" constant="12" id="hf8-C0-OGt"/>
+                <constraint firstItem="HKX-ds-IfX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="tIB-NM-Kpz"/>
+                <constraint firstItem="Q3s-xS-vLw" firstAttribute="top" secondItem="HKX-ds-IfX" secondAttribute="bottom" constant="6" id="yDW-xh-WUX"/>
+                <constraint firstItem="Rnk-dd-vOO" firstAttribute="top" secondItem="Q3s-xS-vLw" secondAttribute="bottom" constant="8" id="yET-W1-X2w"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Rnk-dd-vOO" secondAttribute="trailing" constant="10" id="zqW-pZ-FIG"/>
+                <constraint firstItem="Rnk-dd-vOO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="zsL-42-RIg"/>
+                <constraint firstItem="cvG-ew-Mo6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="zwX-Xn-FfQ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="descriptionUrl" destination="Rnk-dd-vOO" id="DCn-AF-ksS"/>
+                <outlet property="imgUrl" destination="cvG-ew-Mo6" id="lX4-Mr-XVF"/>
+                <outlet property="urlLink" destination="Q3s-xS-vLw" id="Fxl-ZG-UEL"/>
+                <outlet property="urlTitle" destination="HKX-ds-IfX" id="SVa-7P-Hmk"/>
+            </connections>
+            <point key="canvasLocation" x="111.59420289855073" y="166.74107142857142"/>
+        </view>
+    </objects>
+</document>
