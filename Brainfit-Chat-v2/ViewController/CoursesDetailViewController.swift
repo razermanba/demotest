@@ -26,8 +26,7 @@ class CoursesDetailViewController: UIViewController  {
     var cellButton : CoursesButtonTableViewCell! = nil
     
     var contentText : String = ""
-    var urlFile : URL!
-    //        = ""
+    var urlFile : String = ""
     
     
     var courses = Mapper<CoursesDetail>().map(JSONObject: ())
@@ -202,8 +201,8 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
                     playerViewController.player!.play()
                     playerViewController.didMove(toParent: self)
                 } else if media.context == "document"{
-                    //                    urlFile = media.file ?? ""
-                    //                    self.performSegue(withIdentifier: "document", sender: self)
+                    urlFile = media.file ?? ""
+                    self.performSegue(withIdentifier: "document", sender: self)
                 }
                 
                 tableView.reloadData()

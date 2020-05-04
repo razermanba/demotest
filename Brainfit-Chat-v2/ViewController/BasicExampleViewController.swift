@@ -79,7 +79,6 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
             default:
                 return UIColor(red:0.00, green:0.64, blue:1.00, alpha:1.0)
             }
-            
         }else {
             switch message.file_type {
             case "png","jpg","video","mov","mp4","html":
@@ -141,6 +140,7 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
             imageView.setNeedsDisplay()
             
             self.slp.preview( message.Link,onSuccess: { result in
+                print(result)
                 let url = URL(string: result.image ?? "")
                 let previewLink = (Bundle.main.loadNibNamed("PreviewLink", owner: self, options: nil)?.first as? PreviewLink)!
                 previewLink.bounds = imageView.bounds

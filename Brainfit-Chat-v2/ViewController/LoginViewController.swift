@@ -21,13 +21,13 @@ class LoginviewController : UIViewController, UITextFieldDelegate{
     @IBOutlet weak var btnkeep: UIButton!
     let appdelgate = UIApplication.shared.delegate as? AppDelegate
     
-    
     var flagKeep : Bool = false
-    
+    //This is the privacy policy for services through applications by BrainFit Studio Pte Ltd and BrainFit Group Pte Ltd (collective known as “BFS” hereafter), a company incorporated in Singapore.
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        needsUpdate()
+        //        needsUpdate()
         
         txtUsername.text = UserDefaults.standard.string(forKey: "username")
         txtPassword.text = UserDefaults.standard.string(forKey: "password")
@@ -39,11 +39,16 @@ class LoginviewController : UIViewController, UITextFieldDelegate{
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         
-        let keeplogin = UserDefaults.standard.string(forKey: "keepLogin")
-        if keeplogin == "true" && UserDefaults.standard.string(forKey: "username") != nil{
+        guard let keeplogin = UserDefaults.standard.string(forKey: "keepLogin") else {
+            return
+        }
+        
+        if keeplogin == "true" && UserDefaults.standard.string(forKey: "token") != nil{
             btnkeep.setImage(UIImage(named: "border_ticked_signin"), for: UIControl.State.normal)
             loginUser(username: txtUsername.text!, password: txtPassword.text!)
+            btnkeep.setImage(UIImage(named: "border_ticked_signin"), for: UIControl.State.normal)
         }else {
+            btnkeep.setImage(UIImage(named: "border_tick_signin"), for: UIControl.State.normal)
             UserDefaults.standard.set("false", forKey: "keepLogin")
         }
     }
@@ -55,9 +60,9 @@ class LoginviewController : UIViewController, UITextFieldDelegate{
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-
+        
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -117,18 +122,18 @@ extension LoginviewController{
                 
                 if let token = Messaging.messaging().fcmToken {
                     print("FCM token: \(token)")
-                
-
-
-                let paramToken = ["device_id": UIDevice.current.identifierForVendor!.uuidString,
-                                  "device_token":token,
-                                  "device_type": "ios"] as [String : AnyObject]
-                
-                APIService.sharedInstance.submitDeviceToken(paramToken, completionHandle: { (result, error) in
-                    if error == nil {
-                        print(result)
-                    }
-                })
+                    
+                    
+                    
+                    let paramToken = ["device_id": UIDevice.current.identifierForVendor!.uuidString,
+                                      "device_token":token,
+                                      "device_type": "ios"] as [String : AnyObject]
+                    
+                    APIService.sharedInstance.submitDeviceToken(paramToken, completionHandle: { (result, error) in
+                        if error == nil {
+                            print(result)
+                        }
+                    })
                 }
                 
                 APIService.sharedInstance.getProfile([:], completionHandle:  { (result, error) in
@@ -137,7 +142,7 @@ extension LoginviewController{
                         
                         UserDefaults.standard.set(self.txtUsername.text!, forKey: "username")
                         UserDefaults.standard.set(self.txtPassword.text!, forKey: "password")
-//                        UserDefaults.standard.set(user?.room, forKey: "room")
+                        //                        UserDefaults.standard.set(user?.room, forKey: "room")
                         UserDefaults.standard.set(user?.role, forKey: "role")
                         UserDefaults.standard.set(user?.id, forKey: "id")
                         UserDefaults.standard.set(user?.name, forKey: "name")
@@ -172,34 +177,34 @@ extension LoginviewController{
         })
     }
     
-//    func needsUpdate() {
-//        let infoDictionary = Bundle.main.infoDictionary
-//        let appID = infoDictionary!["CFBundleIdentifier"] as! String
-//        let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(appID)")
-//        guard let data = try? Data(map: url) else {
-//            print("There is an error!")
-//            return 
-//        }
-//        let lookup = (try? JSONSerialization.jsonObject(with: data , options: [])) as? [String: Any]
-//        if let resultCount = lookup!["resultCount"] as? Int, resultCount == 1 {
-//            if let results = lookup!["results"] as? [[String:Any]] {
-//                if let appStoreVersion = results[0]["version"] as? String{
-//                    let currentVersion = infoDictionary!["CFBundleShortVersionString"] as? String
-//                    if !(appStoreVersion == currentVersion) {
-//                        print("Need to update [\(appStoreVersion) != \(String(describing: currentVersion))]")
-//                    }else {
-//                        let alert = UIAlertController(title: "Announcement", message: "Please update new version \(String(describing: currentVersion))", preferredStyle: UIAlertController.Style.alert)
-//                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default){ action -> Void in
-//                            guard let url = URL(string: "itms://itunes.apple.com/us/app/personal-brain-coach/id1244995154?ls=1&mt=8") else { return }
-//                            UIApplication.shared.open(url)
-//                        })
-//                        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
-//                        self.present(alert, animated: true, completion: nil)
-//                    }
-//                }
-//            }
-//        }
-//    }
+    //    func needsUpdate() {
+    //        let infoDictionary = Bundle.main.infoDictionary
+    //        let appID = infoDictionary!["CFBundleIdentifier"] as! String
+    //        let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(appID)")
+    //        guard let data = try? Data(map: url) else {
+    //            print("There is an error!")
+    //            return
+    //        }
+    //        let lookup = (try? JSONSerialization.jsonObject(with: data , options: [])) as? [String: Any]
+    //        if let resultCount = lookup!["resultCount"] as? Int, resultCount == 1 {
+    //            if let results = lookup!["results"] as? [[String:Any]] {
+    //                if let appStoreVersion = results[0]["version"] as? String{
+    //                    let currentVersion = infoDictionary!["CFBundleShortVersionString"] as? String
+    //                    if !(appStoreVersion == currentVersion) {
+    //                        print("Need to update [\(appStoreVersion) != \(String(describing: currentVersion))]")
+    //                    }else {
+    //                        let alert = UIAlertController(title: "Announcement", message: "Please update new version \(String(describing: currentVersion))", preferredStyle: UIAlertController.Style.alert)
+    //                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default){ action -> Void in
+    //                            guard let url = URL(string: "itms://itunes.apple.com/us/app/personal-brain-coach/id1244995154?ls=1&mt=8") else { return }
+    //                            UIApplication.shared.open(url)
+    //                        })
+    //                        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+    //                        self.present(alert, animated: true, completion: nil)
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
 }
 

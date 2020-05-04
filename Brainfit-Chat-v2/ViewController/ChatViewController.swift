@@ -146,7 +146,7 @@ class ChatViewController: MessagesViewController  {
     
     private func makeButtonVideo(named: String) -> InputBarButtonItem {
         return InputBarButtonItem()
-            .configure {
+        .configure {
                 $0.spacing = .fixed(0)
                 $0.setBackgroundImage(UIImage(named: named), for: .normal)// = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
                 $0.setSize(CGSize(width: 30, height: 30), animated: false)
@@ -175,6 +175,7 @@ class ChatViewController: MessagesViewController  {
             $0.tintColor = UIColor(red:1.00, green:0.20, blue:0.20, alpha:1.00)
         }.onTouchUpInside { _ in
             print("Item Tapped")
+          
             self.clickFunction()
         }
     }
@@ -928,6 +929,31 @@ extension ChatViewController {
         }
         return false
     }
+    
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
 }
 
 
@@ -969,7 +995,12 @@ extension ChatViewController : YouTubePlayerDelegate{
 extension ChatViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func getFileMedia(){
-        let alert = UIAlertController(title: "Choose image or video", message: nil, preferredStyle: .actionSheet)
+        var alert = UIAlertController(title: "Choose image or video", message: nil, preferredStyle: .actionSheet)
+       
+        if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad ){
+            alert = UIAlertController(title: "Choose image or video", message: nil, preferredStyle: .alert)
+        }
+        
         alert.addAction(UIAlertAction(title: "Choose from Camera", style: .default, handler: { _ in
             self.openCamera()
         }))
@@ -993,7 +1024,7 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
         {
             imagePickerController.sourceType = UIImagePickerController.SourceType.camera
-            imagePickerController.allowsEditing = true
+            imagePickerController.allowsEditing = false
             
             imagePickerController.delegate = self
             
@@ -1012,7 +1043,7 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
     func openGallary()
     {
         imagePickerController.sourceType = UIImagePickerController.SourceType.photoLibrary
-        imagePickerController.allowsEditing = true
+        imagePickerController.allowsEditing = false
         imagePickerController.delegate = self
         
         imagePickerController.mediaTypes = ["public.image", "public.movie"]
@@ -1036,8 +1067,9 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
                 filename = timestamp + ".png"
                 // fix bug data rotate -90
                 let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-                let imageupload = image?.fixOrientation()
-                datafile = imageupload!.jpegData(compressionQuality: 0.5)!
+                let imageResize =  resizeImage(image: image!, targetSize: CGSize(width: 1024, height: 576))
+                let imageupload = imageResize.fixOrientation()
+                datafile = imageupload.jpegData(compressionQuality: 0.5)!
                 print("size of image in KB: %f ", Double(datafile.count) / 1000.0)
                 
                 print(datafile)
@@ -1072,12 +1104,18 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
 
 extension ChatViewController : UIDocumentMenuDelegate,UIDocumentPickerDelegate{
     func clickFunction(){
-        
+
         let importMenu = UIDocumentMenuViewController(documentTypes: [String(kUTTypePDF),String(kUTTypeGIF),String(kUTTypeText),String("com.microsoft.word.doc")], in: .import)
         importMenu.delegate = self
-        importMenu.modalPresentationStyle = .formSheet
-        
+        if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad ){
+            importMenu.modalPresentationStyle = .popover
+            importMenu.popoverPresentationController?.sourceView = self.messageInputBar.leftStackView
+        }else {
+            importMenu.modalPresentationStyle = .formSheet
+        }
+
         self.present(importMenu, animated: true, completion: nil)
+
     }
     
     
@@ -1127,6 +1165,7 @@ extension ChatViewController : UIDocumentMenuDelegate,UIDocumentPickerDelegate{
     
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         print("view was cancelled")
+        
         dismiss(animated: true, completion: nil)
     }
 }
@@ -1146,9 +1185,6 @@ extension UIImage {
             }
         }
     }
-}
-
-extension UIImage {
     //https://stackoverflow.com/questions/51836652/swift-how-to-prevent-image-being-rotate-and-starch fix load image rotate 90
     func fixOrientation() -> UIImage {
         if self.imageOrientation == UIImage.Orientation.up {
@@ -1163,5 +1199,6 @@ extension UIImage {
             return self
         }
     }
-    
+
 }
+

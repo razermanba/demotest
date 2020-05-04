@@ -17,9 +17,9 @@ class TabBarViewController: UITabBarController {
         self.tabBar.tintColor = UIColor.white
         self.tabBar.unselectedItemTintColor = UIColor.white
         let role = UserDefaults.standard.value(forKey: "role") as! String
-        if role == "student" {
-            self.viewControllers?.remove(at: 1)
-        }
+//        if role == "student" {
+//            self.viewControllers?.remove(at: 1)
+//        }
     }
     
 
