@@ -111,8 +111,10 @@ class LoginviewController : UIViewController, UITextFieldDelegate{
 extension LoginviewController{
     func loginUser( username : String ,password : String ) {
         appdelgate?.showLoading()
-        let param = ["username": username,
-                     "password": password ] as [String : AnyObject]
+        print(username.lowercased().replacingOccurrences(of:" ", with: ""))
+        
+        let param = ["username": username.lowercased().replacingOccurrences(of:" ", with: ""),
+                     "password": password.lowercased().replacingOccurrences(of:" ", with: "") ] as [String : AnyObject]
         
         APIService.sharedInstance.login(param , completionHandle: { (result, error) in
             if error == nil {

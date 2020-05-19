@@ -75,8 +75,6 @@ class ChatViewController: MessagesViewController  {
         
         loadHistoryChat()
         
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,7 +144,7 @@ class ChatViewController: MessagesViewController  {
     
     private func makeButtonVideo(named: String) -> InputBarButtonItem {
         return InputBarButtonItem()
-        .configure {
+            .configure {
                 $0.spacing = .fixed(0)
                 $0.setBackgroundImage(UIImage(named: named), for: .normal)// = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
                 $0.setSize(CGSize(width: 30, height: 30), animated: false)
@@ -175,7 +173,7 @@ class ChatViewController: MessagesViewController  {
             $0.tintColor = UIColor(red:1.00, green:0.20, blue:0.20, alpha:1.00)
         }.onTouchUpInside { _ in
             print("Item Tapped")
-          
+            
             self.clickFunction()
         }
     }
@@ -196,7 +194,6 @@ extension ChatViewController {
                 }
                 
                 self.pageNumber = self.pageNumber + 1;
-                
                 self.messagesCollectionView.reloadData()
                 self.refreshControl.endRefreshing()
                 self.messagesCollectionView.scrollToBottom(animated: true)
@@ -283,14 +280,15 @@ extension ChatViewController {
                     placeholder: UIImage(named: "placeholder"),
                     transition: .fadeIn(duration: 0.33)
                 )
+
                 Nuke.loadImage(with: url, options: options, into: imageview)
 
                 let message = MockMessage(image:imageview.image!, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: content, type : "html" ,file_type: "html")
-                self.messageList.append(message)
+               self.messageList.insert(message, at: 0)
 
             }else {
                 message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type,file_type: file_type)
-                self.messageList.append(message)
+                self.messageList.insert(message, at: 0)
             }
             break
         case "youtube":
@@ -372,16 +370,16 @@ extension ChatViewController {
         case "text":
             if  verifyUrl(urlString: content) {
                 let url = URL(string: String(format: "%@",content))!
-
+                
                 let options = ImageLoadingOptions(
                     placeholder: UIImage(named: "placeholder"),
                     transition: .fadeIn(duration: 0.33)
                 )
                 Nuke.loadImage(with: url, options: options, into: imageview)
-
+                
                 let message = MockMessage(image:imageview.image!, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: content, type : "html" ,file_type: "html")
                 self.messageList.append(message)
-
+                
             }else {
                 message = MockMessage(text:content, sender: Sender(id: user_id , displayName:  name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: link , type: type,file_type: file_type)
                 self.messageList.append(message)
@@ -467,14 +465,14 @@ extension ChatViewController {
         switch type {
         case "text":
             if  verifyUrl(urlString: content) {
-                 let url = URL(string: String(format: "%@",content))!
-
+                let url = URL(string: String(format: "%@",content))!
+                
                 let options = ImageLoadingOptions(
                     placeholder: UIImage(named: "placeholder"),
                     transition: .fadeIn(duration: 0.33)
                 )
                 Nuke.loadImage(with: url, options: options, into: imageview)
-
+                
                 let message = MockMessage(image:imageview.image!, sender: Sender(id: user_id, displayName:name), messageId: UUID().uuidString, date: formatDate(strDate: create_at) , link: content, type : "html" ,file_type: "html")
                 self.messageList.append(message)
             }else {
@@ -720,7 +718,17 @@ extension ChatViewController: MessageCellDelegate {
             let message = messageList[indexPath.section]
             switch message.Type {
             case "youtube":
-                videoPlayer = YouTubePlayerView(frame: CGRect(x: 50, y: cell.frame.minY + 40, width: 300 , height: 190))
+                //                videoPlayer = YouTubePlayerView(frame: CGRect(x: 50, y: cell.frame.minY + 40, width: 300 , height: 190))
+                if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad ){
+                    if (userSender.senderId == message.sender.senderId) {
+                        videoPlayer = YouTubePlayerView(frame: CGRect(x: cell.frame.width - 320, y: cell.frame.minY + 25, width: 280 , height: cell.frame.height - 50))
+                    }else {
+                        videoPlayer = YouTubePlayerView(frame: CGRect(x: 50, y: cell.frame.minY + 40, width: 300 , height: 190))
+                    }
+                }else {
+                    videoPlayer = YouTubePlayerView(frame: CGRect(x: 50, y: cell.frame.minY + 40, width: 300 , height: 190))
+                }
+                
                 videoPlayer.setValue(1, forKey: "tag")
                 videoPlayer.delegate = self
                 
@@ -747,7 +755,17 @@ extension ChatViewController: MessageCellDelegate {
                 let playerViewController = AVPlayerViewController()
                 player = AVPlayer(url: URL(string:message.Link)!)
                 playerViewController.player = player
-                playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 15, width: 280 , height: cell.frame.height - 30)
+                
+                if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad ){
+                    if (userSender.senderId == message.sender.senderId) {
+                        playerViewController.view.frame = CGRect(x: cell.frame.width - 320, y: cell.frame.minY + 25, width: 280 , height: cell.frame.height - 50)
+                    }else {
+                        playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 15, width: 280 , height: cell.frame.height - 50)
+                    }
+                }else {
+                    playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 15, width: 280 , height: cell.frame.height - 30)
+                }
+                
                 playerViewController.view.setValue(1, forKey: "tag")
                 self.addChild(playerViewController)
                 
@@ -763,7 +781,18 @@ extension ChatViewController: MessageCellDelegate {
                     let playerViewController = AVPlayerViewController()
                     player = AVPlayer(url: URL(string:message.Link)!)
                     playerViewController.player = player
-                    playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 15, width: 280 , height: cell.frame.height - 30)
+                    print (cell.frame.minY + 15)
+                    
+                    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad ){
+                        if (userSender.senderId == message.sender.senderId) {
+                            playerViewController.view.frame = CGRect(x: cell.frame.width - 320, y: cell.frame.minY + 25, width: 280 , height: cell.frame.height - 50)
+                        }else {
+                            playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 15, width: 280 , height: cell.frame.height - 50)
+                        }
+                    }else {
+                        playerViewController.view.frame = CGRect(x: 50, y: cell.frame.minY + 15, width: 280 , height: cell.frame.height - 30)
+                    }
+                    
                     playerViewController.view.setValue(1, forKey: "tag")
                     self.addChild(playerViewController)
                     
@@ -790,7 +819,7 @@ extension ChatViewController: MessageCellDelegate {
             default:
                 let docLink = NSURL(string: message.Link)
                 UIApplication.shared.open(docLink! as URL, options: [:], completionHandler: nil)
-
+                
                 break
             }
         }
@@ -932,10 +961,10 @@ extension ChatViewController {
     
     func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
         let size = image.size
-
+        
         let widthRatio  = targetSize.width  / size.width
         let heightRatio = targetSize.height / size.height
-
+        
         // Figure out what our orientation is, and use that to form the rectangle
         var newSize: CGSize
         if(widthRatio > heightRatio) {
@@ -943,10 +972,10 @@ extension ChatViewController {
         } else {
             newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
         }
-
+        
         // This is the rect that we've calculated out and this is what is actually used below
         let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-
+        
         // Actually do the resizing to the rect using the ImageContext stuff
         UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
         image.draw(in: rect)
@@ -996,7 +1025,7 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
     
     func getFileMedia(){
         var alert = UIAlertController(title: "Choose image or video", message: nil, preferredStyle: .actionSheet)
-       
+        
         if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad ){
             alert = UIAlertController(title: "Choose image or video", message: nil, preferredStyle: .alert)
         }
@@ -1104,7 +1133,7 @@ extension ChatViewController : UIImagePickerControllerDelegate, UINavigationCont
 
 extension ChatViewController : UIDocumentMenuDelegate,UIDocumentPickerDelegate{
     func clickFunction(){
-
+        
         let importMenu = UIDocumentMenuViewController(documentTypes: [String(kUTTypePDF),String(kUTTypeGIF),String(kUTTypeText),String("com.microsoft.word.doc")], in: .import)
         importMenu.delegate = self
         if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad ){
@@ -1113,9 +1142,9 @@ extension ChatViewController : UIDocumentMenuDelegate,UIDocumentPickerDelegate{
         }else {
             importMenu.modalPresentationStyle = .formSheet
         }
-
+        
         self.present(importMenu, animated: true, completion: nil)
-
+        
     }
     
     
@@ -1165,8 +1194,10 @@ extension ChatViewController : UIDocumentMenuDelegate,UIDocumentPickerDelegate{
     
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         print("view was cancelled")
-        
         dismiss(animated: true, completion: nil)
+        
+        self.messageInputBar.inputTextView.resignFirstResponder()
+        view.endEditing(false)
     }
 }
 
@@ -1199,6 +1230,6 @@ extension UIImage {
             return self
         }
     }
-
+    
 }
 

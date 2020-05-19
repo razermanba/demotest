@@ -17,11 +17,11 @@ struct METHOD {
 
 struct API {
     static let base_url = "https://acp.brainfitstudio.com/"
-//    "https://brainfit-studio.puresolutions.international/"
+//    "https://chat-brainfit.dev.powerdigital.sg/"
     
     
     static let SOCKET_URL = "https://brainfitstudiosocket.puresolutions.com.sg"
-//    "https://socket.brainfit-studio.puresolutions.international/"
+//    "https://socket-brainfit.dev.powerdigital.sg/"
     
     
     static let BASE_URL_API = "/api/v1/"

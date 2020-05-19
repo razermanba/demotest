@@ -7,21 +7,45 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class PreviewLink: UIView {
-
+    
     @IBOutlet weak var urlTitle: UILabel!
     @IBOutlet weak var urlLink: UILabel!
     @IBOutlet weak var descriptionUrl: UILabel!
     @IBOutlet weak var imgUrl: UIImageView!
-    
+    let hud = JGProgressHUD(style: .dark)
+    let indicator = UIActivityIndicatorView(style: .gray)
     
     /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+     // Only override draw() if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func draw(_ rect: CGRect) {
+     // Drawing code
+     }
+     */
+    
+    func loadImage(url : String){
+        let urlImage = URL(string: url)
+        imgUrl.sd_setImage(with: urlImage, placeholderImage: nil)
+        
 
+    }
+    
+    func showLoading(){
+//        hud.textLabel.text = "Loading"
+//        hud.show(in: self)
+       
+        indicator.center = self.center
+        self.addSubview(indicator)
+        indicator.startAnimating()
+    }
+    
+    func dismissLoading(){
+//        hud.dismiss(afterDelay: 0.0)
+        indicator.stopAnimating()
+    }
+    
+    
 }

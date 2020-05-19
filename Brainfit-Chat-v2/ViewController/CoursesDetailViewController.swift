@@ -246,7 +246,7 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
     
     @objc func actionDownFile(_ sender : SubClassButton){
         print("URL download \(sender.urlString)")
-        dowloadFile(urlString: sender.urlString )
+        dowloadFile(urlString: sender.urlString ,btnSend: sender)
         
     }
     
@@ -282,7 +282,7 @@ extension CoursesDetailViewController{
     }
     
     // MARK: - download file
-    func dowloadFile(urlString: String) {
+    func dowloadFile(urlString: String, btnSend : SubClassButton) {
         appdelgate?.showLoading()
         // https://stackoverflow.com/questions/39912905/download-file-using-alamofire-4-0-swift-3
         // change ten file trong pdf
@@ -302,7 +302,12 @@ extension CoursesDetailViewController{
                 let objectsToShare = [fileURL]
                 
                 let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
-                
+                if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad ){
+                    activityVC.modalPresentationStyle = .popover
+                    activityVC.popoverPresentationController?.sourceView = btnSend
+                }else {
+                    //                           importMenu.modalPresentationStyle = .formSheet
+                }
                 self.present(activityVC, animated: true, completion: nil)
                 
                 self.appdelgate?.dismissLoading()

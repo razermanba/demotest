@@ -29,6 +29,7 @@ import MessageInputBar
 import SDWebImage
 import SwiftLinkPreview
 import JGProgressHUD
+import Nuke
 
 final class BasicExampleViewController: ChatViewController {
     private let slp = SwiftLinkPreview(cache: InMemoryCache())
@@ -113,18 +114,18 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
             }
         }
     }
+    
+    
+    
     func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        
         let message = messageList[indexPath.section]
+        
         switch message.file_type {
         case "png","jpg":
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                for subView in imageView.subviews {
-                    if subView.tag == 0 {
-                        subView.removeFromSuperview()
-                    }
-                }
-            })
-            
+            for subView in imageView.subviews {
+                subView.removeFromSuperview()
+            }
             let placeholderImage = UIImage(named: "placeholder")!
             let url = URL(string: message.Link)!
             DispatchQueue.main.async {
@@ -132,37 +133,49 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
                 imageView.contentMode = .scaleAspectFill
                 imageView.sd_setShowActivityIndicatorView(true)
                 imageView.sd_setIndicatorStyle(.gray)
+                
                 imageView.sd_setImage(with: url, placeholderImage: placeholderImage)
             }
+            
+            //            SDImageCache.shared().clearMemory()
+            //            SDImageCache.shared().clearDisk()
             break
         case "html":
+            
+            let previewLink = (Bundle.main.loadNibNamed("PreviewLink", owner: self, options: nil)?.first as? PreviewLink)!
+            previewLink.bounds = imageView.bounds
+            previewLink.center = imageView.center
+            
+            imageView.addSubview(previewLink)
+            previewLink.showLoading()
+            
+            self.slp.preview( message.Link,onSuccess: { result in
+                previewLink.loadImage(url: result.image ?? "")
+                previewLink.urlTitle.text = result.title
+                let attributedString = NSMutableAttributedString(string: result.canonicalUrl ?? "", attributes:[NSAttributedString.Key.link: result.finalUrl ?? ""])
+                previewLink.urlLink.attributedText = attributedString
+                previewLink.descriptionUrl.text = result.description
+                
+                previewLink.viewWithTag(5) // set view load HTML is 5
+                
+                previewLink.dismissLoading()
+            },onError: { error in
+                print(error)
+                previewLink.dismissLoading()
+            })
+            SDImageCache.shared().clearMemory()
+            SDImageCache.shared().clearDisk()
+            
             imageView.image = nil
             imageView.setNeedsDisplay()
             
-            self.slp.preview( message.Link,onSuccess: { result in
-                print(result)
-                let url = URL(string: result.image ?? "")
-                let previewLink = (Bundle.main.loadNibNamed("PreviewLink", owner: self, options: nil)?.first as? PreviewLink)!
-                previewLink.bounds = imageView.bounds
-                previewLink.center = imageView.center
-                previewLink.imgUrl.sd_setImage(with: url, placeholderImage: nil)
-                previewLink.urlTitle.text = result.title
-                var attributedString = NSMutableAttributedString(string: result.canonicalUrl ?? "", attributes:[NSAttributedString.Key.link: result.finalUrl])
-                previewLink.urlLink.attributedText = attributedString
-                previewLink.descriptionUrl.text = result.description
-                imageView.addSubview(previewLink)
-            },onError: { error in
-                print(error)
-            })
             break
         default:
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                for subView in imageView.subviews {
-                    if subView.tag == 0 {
-                        subView.removeFromSuperview()
-                    }
+            for subView in imageView.subviews {
+                if subView.tag == 5 {
+                    subView.removeFromSuperview()
                 }
-            })
+            }
             break
         }
     }
