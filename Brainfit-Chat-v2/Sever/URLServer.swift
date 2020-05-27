@@ -16,12 +16,14 @@ struct METHOD {
 }
 
 struct API {
-    static let base_url = "https://acp.brainfitstudio.com/"
-//    "https://chat-brainfit.dev.powerdigital.sg/"
+    static let base_url = "https://acp.brainfitstudio.com/" // pro
+//    "https://brainfit-sg.powerdigital.sg/" //dev
     
     
-    static let SOCKET_URL = "https://brainfitstudiosocket.puresolutions.com.sg"
-//    "https://socket-brainfit.dev.powerdigital.sg/"
+    
+    static let SOCKET_URL = "https://brainfitstudiosocket.puresolutions.com.sg" // pro
+//    "https://socket-brainfit.dev.powerdigital.sg/" // dev
+    
     
     
     static let BASE_URL_API = "/api/v1/"

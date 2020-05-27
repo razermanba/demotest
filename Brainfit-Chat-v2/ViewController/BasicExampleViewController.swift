@@ -91,9 +91,14 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
     }
     
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
-        
-        let tail: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
-        return .bubbleTail(tail, .curved)
+        let message = messageList[indexPath.section]
+        switch message.file_type {
+        case "html":
+            return .bubbleOutline(.orange)
+        default:
+            let tail: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
+            return .bubbleTail(tail, .curved)
+        }
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
@@ -150,6 +155,7 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
             previewLink.showLoading()
             
             self.slp.preview( message.Link,onSuccess: { result in
+                print(result)
                 previewLink.loadImage(url: result.image ?? "")
                 previewLink.urlTitle.text = result.title
                 let attributedString = NSMutableAttributedString(string: result.canonicalUrl ?? "", attributes:[NSAttributedString.Key.link: result.finalUrl ?? ""])

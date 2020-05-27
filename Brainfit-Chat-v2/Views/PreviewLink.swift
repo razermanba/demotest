@@ -28,22 +28,23 @@ class PreviewLink: UIView {
     
     func loadImage(url : String){
         let urlImage = URL(string: url)
-        imgUrl.sd_setImage(with: urlImage, placeholderImage: nil)
+        let placeholderImage = UIImage(named: "avatar_student (1)")!
+        imgUrl.sd_setImage(with: urlImage, placeholderImage: placeholderImage)
         
-
+        
     }
     
     func showLoading(){
-//        hud.textLabel.text = "Loading"
-//        hud.show(in: self)
-       
+        //        hud.textLabel.text = "Loading"
+        //        hud.show(in: self)
+        
         indicator.center = self.center
         self.addSubview(indicator)
         indicator.startAnimating()
     }
     
     func dismissLoading(){
-//        hud.dismiss(afterDelay: 0.0)
+        //        hud.dismiss(afterDelay: 0.0)
         indicator.stopAnimating()
     }
     
