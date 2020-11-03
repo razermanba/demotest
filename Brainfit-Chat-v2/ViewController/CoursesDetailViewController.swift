@@ -122,7 +122,7 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellTitle", for: indexPath) as! CoursesTitleTableViewCell
                 cell.txtTitle.text = self.courses?.title
-                cell.txtResoucre.text = String(format: "%d resoucre", self.courses?.topics?.count ?? 0)
+                cell.txtResoucre.text = String(format: "%d resources", self.courses?.topics?.count ?? 0)
                 return cell
             default:
                 cellButton = tableView.dequeueReusableCell(withIdentifier: "cellButton", for: indexPath) as? CoursesButtonTableViewCell

@@ -20,11 +20,10 @@ struct API {
 //    "https://brainfit-sg.powerdigital.sg/" //dev
     
     
+    static let SOCKET_URL =  "https://broadcast.brainfitstudio.com" // pro
+    //    "https://socket-brainfit.dev.powerdigital.sg/" // dev
     
-    static let SOCKET_URL = "https://brainfitstudiosocket.puresolutions.com.sg" // pro
-//    "https://socket-brainfit.dev.powerdigital.sg/" // dev
-    
-    
+    //    "https://brainfitstudiosocket.puresolutions.com.sg"
     
     static let BASE_URL_API = "/api/v1/"
     static let BASE_URL_API_Auth = "/api/v1/auth/"
@@ -32,9 +31,9 @@ struct API {
     static let BASE_URL_API_Chat = "/api/v1/chat"
     static let BASE_URL_API_Room = "/api/v1/rooms"
     static let BASE_URL_API_SendFile = "/api/v1/chat/room/"
-//    static let BASE_URL_API = "/categories"
+    //    static let BASE_URL_API = "/categories"
     
-//    #define RESOURCES_URL(key)      [NSString stringWithFormat:@"%@%@", BASE_URL, key]
+    //    #define RESOURCES_URL(key)      [NSString stringWithFormat:@"%@%@", BASE_URL, key]
 }
 
 enum LOG_TYPE {
@@ -42,4 +41,4 @@ enum LOG_TYPE {
     case kREWARD
     case kGAME
 }
- 
+

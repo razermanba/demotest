@@ -178,9 +178,9 @@ extension BasicExampleViewController: MessagesDisplayDelegate {
             break
         default:
             for subView in imageView.subviews {
-                if subView.tag == 5 {
+//                if subView.tag == 5 {
                     subView.removeFromSuperview()
-                }
+//                }
             }
             break
         }

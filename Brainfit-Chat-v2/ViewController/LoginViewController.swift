@@ -113,8 +113,8 @@ extension LoginviewController{
         appdelgate?.showLoading()
         print(username.lowercased().replacingOccurrences(of:" ", with: ""))
         
-        let param = ["username": username.lowercased().replacingOccurrences(of:" ", with: ""),
-                     "password": password.lowercased().replacingOccurrences(of:" ", with: "") ] as [String : AnyObject]
+        let param = ["username": username.replacingOccurrences(of:" ", with: ""),
+                     "password": password.replacingOccurrences(of:" ", with: "") ] as [String : AnyObject]
         
         APIService.sharedInstance.login(param , completionHandle: { (result, error) in
             if error == nil {

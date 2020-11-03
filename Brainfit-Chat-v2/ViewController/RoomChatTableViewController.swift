@@ -140,6 +140,7 @@ extension RoomChatTableViewController{
         self.appdelgate?.showLoading()
         APIService.sharedInstance.getListRoom([:], pagenumber: String(pageNumber) , completionHandle: {(result, error) in
             if error == nil {
+                print(result)
                 if pageNumber == 0 {
                     self.arrayRoom = Mapper<RoomChat>().mapArray(JSONArray: result as! [[String : Any]])
                 }else {

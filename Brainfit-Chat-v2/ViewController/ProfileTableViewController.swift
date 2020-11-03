@@ -78,8 +78,6 @@ class ProfileTableViewController: UITableViewController,UINavigationControllerDe
             tap.cancelsTouchesInView = false
             changePWView.addGestureRecognizer(tap)
             
-            
-            
             changePWView.btnClose.addTarget(self, action: #selector(self.actionClosePopUp), for: .touchUpInside)
             changePWView.btnChangePasword.addTarget(self, action: #selector(self.actionChangePassword), for: .touchUpInside)
             
