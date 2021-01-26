@@ -156,13 +156,24 @@ class APIService {
     }
     
     func getListCourses(_ params : [String : AnyObject], completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
-        print(API.base_url + API.BASE_URL_API + "/courses")
-        getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API + "/courses" , params: params, headers: [:], completionHandle: completionHandle)
+        print(API.base_url + API.base_URL_API_V4 + "/courses")
+        getURL(METHOD.kGET, url: API.base_url + API.base_URL_API_V4 + "/courses" , params: params, headers: [:], completionHandle: completionHandle)
     }
     
     func coursesDetail(_ params : [String : AnyObject], courses_id : String , completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
-        getURL(METHOD.kGET, url: API.base_url + API.BASE_URL_API + "/courses/" + courses_id , params: params, headers: [:], completionHandle: completionHandle)
+        print(API.base_url + API.base_URL_API_V4 + "/courses/" + courses_id )
+        getURL(METHOD.kGET, url: API.base_url + API.base_URL_API_V4 + "/courses/" + courses_id , params: params, headers: [:], completionHandle: completionHandle)
     }
+    
+    func getQuiz(_ params : [String : AnyObject], quiz_ID : String , completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
+        getURL(METHOD.kGET, url: API.base_url + API.base_URL_API_V4 + "/quizzes/" + quiz_ID , params: params, headers: [:], completionHandle: completionHandle)
+    }
+    
+    func SubmitQuiz(_ params : [String : AnyObject], quiz_ID : String , completionHandle:@escaping (_ result:AnyObject,_ error:AnyObject?) -> Void) {
+        getURL(METHOD.kPOST, url: API.base_url + API.base_URL_API_V4 + "/quizzes/" + quiz_ID + "/submit" , params: params, headers: [:], completionHandle: completionHandle)
+    }
+
+    
     func uploadImage(_ keyUpload : String ,_ photo: UIImage, completionHandle:@escaping (_ result:[String:AnyObject]?,_ error:AnyObject?) -> Void) {
         
         guard let imageData = photo.jpegData(compressionQuality: 1) else { return }

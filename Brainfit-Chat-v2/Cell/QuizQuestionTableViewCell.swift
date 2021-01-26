@@ -16,20 +16,9 @@ class QuizQuestionTableViewCell: UITableViewCell {
     var arrAnswer = ["Answer 1","Answer 2","Answer 3","Answer 4"]
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        QuizAnswer.dataSource = self
-        QuizAnswer.delegate = self
-        self.QuizAnswer.estimatedRowHeight = 150
-        self.QuizAnswer.rowHeight = UITableView.automaticDimension
+      
         
     }
-    
-    //    override func layoutSubviews() {
-    //        super.layoutSubviews()
-    //        //set the values for top,left,bottom,right margins
-    //        let padding = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-    //        contentView.frame = bounds.inset(by: padding)
-    //    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -39,33 +28,36 @@ class QuizQuestionTableViewCell: UITableViewCell {
     
 }
 
-extension QuizQuestionTableViewCell : UITableViewDelegate,UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrAnswer.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell =  tableView.dequeueReusableCell(withIdentifier: "cellAnswer", for: indexPath) as! QuizAnswerTableViewCell
-        
-        cell.lblAnswer.text = arrAnswer[indexPath.row]
-        return cell
-        
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cellSelected  = tableView.cellForRow(at: indexPath as IndexPath) as! QuizAnswerTableViewCell
-        selectedCell(viewBg: cellSelected.viewBG, imgCheck: cellSelected.imgChooice)
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let cellToDeSelect = tableView.cellForRow(at: indexPath as IndexPath) as! QuizAnswerTableViewCell
-        DeSelectCell(viewBg: cellToDeSelect.viewBG,imgCheck: cellToDeSelect.imgChooice)
-    }
-}
+//extension QuizQuestionTableViewCell : UITableViewDelegate,UITableViewDataSource {
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 3
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell =  tableView.dequeueReusableCell(withIdentifier: "cellAnswer", for: indexPath) as! QuizAnswerTableViewCell
+//        
+//        cell.lblAnswer.text = arrAnswer[indexPath.row]
+//        return cell
+//        
+//    }
+//    
+////    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+////        return 40
+////    }
+////    
+////    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+////        let cellSelected  = tableView.cellForRow(at: indexPath as IndexPath) as! QuizAnswerTableViewCell
+////        selectedCell(viewBg: cellSelected.viewBG, imgCheck: cellSelected.imgChooice)
+////    }
+////
+////    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+////        let cellToDeSelect = tableView.cellForRow(at: indexPath as IndexPath) as! QuizAnswerTableViewCell
+////        DeSelectCell(viewBg: cellToDeSelect.viewBG,imgCheck: cellToDeSelect.imgChooice)
+////    }
+//}
 
 extension QuizQuestionTableViewCell {
     func selectedCell(viewBg : UIView, imgCheck : UIImageView)  {

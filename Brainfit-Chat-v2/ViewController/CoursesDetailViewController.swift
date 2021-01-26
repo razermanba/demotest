@@ -24,6 +24,9 @@ class CoursesDetailViewController: UIViewController  {
     var player : AVPlayer?
     @IBOutlet weak var viewPlayer: UIView!
     var cellButton : CoursesButtonTableViewCell! = nil
+    var quiz =  Mapper<Quizzes>().map(JSONObject: ())
+    var viewInstructionQuiz = (Bundle.main.loadNibNamed("InstructionView", owner: self, options: nil)?.first as? InstructionView)!
+    
     
     var contentText : String = ""
     var urlFile : String = ""
@@ -49,6 +52,12 @@ class CoursesDetailViewController: UIViewController  {
         getCourses(courseID: String(courseID))
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if view.bounds == playerLayer?.bounds {
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+        }
+    }
     
     @objc func actionResoucres(){
         
@@ -140,15 +149,25 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
                 cell.txtDesciption.text = self.courses?.description
                 
                 return cell
+            case "quiz":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellTopic", for: indexPath) as! CoursesTopicTableViewCell
+                
+                cell.txtTitle.text = "12345"
+                
+                return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellTopic", for: indexPath) as! CoursesTopicTableViewCell
                 let course = self.courses?.topics![indexPath.section - 1].media
                 let media = course![indexPath.row]
                 cell.txtTitle.text = media.title
                 cell.txtIndex.text = String(indexPath.row + 1)
-                if media.context == "document" {
+                
+                switch media.context {
+                case "document":
                     cell.imgType.image = Image(named: "ic_attachment.png")
-                }else {
+                case "quiz":
+                    cell.imgType.image = Image(named: "ic_attachment.png")
+                default:
                     cell.imgType.image = Image(named: "ic_play_circle_outline.png")
                 }
                 
@@ -188,7 +207,8 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
                 let course = self.courses?.topics![indexSectionSelect! - 1].media
                 let media = course![indexRowSelect!]
                 
-                if media.context == "video" {
+                switch media.context {
+                case "video":
                     player?.pause()
                     player = nil
                     
@@ -200,10 +220,17 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
                     viewPlayer.addSubview(playerViewController.view)
                     playerViewController.player!.play()
                     playerViewController.didMove(toParent: self)
-                } else if media.context == "document"{
+                    break
+                case "quiz":
+                    
+                    getQuestionQuiz(quizId: media.quiz ?? "")
+                    break
+                default:
                     urlFile = media.file ?? ""
                     self.performSegue(withIdentifier: "document", sender: self)
+                    
                 }
+                
                 
                 tableView.reloadData()
             }
@@ -254,9 +281,17 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "document" {
+        
+        switch segue.identifier {
+        case "document":
             let documentVC = segue.destination as! DocumentViewController
             documentVC.urlFile = urlFile
+        case "StartQuiz":
+            let Questionquiz = segue.destination as! QuizQuestionViewController
+            Questionquiz.quiz = quiz
+            break
+        default:
+            break
         }
     }
 }
@@ -267,7 +302,7 @@ extension CoursesDetailViewController{
         APIService.sharedInstance.coursesDetail([:], courses_id: courseID, completionHandle:{(result, error) in
             if error == nil {
                 print(result)
-                self.courses = Mapper<CoursesDetail>().map(JSONObject: result)
+                self.courses = Mapper< CoursesDetail >().map(JSONObject: result)
                 self.tableView.reloadData()
                 self.appdelgate?.dismissLoading()
                 
@@ -280,6 +315,24 @@ extension CoursesDetailViewController{
             }
         })
     }
+    
+    func getQuestionQuiz(quizId : String) {
+        self.appdelgate?.showLoading()
+        APIService.sharedInstance.getQuiz([:], quiz_ID: quizId, completionHandle: {(result,error ) in
+            if error == nil {
+                print(result)
+                self.quiz = Mapper< Quizzes >().map(JSONObject: result)
+                self.loadIntructionQuiz(title: self.quiz?.title ?? "", content: self.quiz?.description ?? "",quizId: String(format: "%d", self.quiz?.id ?? 0))
+                self.appdelgate?.dismissLoading()
+            }else {
+                self.appdelgate?.dismissLoading()
+                let alert = UIAlertController(title: "Error", message: (error as! String), preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
+    }
+    
     
     // MARK: - download file
     func dowloadFile(urlString: String, btnSend : SubClassButton) {
@@ -316,4 +369,46 @@ extension CoursesDetailViewController{
     }
 }
 
+extension CoursesDetailViewController {
+    func loadIntructionQuiz(title : String , content : String, quizId : String) {
+        viewInstructionQuiz = (Bundle.main.loadNibNamed("InstructionView", owner: self, options: nil)?.first as? InstructionView)!
+        viewInstructionQuiz.frame = self.view.frame
+        viewInstructionQuiz.center = self.view.center
+        
+        viewInstructionQuiz.lblTitle.text = title
+        viewInstructionQuiz.lblInstruction.text = content
+        
+        viewInstructionQuiz.btnStart.addTarget(self, action: #selector(self.actionStartQuiz), for: .touchUpInside)
+        
+        self.animateViewHeight(viewInstructionQuiz, withAnimationType: CATransitionSubtype.fromTop.rawValue, andflagClose: true)
+        self.view.addSubview(viewInstructionQuiz)
+        
+    }
+    
+    @objc func actionStartQuiz (){
+        self.animateViewHeight(viewInstructionQuiz, withAnimationType: CATransitionSubtype.fromBottom.rawValue, andflagClose: false)
+        self.performSegue(withIdentifier: "StartQuiz", sender: self)
+    }
+    
+    func animateViewHeight(_ animateView: UIView, withAnimationType animType: String, andflagClose flag: Bool) {
+        let animation = CATransition()
+        animation.type = CATransitionType.push
+        animation.subtype = CATransitionSubtype(rawValue: animType)
+        animation.duration = 0.8
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        animateView.layer.add(animation, forKey: kCATransition)
+        animateView.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.3)
+        
+        if flag == false {
+            animateView.isHidden = !animateView.isHidden
+        }
+    }
+    
+    
+    @objc func actionClosePopUp() {
+        //                self.animateViewHeight(tokenview, withAnimationType: CATransitionSubtype.fromBottom.rawValue, andflagClose: false)
+    }
+    
+    
+}
 

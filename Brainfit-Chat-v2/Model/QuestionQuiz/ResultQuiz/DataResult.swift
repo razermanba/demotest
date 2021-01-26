@@ -1,5 +1,5 @@
 /* 
-Copyright (c) 2019 Swift Models Generated from JSON powered by http://www.json4swift.com
+Copyright (c) 2020 Swift Models Generated from JSON powered by http://www.json4swift.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -14,15 +14,10 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Media : Mappable {
-	var id : Int?
-	var title : String?
-	var image : String?
-	var context : String?
-	var downloadable : Bool?
-	var file : String?
-    var quiz : String?
-    
+struct DataResult : Mappable {
+	var result : Result?
+	var total_correct : Int?
+	var total_question : Int?
 
 	init?(map: Map) {
 
@@ -30,13 +25,9 @@ struct Media : Mappable {
 
 	mutating func mapping(map: Map) {
 
-		id <- map["id"]
-		title <- map["title"]
-		image <- map["image"]
-		context <- map["context"]
-		downloadable <- map["downloadable"]
-		file <- map["file"]
-        quiz <- map["quiz"]
+		result <- map["result"]
+		total_correct <- map["total_correct"]
+		total_question <- map["total_question"]
 	}
 
 }

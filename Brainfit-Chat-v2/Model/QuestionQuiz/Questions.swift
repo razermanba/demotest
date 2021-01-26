@@ -1,5 +1,5 @@
 /* 
-Copyright (c) 2019 Swift Models Generated from JSON powered by http://www.json4swift.com
+Copyright (c) 2020 Swift Models Generated from JSON powered by http://www.json4swift.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -14,15 +14,15 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Media : Mappable {
+struct Questions : Mappable {
 	var id : Int?
 	var title : String?
-	var image : String?
+	var content : String?
 	var context : String?
-	var downloadable : Bool?
-	var file : String?
-    var quiz : String?
-    
+	var position : Int?
+	var created_at : String?
+	var updated_at : String?
+	var options : [Options]?
 
 	init?(map: Map) {
 
@@ -32,11 +32,12 @@ struct Media : Mappable {
 
 		id <- map["id"]
 		title <- map["title"]
-		image <- map["image"]
+		content <- map["content"]
 		context <- map["context"]
-		downloadable <- map["downloadable"]
-		file <- map["file"]
-        quiz <- map["quiz"]
+		position <- map["position"]
+		created_at <- map["created_at"]
+		updated_at <- map["updated_at"]
+		options <- map["options"]
 	}
 
 }

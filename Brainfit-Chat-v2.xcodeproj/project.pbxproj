@@ -53,8 +53,20 @@
 		FA50504B229256FD00FE9848 /* En.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA505044229256FD00FE9848 /* En.swift */; };
 		FA50504C229256FD00FE9848 /* StandardScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA505045229256FD00FE9848 /* StandardScore.swift */; };
 		FA5050502292696B00FE9848 /* StandardScoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA50504F2292696B00FE9848 /* StandardScoreTableViewController.swift */; };
+		FA5BD7652570DFB9000C707D /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5BD7622570DFB9000C707D /* Options.swift */; };
+		FA5BD7662570DFB9000C707D /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5BD7632570DFB9000C707D /* Questions.swift */; };
+		FA5BD7672570DFB9000C707D /* Quizzes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5BD7642570DFB9000C707D /* Quizzes.swift */; };
 		FA5EA2122269756D001BF077 /* MockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5EA2112269756D001BF077 /* MockMessage.swift */; };
 		FA68EE5A2269ABC4007BF7DD /* BasicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68EE592269ABC4007BF7DD /* BasicExampleViewController.swift */; };
+		FA768D632575EFBD00361583 /* AnswerQuiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA768D612575EFBD00361583 /* AnswerQuiz.swift */; };
+		FA768D642575EFBD00361583 /* Answers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA768D622575EFBD00361583 /* Answers.swift */; };
+		FA768D662576436100361583 /* PopupCompleted.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA768D652576436000361583 /* PopupCompleted.xib */; };
+		FA768D682576437100361583 /* PopupCompleted.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA768D672576437100361583 /* PopupCompleted.swift */; };
+		FA768D6E2576465A00361583 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA768D6A2576465A00361583 /* Result.swift */; };
+		FA768D702576465A00361583 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA768D6C2576465A00361583 /* Detail.swift */; };
+		FA768D712576465A00361583 /* DataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA768D6D2576465A00361583 /* DataResult.swift */; };
+		FAB98F5525676FEA00DE6B22 /* InstructionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAB98F5425676FEA00DE6B22 /* InstructionView.xib */; };
+		FAB98F5725676FF900DE6B22 /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB98F5625676FF900DE6B22 /* InstructionView.swift */; };
 		FAC731BB22670AA700C59F10 /* URLServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC731BA22670AA700C59F10 /* URLServer.swift */; };
 		FAC731BD22670C6300C59F10 /* APIServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC731BC22670C6300C59F10 /* APIServer.swift */; };
 		FACA1D8423432C71007B959C /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACA1D8323432C71007B959C /* DocumentViewController.swift */; };
@@ -82,6 +94,7 @@
 		FAE6722423615CC70003FC13 /* EmptyCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE6722323615CC70003FC13 /* EmptyCourses.swift */; };
 		FAEB0288226858A9002F54EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0287226858A9002F54EA /* LoginViewController.swift */; };
 		FAEB028A22685E5B002F54EA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB028922685E5B002F54EA /* UserProfile.swift */; };
+		FAFB6B2B2574D83700129472 /* FillinBlankTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFB6B2A2574D83700129472 /* FillinBlankTableViewCell.swift */; };
 		FAFF3F412266CBCA00225C94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFF3F402266CBCA00225C94 /* AppDelegate.swift */; };
 		FAFF3F432266CBCA00225C94 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFF3F422266CBCA00225C94 /* ViewController.swift */; };
 		FAFF3F462266CBCA00225C94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAFF3F442266CBCA00225C94 /* Main.storyboard */; };
@@ -159,8 +172,20 @@
 		FA505044229256FD00FE9848 /* En.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = En.swift; sourceTree = "<group>"; };
 		FA505045229256FD00FE9848 /* StandardScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardScore.swift; sourceTree = "<group>"; };
 		FA50504F2292696B00FE9848 /* StandardScoreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardScoreTableViewController.swift; sourceTree = "<group>"; };
+		FA5BD7622570DFB9000C707D /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		FA5BD7632570DFB9000C707D /* Questions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
+		FA5BD7642570DFB9000C707D /* Quizzes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quizzes.swift; sourceTree = "<group>"; };
 		FA5EA2112269756D001BF077 /* MockMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockMessage.swift; sourceTree = "<group>"; };
 		FA68EE592269ABC4007BF7DD /* BasicExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicExampleViewController.swift; sourceTree = "<group>"; };
+		FA768D612575EFBD00361583 /* AnswerQuiz.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerQuiz.swift; sourceTree = "<group>"; };
+		FA768D622575EFBD00361583 /* Answers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Answers.swift; sourceTree = "<group>"; };
+		FA768D652576436000361583 /* PopupCompleted.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupCompleted.xib; sourceTree = "<group>"; };
+		FA768D672576437100361583 /* PopupCompleted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCompleted.swift; sourceTree = "<group>"; };
+		FA768D6A2576465A00361583 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		FA768D6C2576465A00361583 /* Detail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
+		FA768D6D2576465A00361583 /* DataResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataResult.swift; sourceTree = "<group>"; };
+		FAB98F5425676FEA00DE6B22 /* InstructionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstructionView.xib; sourceTree = "<group>"; };
+		FAB98F5625676FF900DE6B22 /* InstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
 		FAC731BA22670AA700C59F10 /* URLServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLServer.swift; sourceTree = "<group>"; };
 		FAC731BC22670C6300C59F10 /* APIServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServer.swift; sourceTree = "<group>"; };
 		FACA1D8323432C71007B959C /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +214,7 @@
 		FAEB0287226858A9002F54EA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FAEB028922685E5B002F54EA /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		FAF2E765228EBEB200FA1440 /* Brainfit-Chat-v2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Brainfit-Chat-v2.entitlements"; sourceTree = "<group>"; };
+		FAFB6B2A2574D83700129472 /* FillinBlankTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillinBlankTableViewCell.swift; sourceTree = "<group>"; };
 		FAFF3F3D2266CBCA00225C94 /* Brainfit-Chat-v2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Brainfit-Chat-v2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAFF3F402266CBCA00225C94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAFF3F422266CBCA00225C94 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +291,10 @@
 				FA2FFEAA24483DB200233EA5 /* PreviewLink.swift */,
 				FA104CDC2551020200D5EFE9 /* introQuiz.xib */,
 				FA104CDE2551021100D5EFE9 /* introQuiz.swift */,
+				FAB98F5425676FEA00DE6B22 /* InstructionView.xib */,
+				FAB98F5625676FF900DE6B22 /* InstructionView.swift */,
+				FA768D652576436000361583 /* PopupCompleted.xib */,
+				FA768D672576437100361583 /* PopupCompleted.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -282,6 +312,7 @@
 				FAD25BD9233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift */,
 				FA104CE6255107FC00D5EFE9 /* QuizAnswerTableViewCell.swift */,
 				FA104CE82551081A00D5EFE9 /* QuizQuestionTableViewCell.swift */,
+				FAFB6B2A2574D83700129472 /* FillinBlankTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -308,6 +339,37 @@
 				FA505045229256FD00FE9848 /* StandardScore.swift */,
 			);
 			path = StandardScore;
+			sourceTree = "<group>";
+		};
+		FA5BD7612570DFB9000C707D /* QuestionQuiz */ = {
+			isa = PBXGroup;
+			children = (
+				FA768D692576465A00361583 /* ResultQuiz */,
+				FA768D602575EF7700361583 /* SubmitQuiz */,
+				FA5BD7622570DFB9000C707D /* Options.swift */,
+				FA5BD7632570DFB9000C707D /* Questions.swift */,
+				FA5BD7642570DFB9000C707D /* Quizzes.swift */,
+			);
+			path = QuestionQuiz;
+			sourceTree = "<group>";
+		};
+		FA768D602575EF7700361583 /* SubmitQuiz */ = {
+			isa = PBXGroup;
+			children = (
+				FA768D612575EFBD00361583 /* AnswerQuiz.swift */,
+				FA768D622575EFBD00361583 /* Answers.swift */,
+			);
+			path = SubmitQuiz;
+			sourceTree = "<group>";
+		};
+		FA768D692576465A00361583 /* ResultQuiz */ = {
+			isa = PBXGroup;
+			children = (
+				FA768D6A2576465A00361583 /* Result.swift */,
+				FA768D6C2576465A00361583 /* Detail.swift */,
+				FA768D6D2576465A00361583 /* DataResult.swift */,
+			);
+			path = ResultQuiz;
 			sourceTree = "<group>";
 		};
 		FAC731B7226709AB00C59F10 /* Sever */ = {
@@ -338,8 +400,8 @@
 				FAD25BB9233DB30F00DAA8EE /* ListCoursesTableViewController.swift */,
 				FAD25BC6233DC21F00DAA8EE /* CoursesDetailViewController.swift */,
 				FACA1D8323432C71007B959C /* DocumentViewController.swift */,
-				FAD1395C244858950038C9FB /* PrivacypolicyViewController.swift */,
 				FA104CE2255107A500D5EFE9 /* QuizQuestionViewController.swift */,
+				FAD1395C244858950038C9FB /* PrivacypolicyViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -347,6 +409,7 @@
 		FAC731B9226709AB00C59F10 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FA5BD7612570DFB9000C707D /* QuestionQuiz */,
 				FAE057A52435D03E00BEB545 /* AuidoChat */,
 				FAD25BD0233DC50400DAA8EE /* CoursesDetail */,
 				FAD25BBB233DB76800DAA8EE /* Courses */,
@@ -573,7 +636,9 @@
 				FAE6722223615CB60003FC13 /* EmptyCourses.xib in Resources */,
 				FAFF3F4B2266CBCC00225C94 /* LaunchScreen.storyboard in Resources */,
 				FAE061AB243AE61A003AD41B /* ViewFullImage.xib in Resources */,
+				FA768D662576436100361583 /* PopupCompleted.xib in Resources */,
 				FA08E25C226D72A7002EABFB /* alertToken.xib in Resources */,
+				FAB98F5525676FEA00DE6B22 /* InstructionView.xib in Resources */,
 				FAFF3F482266CBCC00225C94 /* Assets.xcassets in Resources */,
 				FAFF3F462266CBCA00225C94 /* Main.storyboard in Resources */,
 				FA104CDD2551020200D5EFE9 /* introQuiz.xib in Resources */,
@@ -713,6 +778,7 @@
 				FA104CE3255107A500D5EFE9 /* QuizQuestionViewController.swift in Sources */,
 				FAD25BC0233DB76800DAA8EE /* RecordsTotal.swift in Sources */,
 				FAFF3F432266CBCA00225C94 /* ViewController.swift in Sources */,
+				FAFB6B2B2574D83700129472 /* FillinBlankTableViewCell.swift in Sources */,
 				FA2652282268696800A7131E /* LogOutViewController.swift in Sources */,
 				FAC731BB22670AA700C59F10 /* URLServer.swift in Sources */,
 				FA265230226870C000A7131E /* RoomChat.swift in Sources */,
@@ -724,6 +790,7 @@
 				FA08E264226D7D82002EABFB /* ListMemberTableViewCell.swift in Sources */,
 				FAD25BD5233DC50400DAA8EE /* Center.swift in Sources */,
 				FA08E25E226D72C8002EABFB /* ChangePassword.swift in Sources */,
+				FA768D702576465A00361583 /* Detail.swift in Sources */,
 				FAD25BC2233DB76800DAA8EE /* RecordsFiltered.swift in Sources */,
 				FAFF3F412266CBCA00225C94 /* AppDelegate.swift in Sources */,
 				FAD25BC7233DC21F00DAA8EE /* CoursesDetailViewController.swift in Sources */,
@@ -738,11 +805,16 @@
 				FAD1395D244858950038C9FB /* PrivacypolicyViewController.swift in Sources */,
 				FA505048229256FD00FE9848 /* Contents.swift in Sources */,
 				FA0B0B2124348AD400359EB4 /* SendFIle.swift in Sources */,
+				FAB98F5725676FF900DE6B22 /* InstructionView.swift in Sources */,
 				FAE057A72435D05200BEB545 /* BasicAudioController.swift in Sources */,
 				FA5EA2122269756D001BF077 /* MockMessage.swift in Sources */,
+				FA768D682576437100361583 /* PopupCompleted.swift in Sources */,
+				FA768D642575EFBD00361583 /* Answers.swift in Sources */,
 				FA08E272226DA4FE002EABFB /* ListTokenViewController.swift in Sources */,
+				FA768D632575EFBD00361583 /* AnswerQuiz.swift in Sources */,
 				FAE6722423615CC70003FC13 /* EmptyCourses.swift in Sources */,
 				FA08E26E226DA4D6002EABFB /* ListTokenTableViewCell.swift in Sources */,
+				FA5BD7662570DFB9000C707D /* Questions.swift in Sources */,
 				FAE061AD243AE633003AD41B /* ViewFullImage.swift in Sources */,
 				FA08E269226D81EC002EABFB /* Room_centers.swift in Sources */,
 				FA265231226870C000A7131E /* Message.swift in Sources */,
@@ -751,6 +823,7 @@
 				FA26522B22686D1E00A7131E /* ChatRoomTableViewCell.swift in Sources */,
 				FA08E26A226D81EC002EABFB /* Tokens.swift in Sources */,
 				FAD25BCB233DC25500DAA8EE /* CoursesTitleTableViewCell.swift in Sources */,
+				FA5BD7652570DFB9000C707D /* Options.swift in Sources */,
 				FA104CE92551081A00D5EFE9 /* QuizQuestionTableViewCell.swift in Sources */,
 				FA505047229256FD00FE9848 /* Tuk.swift in Sources */,
 				FA50504C229256FD00FE9848 /* StandardScore.swift in Sources */,
@@ -758,11 +831,14 @@
 				FA104CE7255107FC00D5EFE9 /* QuizAnswerTableViewCell.swift in Sources */,
 				FAD25BD8233DC50400DAA8EE /* CoursesDetail.swift in Sources */,
 				FAC731BD22670C6300C59F10 /* APIServer.swift in Sources */,
+				FA768D6E2576465A00361583 /* Result.swift in Sources */,
 				FA5050502292696B00FE9848 /* StandardScoreTableViewController.swift in Sources */,
 				FA29DBA12293B0B300BE34A6 /* TabBarViewController.swift in Sources */,
+				FA5BD7672570DFB9000C707D /* Quizzes.swift in Sources */,
 				FAD25BDA233E09A700DAA8EE /* CoursesDescriptionTableViewCell.swift in Sources */,
 				FA08E262226D7CF1002EABFB /* ListMemberChatTableViewController.swift in Sources */,
 				FA29DBAA2293DF7A00BE34A6 /* Datasets.swift in Sources */,
+				FA768D712576465A00361583 /* DataResult.swift in Sources */,
 				FA08E276226DAE2E002EABFB /* alertToken.swift in Sources */,
 				FA265233226880D200A7131E /* ChatViewController.swift in Sources */,
 				FA68EE5A2269ABC4007BF7DD /* BasicExampleViewController.swift in Sources */,
@@ -946,7 +1022,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Brainfit-Chat-v2/Brainfit-Chat-v2.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = P9265767DK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";
@@ -972,7 +1048,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Brainfit-Chat-v2/Brainfit-Chat-v2.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = P9265767DK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Brainfit-Chat-v2/Info.plist";
