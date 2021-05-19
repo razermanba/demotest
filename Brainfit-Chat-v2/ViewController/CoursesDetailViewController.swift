@@ -21,6 +21,7 @@ class CoursesDetailViewController: UIViewController  {
     var indexRowSelect : Int?
     var indexSectionSelect : Int?
     var playerLayer: AVPlayerLayer?
+    let playerViewController = AVPlayerVC()
     var player : AVPlayer?
     @IBOutlet weak var viewPlayer: UIView!
     var cellButton : CoursesButtonTableViewCell! = nil
@@ -52,12 +53,23 @@ class CoursesDetailViewController: UIViewController  {
         getCourses(courseID: String(courseID))
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        if view.bounds == playerLayer?.bounds {
+    //    override var shouldAutorotate: Bool{
+    //        return true
+    //    }
+    
+    
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            self.appdelgate?.orientationLock = .portrait
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
         }
-    }
+    //
+    //    override func viewWillDisappear(_ animated: Bool) {
+    //        super.viewWillDisappear(animated)
+    //
+    //        // Don't forget to reset when view is being removed
+    //        AppUtility.lockOrientation(.all)
+    //    }
     
     @objc func actionResoucres(){
         
@@ -213,13 +225,17 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
                     player = nil
                     
                     player = AVPlayer(url: URL(string:media.file ?? "")!)
-                    let playerViewController = AVPlayerViewController()
+                    
                     playerViewController.player = player
                     playerViewController.view.frame = viewPlayer.bounds
+                    
                     self.addChild(playerViewController)
                     viewPlayer.addSubview(playerViewController.view)
                     playerViewController.player!.play()
                     playerViewController.didMove(toParent: self)
+                    
+                    playerViewController.addObserver(self, forKeyPath: "videoBounds", options: NSKeyValueObservingOptions.new, context: nil)
+                    
                     break
                 case "quiz":
                     
@@ -237,6 +253,34 @@ extension CoursesDetailViewController : UITableViewDelegate,UITableViewDataSourc
         }
     }
     
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
+    {
+        if keyPath == "videoBounds"
+        {
+            if let rect = change?[.newKey] as? NSValue
+            {
+                if let newrect = rect.cgRectValue as CGRect?
+                {
+                    // 200 is height of playerViewController in normal screen mode
+                    if newrect.size.height <= 200
+                    {
+                        print("normal screen")
+                        AVPlayerVC.isPlayerFullscreen = false
+                 
+                    }
+                    else
+                    {
+                        print("full screen")
+                        AVPlayerVC.isPlayerFullscreen = true
+                        self.appdelgate?.orientationLock = .landscape
+                        UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
+                    }
+                }
+            }
+        }
+    }
+    
+
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch contentText {
@@ -412,3 +456,10 @@ extension CoursesDetailViewController {
     
 }
 
+class AVPlayerVC : AVPlayerViewController {
+    static var isPlayerFullscreen: Bool = false
+    override var shouldAutorotate: Bool{
+        return true
+        
+    }
+}

@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     
     var window: UIWindow?
     let hud = JGProgressHUD(style: .dark)
+    var orientationLock = UIInterfaceOrientationMask.all
+    
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -37,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
             UNUserNotificationCenter.current().requestAuthorization(options: authOptions,
                                                                     completionHandler: { (bool, err) in
                                                                         
-            })
+                                                                    })
             
         } else {
             let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
@@ -78,15 +80,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         }
     }
     
-    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+    
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         guard let vc = (window?.rootViewController?.presentedViewController) else {
             return .portrait
         }
         
-        if vc.isKind(of: NSClassFromString("AVFullScreenViewController")!) {
-            return .allButUpsideDown
+        if (vc.isKind(of: NSClassFromString("AVFullScreenViewController")!)) {
+            return orientationLock
         }
-            
+        
         return .portrait
     }
     
@@ -103,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-//        print(UserDefaults.standard.value(forKey: "room") as Any)
+        //        print(UserDefaults.standard.value(forKey: "room") as Any)
         if UserDefaults.standard.value(forKey: "room") != nil {
             SocketIOManager.sharedInstance.socketConnect()
         }
@@ -151,5 +155,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Oh no! Failed to register for remote notifications with error \(error)")
     }
+    
 }
 
+struct AppUtility {
+    
+    static func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
+        
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            delegate.orientationLock = orientation
+        }
+    }
+    
+    /// OPTIONAL Added method to adjust lock and rotate to the desired orientation
+    static func lockOrientation(_ orientation: UIInterfaceOrientationMask, andRotateTo rotateOrientation:UIInterfaceOrientation) {
+        
+        self.lockOrientation(orientation)
+        
+        UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
+        UINavigationController.attemptRotationToDeviceOrientation()
+    }
+    
+}
